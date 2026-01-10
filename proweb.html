@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proweb - website demos</title>
+    <!-- EmailJS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #4361ee;
+            --primary-purple: #7209b7;
+            --secondary-blue: #4895ef;
+            --secondary-purple: #b5179e;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #4cc9f0;
+            --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            --gradient-secondary: linear-gradient(135deg, var(--secondary-blue), var(--secondary-purple));
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 20px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0 60px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: white;
+            padding: 30px 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            min-width: 180px;
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        /* Project Card */
+        .project-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-primary);
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 1;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .project-description {
+            color: var(--gray);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .project-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .project-features li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--gray);
+        }
+
+        .project-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .project-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .btn-preview {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-preview:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-buy {
+            background: white;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-buy:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Modal */
+        .modal {
+            background-color: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            transform: translateY(30px) scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-header {
+            padding: 30px;
+            background: var(--gradient-primary);
+            color: white;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fa;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        .form-control[readonly] {
+            background: #f1f3f9;
+            color: var(--gray);
+            cursor: not-allowed;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 18px;
+            background: var(--gradient-primary);
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-submit:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Close Button */
+        .close-modal {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 20px;
+            background: var(--dark);
+            border-radius: var(--radius);
+            color: white;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+        }
+
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #4cc9f0, #4895ef);
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-top: 20px;
+            text-align: center;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .stats {
+                gap: 20px;
+            }
+            
+            .stat-item {
+                min-width: 140px;
+                padding: 20px 15px;
+            }
+            
+            .project-buttons {
+                flex-direction: column;
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
+            
+            .modal-header {
+                padding: 25px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .header {
+                padding: 30px 15px;
+            }
+            
+            .project-content {
+                padding: 20px;
+            }
+            
+            .btn {
+                padding: 16px 20px;
+            }
+            
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-item {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1 class="page-title">Proweb Projects</h1>
+            <p class="page-subtitle">Premium website templates crafted with modern design principles and cutting-edge technologies</p>
+        </header>
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="project-badge">Most Popular</div>
+                <div class="project-image">
+                    <img src="demo1.png" alt="Design Forward Web">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Design Forward Web</h3>
+                    <p class="project-description">Modern, responsive website template with clean aesthetics and performance-driven design principles.</p>
+                    <ul class="project-features">
+                        <li>Fully Responsive Design</li>
+                        <li>Modern UI/UX Components</li>
+                        <li>Optimized Performance</li>
+                        <li>Cross-browser Compatible</li>
+                    </ul>
+                    <div class="project-buttons">
+                        <a href="https://prodeweloping.github.io/Demo1/" class="btn btn-preview" target="_blank">
+                            <span>Live Preview</span>
+                        </a>
+                        <button class="btn btn-buy" data-project="Design Forward Web (demo1)">
+                            <span>Buy Now</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="project-badge">3D Effects</div>
+                <div class="project-image">
+                    <img src="demo2.png" alt="ProDev 3D Website">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">ProDev 3D Website</h3>
+                    <p class="project-description">Immersive 3D website with smooth animations and interactive elements for engaging user experiences.</p>
+                    <ul class="project-features">
+                        <li>3D Animations</li>
+                        <li>Interactive UI Elements</li>
+                        <li>Performance Optimized</li>
+                        <li>Mobile First Design</li>
+                    </ul>
+                    <div class="project-buttons">
+                        <a href="https://prodeweloping.github.io/Demo2/" class="btn btn-preview" target="_blank">
+                            <span>Live Preview</span>
+                        </a>
+                        <button class="btn btn-buy" data-project="Proweb 3D Website (demo2)">
+                            <span>Buy Now</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div class="project-badge">Creative</div>
+                <div class="project-image">
+                    <img src="demo3.jpg" alt="PolyRhython Web">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">PolyRhython Web</h3>
+                    <p class="project-description">Creative portfolio template with geometric patterns and rhythmic design elements for visual impact.</p>
+                    <ul class="project-features">
+                        <li>Geometric Design Patterns</li>
+                        <li>Smooth Animations</li>
+                        <li>SEO Optimized</li>
+                        <li>Fast Loading</li>
+                    </ul>
+                    <div class="project-buttons">
+                        <a href="https://prodeweloping.github.io/Demo3/" class="btn btn-preview" target="_blank">
+                            <span>Live Preview</span>
+                        </a>
+                        <button class="btn btn-buy" data-project="PolyRhython Web (demo3)">
+                            <span>Buy Now</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 4 -->
+            <div class="project-card">
+                <div class="project-badge">E-commerce</div>
+                <div class="project-image">
+                    <img src="demo4.jpg" alt="Nexus Ecommerce Web">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Nexus Ecommerce Web</h3>
+                    <p class="project-description">Complete e-commerce solution with modern design, secure payments, and seamless shopping experience.</p>
+                    <ul class="project-features">
+                        <li>E-commerce Ready</li>
+                        <li>Secure Payment Integration</li>
+                        <li>Product Management</li>
+                        <li>Analytics Dashboard</li>
+                    </ul>
+                    <div class="project-buttons">
+                        <a href="https://prodeweloping.github.io/Demo4/" class="btn btn-preview" target="_blank">
+                            <span>Live Preview</span>
+                        </a>
+                        <button class="btn btn-buy" data-project="Nexus Ecommerce Web (demo4)">
+                            <span>Buy Now</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <h3 class="footer-title">Ready to Transform Your Digital Presence?</h3>
+                <p class="footer-text">Each template comes with full documentation, dedicated support, and easy customization options to match your brand identity.</p>
+                <div class="footer-copyright">
+                    © 2026 Powered by Pro Developing. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div class="modal-overlay" id="purchaseModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Purchase Project</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="purchaseForm">
+                    <div class="form-group">
+                        <label class="form-label" for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address *</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email address" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="mobile">Mobile Number *</label>
+                        <input type="tel" id="mobile" class="form-control" placeholder="Enter your mobile number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="projectName">Selected Project</label>
+                        <input type="text" id="projectName" class="form-control" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="message">Additional Requirements (Optional)</label>
+                        <textarea id="message" class="form-control" rows="4" placeholder="Any specific customization or requirements..."></textarea>
+                    </div>
+                    
+                    <div id="successMessage" class="success-message">
+                        Thank you! Your purchase request has been submitted successfully.
+                    </div>
+                    
+                    <button type="submit" class="btn-submit" id="submitBtn">
+                        <span>Purchase Now</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("FfnVW2oPii98q0uHl");
+        })();
+
+        // DOM Elements
+        const buyButtons = document.querySelectorAll('.btn-buy');
+        const purchaseModal = document.getElementById('purchaseModal');
+        const closeModal = document.getElementById('closeModal');
+        const purchaseForm = document.getElementById('purchaseForm');
+        const projectNameInput = document.getElementById('projectName');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+
+        // Open modal when Buy Now is clicked
+        buyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const projectName = button.getAttribute('data-project');
+                projectNameInput.value = projectName;
+                purchaseModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                successMessage.style.display = 'none';
+            });
+        });
+
+        // Close modal when X is clicked
+        closeModal.addEventListener('click', () => {
+            closeModalHandler();
+        });
+
+        // Close modal when clicking outside
+        purchaseModal.addEventListener('click', (e) => {
+            if (e.target === purchaseModal) {
+                closeModalHandler();
+            }
+        });
+
+        // Handle form submission
+        purchaseForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+            
+            // Disable submit button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Processing...</span>';
+            
+            try {
+                // Prepare form data
+                const formData = {
+                    full_name: document.getElementById('fullName').value,
+                    email: document.getElementById('email').value,
+                    mobile: document.getElementById('mobile').value,
+                    project_name: projectNameInput.value,
+                    message: document.getElementById('message').value || 'No additional requirements',
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Send email using EmailJS
+                const response = await emailjs.send(
+                    'service_snv7hbg',
+                    'template_x7cfn8f',
+                    formData
+                );
+                
+                // Show success message
+                successMessage.style.display = 'block';
+                purchaseForm.reset();
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<span>Purchase Now</span>';
+                    successMessage.style.display = 'none';
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Error sending email:', error);
+                alert('Sorry, there was an error sending your request. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span>Purchase Now</span>';
+            }
+        });
+
+        // Form validation
+        function validateForm() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+            
+            // Full name validation
+            if (!fullName) {
+                alert('Please enter your full name.');
+                document.getElementById('fullName').focus();
+                return false;
+            }
+            
+            // Email validation
+            if (!email) {
+                alert('Please enter your email address.');
+                document.getElementById('email').focus();
+                return false;
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                document.getElementById('email').focus();
+                return false;
+            }
+            
+            // Mobile validation
+            if (!mobile) {
+                alert('Please enter your mobile number.');
+                document.getElementById('mobile').focus();
+                return false;
+            }
+            
+            const mobileDigits = mobile.replace(/\D/g, '');
+            if (mobileDigits.length < 10) {
+                alert('Please enter a valid mobile number (at least 10 digits).');
+                document.getElementById('mobile').focus();
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Close modal handler
+        function closeModalHandler() {
+            purchaseModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            purchaseForm.reset();
+            successMessage.style.display = 'none';
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Purchase Now</span>';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && purchaseModal.classList.contains('active')) {
+                closeModalHandler();
+            }
+        });
+
+        // Add input validation styling
+        const inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim() !== '') {
+                    this.style.borderColor = '#4cc9f0';
+                } else {
+                    this.style.borderColor = '#e0e0e0';
+                }
+            });
+            
+            input.addEventListener('focus', function() {
+                this.style.borderColor = 'var(--primary-blue)';
+            });
+        });
+    </script>
+</body>
+</html>

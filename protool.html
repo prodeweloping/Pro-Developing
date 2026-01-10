@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProTools Hub | Free Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            background-color: #f8fafc;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo-icon {
+            background: rgba(255, 255, 255, 0.2);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            opacity: 0.1;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        /* Tools Section */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.8rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--light-gray);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary);
+        }
+        
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+        
+        .tool-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .tool-btn {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 0.9rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        .tool-btn:hover {
+            background: linear-gradient(to right, var(--primary-dark), var(--secondary));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        /* Features Section */
+        .features-section {
+            background: white;
+            padding: 4rem 0;
+            margin: 3rem 0;
+            border-radius: var(--border-radius);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            background: var(--light);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature-description {
+            color: var(--gray);
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 5rem 0;
+            background: linear-gradient(to right, #f8fafc, #f1f5f9);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .copyright {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .header-bg {
+                width: 50%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header {
+                padding: 3rem 0 4rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .tool-card {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <span>Pro Developing Tool</span>
+                </div>
+                <h1 class="tagline">Free & useful tools created by us to help with your daily development tasks. All tools are simple to use and completely free.</h1>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Tools Section -->
+        <section class="tools-section" style="margin-top: -3rem; position: relative; z-index: 10;">
+            <h2 class="section-title"></h2>
+            <div class="tools-grid">
+                <!-- Age Calculator -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <h3 class="tool-title">Age Calculator</h3>
+                    <p class="tool-description">Calculate age from birth date to current date. Simple and accurate age calculation tool.</p>
+                  <button class="tool-btn"
+        onclick="window.location.href='https://prodeweloping.github.io/Age/'">
+    <i class="fas fa-external-link-alt"></i> OPEN TOOL
+</button>
+                </div>
+                
+                <!-- YouTube Thumbnail Downloader -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <h3 class="tool-title">YouTube Thumbnail Downloader</h3>
+                    <p class="tool-description">Download any YouTube video thumbnail in different resolutions. Simple and fast.</p>
+                    <button class="tool-btn"
+        onclick="window.location.href='https://prodeweloping.github.io/Youtube-thumbnail-download-/'">
+    <i class="fas fa-external-link-alt"></i> OPEN TOOL
+</button>
+                </div>
+                
+                <!-- QR Code Generator -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <h3 class="tool-title">QR Code Generator</h3>
+                    <p class="tool-description">Generate and download QR codes instantly in seconds. Simple, fast & free.</p>
+                    <button class="tool-btn"
+        onclick="window.location.href='https://prodeweloping.github.io/Qr-generator-/'">
+    <i class="fas fa-external-link-alt"></i> OPEN TOOL
+</button>
+                </div>
+                
+                <!-- Photo to PDF -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="tool-title">Photo to PDF</h3>
+                    <p class="tool-description">Convert Images to PDF instantly. Simple, fast and free.</p>
+                   <button class="tool-btn"
+        onclick="window.location.href='https://prodeweloping.github.io/Photos-to-pdf-converter-/'">
+    <i class="fas fa-external-link-alt"></i> OPEN TOOL
+</button>
+                </div>
+                
+                <!-- PNG to JPG -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3 class="tool-title">PNG to JPG Converter</h3>
+                    <p class="tool-description">Convert PNG to JPG and JPG to PNG instantly. Simple, fast and free.</p>
+                 <button class="tool-btn"
+        onclick="window.location.href='https://prodeweloping.github.io/Png-to-jpg/'">
+    <i class="fas fa-external-link-alt"></i> OPEN TOOL
+</button>
+                </div>
+                
+                <!-- KB to MB -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-compress-alt"></i>
+                    </div>
+                    <h3 class="tool-title">Image Compressor</h3>
+                    <p class="tool-description">Compress Images from MB to KB instantly. Simple, fast and free.</p>
+                   <button class="tool-btn"
+        onclick="window.location.href='https://prodeweloping.github.io/Mb-to-kb-converter-/'">
+    <i class="fas fa-external-link-alt"></i> OPEN TOOL
+</button>
+                </div>
+            </div>
+        </section>
+
+                    
+                    <div class="about-image">
+                        <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 100%; border-radius: var(--border-radius); display: flex; align-items: center; justify-content: center; color: white; padding: 3rem; text-align: center;">
+                            <div>
+                                <i class="fas fa-laptop-code" style="font-size: 4rem; margin-bottom: 1.5rem; opacity: 0.9;"></i>
+                                <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Free Tools for <br> Personal Use</h3>
+                                <p>We believe in making development easier by providing free, high-quality tools.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <br>
+ <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">
+                    <p>&copy; 2026 Pro Developing Tool. All rights reserved.</p>
+                    <p></p>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.instagram.com/pro_developing.in?igsh=aGJjMW04cW10MDA4" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                  <a href="https://wa.me/916356952788" class="social-link" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Tool opening functionality
+        function openTool(toolName) {
+            // Simulate opening a tool
+            const toolSlugs = {
+                'Age Calculator': 'age-calculator',
+                'YouTube Thumbnail Downloader': 'youtube-thumbnail',
+                'QR Code Generator': 'qr-generator',
+                'Photo to PDF': 'photo-to-pdf',
+                'PNG to JPG Converter': 'png-to-jpg',
+                'Image Compressor': 'image-compressor'
+            };
+            
+            const slug = toolSlugs[toolName] || 'tool';
+            
+            // In a real implementation, this would redirect to the actual tool page
+            // For this demo, we show a message
+            alert(`Opening ${toolName}...\n\nIn a real website, this would navigate to: /tools/${slug}`);
+            
+            // Add visual feedback
+            const button = event.target;
+            button.innerHTML = `<i class="fas fa-spinner fa-spin"></i> LOADING...`;
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.innerHTML = `<i class="fas fa-external-link-alt"></i> OPEN TOOL`;
+                button.disabled = false;
+            }, 1000);
+        }
+        
+        // Add hover effect for cards on mobile
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
