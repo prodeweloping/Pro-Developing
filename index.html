@@ -2,12 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <header class="top-header">
-  <div class="logo">Pro Developing</div>
-<title>Pro Developing – Professional Web & App Development Services | ProDeveloping</title>
-<link rel="canonical" href="https://www.prodeveloping.online/">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Developing – Professional Web & App Development Services | ProDeveloping</title>
+    <meta name="description" content="Professional web development services including custom websites, EmailJS integration, Google Sheets integration, and UI/UX design.">
+    <link rel="canonical" href="https://www.prodeveloping.online/">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Reset & Base Styles */
@@ -738,7 +736,7 @@
             margin-top: 20px;
         }
         
-         .social-icon {
+       .social-icon {
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -820,6 +818,7 @@
             box-shadow: var(--shadow-3d);
             transition: var(--transition-3d);
             transform-style: preserve-3d;
+            display: none;
         }
         
         .scroll-indicator:hover {
@@ -880,10 +879,6 @@
                 display: block;
             }
             
-            .mobile-menu-btn.active i {
-                content: "\f00d"; /* Close icon */
-            }
-            
             .hero-btns {
                 flex-direction: column;
                 align-items: flex-start;
@@ -934,7 +929,6 @@
             }
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 </head>
 <body>
     <!-- 3D Floating Background Elements -->
@@ -956,7 +950,7 @@
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
                     <i class="fas fa-bars"></i>
                 </button>
             </nav>
@@ -979,7 +973,7 @@
         </div>
     </section>
 
-    <!-- NEW Services Section -->
+    <!-- Services Section -->
     <section id="services">
         <div class="container">
             <h2>Our Services</h2>
@@ -1087,7 +1081,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Our Team">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Our development team working together">
                 </div>
             </div>
         </div>
@@ -1105,7 +1099,7 @@
                         </div>
                         <div>
                             <h3>Our Location</h3>
-                            <p>Wav Tharad, Gujrat</p>
+                            <p>Wav Tharad, Gujarat</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -1158,8 +1152,8 @@
                     <a href="#" class="footer-logo">Pro <span>Developing</span></a>
                     <p>We provide professional web development solutions to help your business grow in the digital world.</p>
                     <div class="social-icons">
-                        <a href="https://www.instagram.com/pro_developing.in?igsh=aGJjMW04cW10MDA4" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/916356952788?text=I%20need%20website%20service" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/pro_developing.in?igsh=aGJjMW04cW10MDA4" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/916356952788?text=I%20need%20website%20service" class="social-icon" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="footer-links">
@@ -1172,12 +1166,15 @@
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                <form class="newsletter-form" id="newsletterForm">
-                    <input type="email" class="newsletter-input" id="newsletterEmail"
-                           placeholder="Your email address" required>
-                    <button type="submit" class="newsletter-btn">Subscribe</button>
-                </form>
-                <p id="newsletterMsg" style="margin-top:10px;color:#fff;"></p>
+                <div class="footer-newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on our latest services and offers.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Your email address" required aria-label="Email address for newsletter">
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                    <p id="newsletterMsg" style="margin-top:10px;color:#fff;"></p>
+                </div>
             </div>
             <div class="copyright">
                 <p>&copy; 2026 Pro Developing. All rights reserved.</p>
@@ -1186,11 +1183,12 @@
     </footer>
 
     <!-- 3D Scroll to Top Button -->
-    <div class="scroll-indicator" id="scrollToTop">
+    <div class="scroll-indicator" id="scrollToTop" aria-label="Scroll to top">
         <i class="fas fa-arrow-up"></i>
     </div>
 
     <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1222,53 +1220,72 @@
             });
         });
         
-        // Contact form submission
+        // Contact form submission to Google Apps Script
         document.getElementById("contactForm").addEventListener("submit", function(e){
             e.preventDefault();
 
+            const formData = {
+                name: document.getElementById("name").value.trim(),
+                email: document.getElementById("email").value.trim(),
+                message: document.getElementById("message").value.trim()
+            };
+
             fetch("https://script.google.com/macros/s/AKfycbxZzsedZUQ4ztVZO4n06HvZxGj2rQ4_QOdumB2ONblGKTu7Iw4eEcNEUu90w9WETmdhBg/exec", {
                 method: "POST",
-                body: JSON.stringify({
-                    name: document.getElementById("name").value,
-                    email: document.getElementById("email").value,
-                    message: document.getElementById("message").value
-                })
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
             })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error('Network response was not ok');
+                return res.json();
+            })
             .then(data => {
                 alert("✅ Message sent successfully!");
                 document.getElementById("contactForm").reset();
             })
             .catch(err => {
-                alert("❌ Error! Please try again");
+                console.error('Error:', err);
+                alert("❌ Error! Please try again or contact us directly.");
             });
         });
         
-        /* EMAILJS INIT */
+        /* EMAILJS INIT for Newsletter only */
         emailjs.init("O6JKIbUeu1dewfkTH");
 
         /* NEWSLETTER SUBMIT */
         document.getElementById("newsletterForm").addEventListener("submit", function(e){
             e.preventDefault();
 
-            let email = document.getElementById("newsletterEmail").value;
+            let email = document.getElementById("newsletterEmail").value.trim();
             let msg = document.getElementById("newsletterMsg");
+
+            if (!email) {
+                msg.innerHTML = "Please enter a valid email address";
+                msg.style.color = "yellow";
+                return;
+            }
 
             emailjs.send(
                 "service_sw42q96",
                 "template_5547llk",
-                { email: email }
+                { 
+                    to_email: "prodeveloping97@gmail.com",
+                    email: email 
+                }
             ).then(() => {
                 msg.innerHTML = "✅ Subscribed successfully! Check your email";
                 msg.style.color = "lightgreen";
                 this.reset();
-            }, () => {
+            }, (error) => {
+                console.error('EmailJS error:', error);
                 msg.innerHTML = "❌ Something went wrong. Try again";
                 msg.style.color = "yellow";
             });
         });
         
-   // Smooth scroll for anchor links
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1337,6 +1354,11 @@
         heroButtons.forEach((btn, index) => {
             btn.style.animationDelay = `${index * 0.1}s`;
         });
+
+        // Initialize scroll indicator
+        if (window.scrollY > 300) {
+            scrollToTopBtn.style.display = 'flex';
+        }
     </script>
 </body>
 </html>
