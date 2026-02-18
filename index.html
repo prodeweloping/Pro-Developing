@@ -121,6 +121,14 @@
             transform: translateY(-5px);
         }
         
+        .btn-primary {
+            background-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+        }
+        
         .btn-small {
             padding: 10px 20px;
             font-size: 0.9rem;
@@ -292,7 +300,7 @@
             transform: rotate(90deg);
         }
         
-        /* Hero Section */
+        /* Hero Section - Slider with per-slide button and full-width get in touch */
         .hero {
             padding-top: 180px;
             background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
@@ -315,19 +323,9 @@
         }
         
         .hero-content {
-            max-width: 700px;
+            max-width: 900px;
+            margin: 0 auto;
             animation: fadeInUp 1s ease-out;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         
         /* Right-to-Left Text Slider */
@@ -349,7 +347,7 @@
             border-radius: 2px;
         }
         
-        .slider-container {
+        .slider-container-text {
             position: relative;
             height: 70px;
             overflow: hidden;
@@ -380,15 +378,11 @@
         }
         
         @keyframes slideRightToLeft {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-25%);
-            }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-25%); }
         }
         
-        .slider-container:hover .slider-track {
+        .slider-container-text:hover .slider-track {
             animation-play-state: paused;
         }
         
@@ -401,16 +395,166 @@
             margin-bottom: 35px;
         }
         
-        .hero-btns {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+        /* Hero Image Slider - Fixed size 1536x1024 */
+        .hero-slider {
+            width: 100%;
+            max-width: 1536px;
+            margin: 30px auto 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-3d);
+            background: #f0f0f0;
         }
         
-        /* Services Section */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 66.6667%; /* 1024/1536 = 0.6667 */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .slider-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .slider-slide {
+            flex: 0 0 100%;
+            height: 100%;
+        }
+        
+        .slider-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.7);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--dark);
+            transition: var(--transition);
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+        
+        .slider-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .slider-prev { left: 15px; }
+        .slider-next { right: 15px; }
+        
+        .slider-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            border: 1px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .slider-dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+        
+        /* Dynamic button per slide */
+        .hero-slider-btn-container {
+            text-align: center;
+            margin-top: 25px;
+            min-height: 70px;
+        }
+        
+        .hero-slider-btn {
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 1.2rem;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: var(--shadow-3d);
+            transition: var(--transition-3d);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .hero-slider-btn:hover {
+            background-color: #e55a2d;
+            transform: translateY(-5px);
+        }
+        
+        /* Permanent Get in Touch Button - Full Width */
+        .permanent-btn-container {
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .permanent-btn {
+            display: block;
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1.2rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: var(--shadow-3d);
+            transition: var(--transition-3d);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .permanent-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Services Section - 3 cards */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
@@ -595,7 +739,7 @@
             z-index: 1;
         }
         
-        .about-text {
+ .about-text {
             flex: 1;
         }
         
@@ -704,7 +848,6 @@
             background-color: var(--accent);
         }
         
-        /* Message Textarea Styles - OPTIMIZED */
         .form-group {
             margin-bottom: 20px;
         }
@@ -733,68 +876,19 @@
             box-shadow: 0 0 0 3px rgba(42, 91, 215, 0.15);
         }
         
-        /* OPTIMIZED TEXTAREA for PC and Mobile */
         textarea.form-control {
             min-height: 150px;
             max-height: 300px;
             resize: vertical;
             line-height: 1.5;
-            transition: all 0.3s ease;
         }
         
-        /* Desktop Optimizations */
         @media (min-width: 769px) {
-            textarea.form-control {
-                min-height: 180px;
-                max-height: 350px;
-                font-size: 1.05rem;
-                padding: 16px 18px;
-                line-height: 1.6;
-            }
-            
-            .form-control {
-                padding: 15px 18px;
-            }
+            textarea.form-control { min-height: 180px; max-height: 350px; }
         }
-
-             /* Mobile Optimizations */
+        
         @media (max-width: 768px) {
-            textarea.form-control {
-                min-height: 140px;
-                max-height: 250px;
-                font-size: 1rem;
-                padding: 14px 16px;
-                line-height: 1.5;
-            }
-            
-            .form-control {
-                padding: 14px 16px;
-            }
-        }
-        
-        /* Tablet Optimizations */
-        @media (max-width: 992px) and (min-width: 769px) {
-            textarea.form-control {
-                min-height: 160px;
-                max-height: 300px;
-            }
-        }
-        
-        /* Very Small Mobile */
-        @media (max-width: 480px) {
-            textarea.form-control {
-                min-height: 120px;
-                max-height: 200px;
-                font-size: 0.95rem;
-                padding: 12px 14px;
-            }
-        }
-        
-        /* Textarea Placeholder Styling */
-        textarea.form-control::placeholder {
-            color: #aaa;
-            font-style: italic;
-            font-size: 0.95em;
+            textarea.form-control { min-height: 140px; max-height: 250px; }
         }
         
         .service-select {
@@ -814,7 +908,6 @@
             box-shadow: 0 0 0 3px rgba(42, 91, 215, 0.15);
         }
         
-        /* Mobile Options Selector */
         .mobile-options {
             margin-top: 20px;
             padding: 20px;
@@ -869,6 +962,68 @@
         
         .contact-form:hover {
             transform: translateY(-10px);
+        }
+        
+        /* Newsletter Loading Animation */
+        .newsletter-form {
+            display: flex;
+            margin-top: 15px;
+            width: 100%;
+            position: relative;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            height: 46px;
+        }
+        
+        .newsletter-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: var(--transition);
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 100px;
+        }
+        
+        .newsletter-btn.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        
+        .newsletter-btn .btn-text {
+            display: inline-block;
+        }
+        
+        .newsletter-btn .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        .newsletter-btn.loading .btn-text {
+            display: none;
+        }
+        
+        .newsletter-btn.loading .spinner {
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         
         /* Footer */
@@ -969,35 +1124,6 @@
             width: 100%;
         }
         
-        .newsletter-form {
-            display: flex;
-            margin-top: 15px;
-            width: 100%;
-        }
-        
-        .newsletter-input {
-            flex: 1;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 4px 0 0 4px;
-            height: 46px;
-        }
-        
-        .newsletter-btn {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            padding: 0 20px;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-            transition: var(--transition);
-            height: 46px;
-        }
-        
-        .newsletter-btn:hover {
-            background-color: #e55a2b;
-        }
-        
         .copyright {
             text-align: center;
             padding-top: 30px;
@@ -1043,27 +1169,13 @@
             transform: scale(1.1);
         }
         
-        /* Responsive Styles */
+        /* Responsive */
         @media (max-width: 992px) {
-            h1 {
-                font-size: 2.8rem;
-            }
-            
-            h2 {
-                font-size: 2.2rem;
-            }
-            
-            .hero {
-                padding-top: 160px;
-            }
-            
-            .about-content, .office-container {
-                flex-direction: column;
-            }
-            
-            .slider-text {
-                font-size: 1.8rem;
-            }
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+            .hero { padding-top: 160px; }
+            .about-content, .office-container { flex-direction: column; }
+            .slider-text { font-size: 1.8rem; }
         }
         
         @media (max-width: 768px) {
@@ -1085,98 +1197,30 @@
                 transition: var(--transition);
                 z-index: 999;
             }
-            
             .nav-links.active {
                 transform: translateX(0);
                 opacity: 1;
             }
-            
-            .nav-links li {
-                margin: 20px 0;
-                font-size: 1.2rem;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero-btns {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .btn {
-                width: 100%;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-            
-            .contact-form {
-                padding: 30px 20px;
-            }
-            
-            .contact-form:hover {
-                transform: none;
-            }
-            
-            .about-image:hover, .office-image:hover {
-                transform: none;
-            }
-            
-            .slider-container {
-                height: 60px;
-            }
-            
-            .slider-text {
-                font-size: 1.6rem;
-            }
-            
-            .options-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .copyright {
-                flex-direction: column;
-                gap: 15px;
-            }
+            .nav-links li { margin: 20px 0; font-size: 1.2rem; }
+            .mobile-menu-btn { display: block; }
+            .contact-form { padding: 30px 20px; }
+            .contact-form:hover { transform: none; }
+            .about-image:hover, .office-image:hover { transform: none; }
+            .slider-container-text { height: 60px; }
+            .slider-text { font-size: 1.6rem; }
+            .options-grid { grid-template-columns: repeat(2, 1fr); }
+            .copyright { flex-direction: column; gap: 15px; }
+            .hero-slider { margin: 20px auto; }
         }
         
         @media (max-width: 576px) {
-            h1 {
-                font-size: 2.3rem;
-            }
-            
-            h2 {
-                font-size: 1.8rem;
-            }
-            
-            section {
-                padding: 60px 0;
-            }
-            
-            .service-card {
-                padding: 30px 20px;
-            }
-            
-            .tool-card {
-                padding: 25px 20px;
-            }
-            
-            .hero-btns {
-                gap: 10px;
-            }
-            
-            .slider-container {
-                height: 50px;
-            }
-            
-            .slider-text {
-                font-size: 1.4rem;
-            }
-            
-            .options-grid {
-                grid-template-columns: 1fr;
-            }
+            h1 { font-size: 2.3rem; }
+            h2 { font-size: 1.8rem; }
+            section { padding: 60px 0; }
+            .service-card { padding: 30px 20px; }
+            .slider-container-text { height: 50px; }
+            .slider-text { font-size: 1.4rem; }
+            .options-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1197,8 +1241,6 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#office">Our Office</a></li>
-                    <li><a href="#tools">My Tools</a></li>
-                    <li><a href="#about">About Us</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
@@ -1208,81 +1250,71 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with slider and per-slide button + full-width get in touch -->
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <!-- Right-to-Left Text Slider -->
+                <!-- Right-to-Left Text Slider (top) -->
                 <div class="text-slider-wrapper">
-                    <div class="slider-container">
+                    <div class="slider-container-text">
                         <div class="slider-track">
-                            <div class="slider-item">
-                                <div class="slider-text">Professional Website Development</div>
-                            </div>
-                            <div class="slider-item">
-                                <div class="slider-text">Data to Direct Email, sheets, WhatsApp</div>
-                            </div>
-                            <div class="slider-item">
-                                <div class="slider-text">EmailJS & Google Sheet Integration</div>
-                            </div>
-                            <div class="slider-item">
-                                <div class="slider-text">Modern UI / UX Design Services</div>
-                            </div>
+                            <div class="slider-item"><div class="slider-text">Professional Website Development</div></div>
+                            <div class="slider-item"><div class="slider-text">Custom tools work</div></div>
+                            <div class="slider-item"><div class="slider-text">Frontend website work</div></div>
                         </div>
                     </div>
                 </div>
                 
                 <h1>Professional Web Development Services</h1>
-                <p>We provide comprehensive web development solutions to help your business thrive in the digital age. From custom websites to advanced integrations, we've got you covered.</p>
-                <div class="hero-btns">
-                    <a href="proweb.html" class="btn">Frontend website Work</a>
-                    <a href="proform.html" class="btn">Integretion Work</a>
-                    <a href="protool.html" class="btn">Custom Tools Work</a> 
-                    <a href="#contact" class="btn btn-accent">Get In Touch</a>
+                <!-- 3-Image Slider (1536x1024) -->
+                <div class="hero-slider">
+                    <div class="slider-container" id="heroSlider">
+                        <div class="slider-wrapper" id="sliderWrapper">
+                            <div class="slider-slide"><img src="f.png" alt="Frontend development"></div>
+                            <div class="slider-slide"><img src="i.png" alt="Integration tools"></div>
+                            <div class="slider-slide"><img src="c.png" alt="Custom tools"></div>
+                        </div>
+                        <button class="slider-btn slider-prev" id="sliderPrev"><i class="fas fa-chevron-left"></i></button>
+                        <button class="slider-btn slider-next" id="sliderNext"><i class="fas fa-chevron-right"></i></button>
+                        <div class="slider-dots" id="sliderDots">
+                            <span class="slider-dot active" data-index="0"></span>
+                            <span class="slider-dot" data-index="1"></span>
+                            <span class="slider-dot" data-index="2"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dynamic button that changes per slide (updated text) -->
+                <div class="hero-slider-btn-container">
+                    <a href="proweb.html" class="hero-slider-btn" id="slideBtn">Frontend Web Work</a>
+                </div>
+                <!-- Permanent Get in Touch Button - Full Width -->
+                <div class="permanent-btn-container">
+                    <a href="#contact" class="permanent-btn">Get in Touch</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Services Section (3 cards) -->
     <section id="services">
         <div class="container">
             <h2>Our Services</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Website Development</h3>
-                    <p>Professional websites built with HTML, CSS, and JavaScript. Responsive designs that work perfectly on all devices.</p>
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Frontend Website Work</h3>
+                    <p>Responsive, modern websites built with HTML, CSS, and JavaScript. Pixel-perfect designs that engage users.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <h3>Email JS Integration</h3>
-                    <p>Integrate contact forms with EmailJS for seamless email delivery without server-side code.</p>
+                    <div class="service-icon"><i class="fas fa-plug"></i></div>
+                    <h3>Integration Work</h3>
+                    <p>Seamless EmailJS, Google Sheets, WhatsApp integrations. Connect your site to the tools you use daily.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-table"></i>
-                    </div>
-                    <h3>Google Sheets Integration</h3>
-                    <p>Connect your website data to Google Sheets for easy data management and storage.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <h3>Custom Web Tools</h3>
-                    <p>Build custom web applications and tools tailored to your specific business needs.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3>UI Frontend Design</h3>
-                    <p>Beautiful, user-friendly interface designs that enhance user experience and engagement.</p>
+                    <div class="service-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Custom Tools Work</h3>
+                    <p>Tailored web applications and automation tools built to solve your unique business challenges.</p>
                 </div>
             </div>
         </div>
@@ -1306,7 +1338,7 @@
         </div>
     </section>
 
-
+   
 
     <!-- Contact Section -->
     <section id="contact">
@@ -1315,33 +1347,18 @@
             <div class="contact-container">
                 <div class="contact-info">
                     <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div>
-                            <h3>Our Location</h3><p>vav Tharad, Gujarat</p>
-                        </div>
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div><h3>Our Location</h3><p>vav Tharad, Gujarat</p></div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div>
-                            <h3>Phone Number</h3>
-                            <p>+91 6356952788</p>
-                        </div>
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                          <div><h3>Phone Number</h3><p>+91 6356952788</p></div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h3>Email Address</h3>
-                            <p>prodeveloping97@gmail.com</p>
-                        </div>
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div><h3>Email Address</h3><p>prodeveloping97@gmail.com</p></div>
                     </div>
                 </div>
-                
                 <div class="contact-form">
                     <h3>Send Message</h3>
                     <form id="contactForm" method="POST">
@@ -1361,16 +1378,16 @@
                             <label for="service">Service Required</label>
                             <select id="service" name="service" class="service-select" required>
                                 <option value="" disabled selected>Select a service</option>
-                                <option value="Website Development">Test</option>
-                                <option value="EmailJS Integration">New user</option>
-                                <option value="Google Sheets Integration">Old user</option>
-                                <option value="Custom Web Tools">EmailJS integration</option>
-                                <option value="UI/UX Design">Google Sheets integration</option>
-                                <option value="Other">WhatsApp Integration</option>
-                                <option value="IT Services">Custom Web Tools</option>
-                                <option value="Form Integration">UI/UX Design</option>
-                                <option value="New Tool Development">Website Needs</option>
-                                <option value="Testing Services">Other</option>
+                                <option value="Test">Test</option>
+                                <option value="New user">New user</option>
+                                <option value="Old user">Old user</option>
+                                <option value="EmailJS integration">EmailJS integration</option>
+                                <option value="Google Sheets integration">Google Sheets integration</option>
+                                <option value="WhatsApp Integretion">WhatsApp Integration</option>
+                                <option value="Custom Web Tools">Custom Web Tools</option>
+                                <option value="UI/UX Design">UI/UX Design</option>
+                                <option value="website Needs">Website Needs</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -1387,7 +1404,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer with Newsletter Loading Animation -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -1395,7 +1412,7 @@
                     <a href="#" class="footer-logo">Pro <span>Developing</span></a>
                     <p>We provide professional web development solutions to help your business grow in the digital world.</p>
                     <div class="social-icons">
-                        <a href="https://www.instagram.com/pro_developing.in?igsh=aGJjMW04cW10MDA4" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/prodeweloping.online?igsh=YWd3MWFnaXBwN2d1" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="https://wa.me/916356952788?text=I%20need%20website%20service" class="social-icon" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
@@ -1405,8 +1422,6 @@
                         <li><a href="#home">Home</a></li>
                         <li><a href="#services">Services</a></li>
                         <li><a href="#office">Our Office</a></li>
-                        <li><a href="#tools">My Tools</a></li>
-                        <li><a href="#about">About Us</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -1415,7 +1430,10 @@
                     <p>Subscribe to get updates on our latest services and offers.</p>
                     <form class="newsletter-form" id="newsletterForm">
                         <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Your email address" required aria-label="Email address for newsletter">
-                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                        <button type="submit" class="newsletter-btn" id="newsletterBtn">
+                            <span class="btn-text">Subscribe</span>
+                            <span class="spinner"></span>
+                        </button>
                     </form>
                     <p id="newsletterMsg" style="margin-top:10px;color:#fff;"></p>
                 </div>
@@ -1441,8 +1459,6 @@
         
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            
-            // Change icon
             const icon = mobileMenuBtn.querySelector('i');
             if (navLinks.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
@@ -1453,7 +1469,6 @@
             }
         });
         
-        // Close mobile menu when clicking on a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -1463,24 +1478,75 @@
             });
         });
         
-        // Mobile Options Selection
+        // Image Slider functionality + dynamic button with updated text
+        const sliderWrapper = document.getElementById('sliderWrapper');
+        const slides = document.querySelectorAll('.slider-slide');
+        const prevBtn = document.getElementById('sliderPrev');
+        const nextBtn = document.getElementById('sliderNext');
+        const dots = document.querySelectorAll('.slider-dot');
+        const slideBtn = document.getElementById('slideBtn');
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        // Define button text and links for each slide (updated as requested)
+      const buttonConfig = [
+    { text: 'Frontend Web Work', link: 'proweb.html' },
+    { text: 'Integration Work', link: 'proform.html' },
+    { text: 'Custom Tools Work', link: 'protool.html' }
+];
+        function updateSlider(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            sliderWrapper.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            // Update button text and href
+            slideBtn.textContent = buttonConfig[index].text;
+            slideBtn.href = buttonConfig[index].link;
+            currentIndex = index;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            updateSlider(currentIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            updateSlider(currentIndex + 1);
+        });
+
+        dots.forEach((dot, idx) => {
+            dot.addEventListener('click', () => {
+                updateSlider(idx);
+            });
+        });
+
+        // Auto slide
+        let autoSlide = setInterval(() => {
+            updateSlider(currentIndex + 1);
+        }, 5000);
+
+        const sliderContainer = document.getElementById('heroSlider');
+        sliderContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoSlide);
+        });
+        sliderContainer.addEventListener('mouseleave', () => {
+            autoSlide = setInterval(() => {
+                updateSlider(currentIndex + 1);
+            }, 5000);
+        });
+
+        // Mobile Options Selection (unchanged)
         const optionButtons = document.querySelectorAll('.option-btn');
         const serviceSelect = document.getElementById('service');
         const messageTextarea = document.getElementById('message');
         
         optionButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all buttons
                 optionButtons.forEach(b => b.classList.remove('active'));
-                
-                // Add active class to clicked button
                 btn.classList.add('active');
-                
-                // Set the service select to match the option
                 const service = btn.getAttribute('data-service');
                 serviceSelect.value = service;
-                
-                // Add a predefined message based on selection
                 const messages = {
                     'Other': 'I would like to discuss a custom project requirement.',
                     'IT Services': 'I need professional IT services for my business.',
@@ -1489,158 +1555,120 @@
                     'Testing Services': 'I need testing services for my website/application.',
                     'New Customer Inquiry': 'I am a new customer interested in your services.'
                 };
-                
                 if (messages[service]) {
                     messageTextarea.value = `Hi, I'm interested in your ${service.toLowerCase()}.\n${messages[service]}\n\nPlease contact me with more details.`;
                 }
             });
         });
         
-        // Contact form submission to Google Apps Script
+        // Contact form submission
         document.getElementById("contactForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const formData = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        service: document.getElementById("service").value,
+        message: document.getElementById("message").value.trim()
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbzsFq6zTL8skxfR9SfYj5nQVYWzlG6Mifsm8VticiZi9Hk9AGrrqMM_zkNQNevrRnvL/exec", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams(formData)
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.status === "success") {
+            alert("✅ Message sent successfully!");
+            document.getElementById("contactForm").reset();
+        } else {
+            alert("❌ Error: " + data.message);
+        }
+    })
+    .catch(error => {
+        alert("❌ Network Error!");
+        console.error(error);
+    });
+});
+        // EmailJS init for Newsletter
+        (function(){ emailjs.init("O6JKIbUeu1dewfkTH"); })();
+
+        // Newsletter form with loading animation
+        const newsletterForm = document.getElementById("newsletterForm");
+        const newsletterBtn = document.getElementById("newsletterBtn");
+        const newsletterMsg = document.getElementById("newsletterMsg");
+
+        newsletterForm.addEventListener("submit", function(e){
             e.preventDefault();
-
-            const formData = {
-                name: document.getElementById("name").value.trim(),
-                email: document.getElementById("email").value.trim(),
-                phone: document.getElementById("phone").value.trim(),
-                service: document.getElementById("service").value,
-                message: document.getElementById("message").value.trim()
-            };
-
-            // Your Google Apps Script URL
-            fetch("https://script.google.com/macros/s/AKfycbxZzsedZUQ4ztVZO4n06HvZxGj2rQ4_QOdumB2ONblGKTu7Iw4eEcNEUu90w9WETmdhBg/exec", {
-                method: "POST",
-                mode: "no-cors", // Add this for Google Apps Script
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams(formData)
-            })
-            .then(() => {
-                alert("✅ Message sent successfully! We'll contact you soon.");
-                document.getElementById("contactForm").reset();
-                
-                // Reset mobile options
-                optionButtons.forEach(b => b.classList.remove('active'));
-            })
-            .catch(err => {
-                console.error('Error:', err);
-                alert("✅ Form submitted! We'll contact you soon.");
-                document.getElementById("contactForm").reset();
-                optionButtons.forEach(b => b.classList.remove('active'));
-            });
-        });
-        
-        /* EMAILJS INIT for Newsletter only */
-        (function(){
-            emailjs.init("O6JKIbUeu1dewfkTH");
-        })();
-
-        /* NEWSLETTER SUBMIT */
-        document.getElementById("newsletterForm").addEventListener("submit", function(e){
-            e.preventDefault();
-
+            
             let email = document.getElementById("newsletterEmail").value.trim();
-            let msg = document.getElementById("newsletterMsg");
-
+            
             if (!email || !email.includes('@')) {
-                msg.innerHTML = "Please enter a valid email address";
-                msg.style.color = "yellow";
+                newsletterMsg.innerHTML = "Please enter a valid email address";
+                newsletterMsg.style.color = "yellow";
                 return;
             }
-
+            
+            // Show loading spinner
+            newsletterBtn.classList.add('loading');
+            
             emailjs.send(
                 "service_sw42q96",
                 "template_5547llk",
-                { 
-                    to_email: "prodeveloping97@gmail.com",
-                    email: email 
-                }
+                { to_email: "prodeveloping97@gmail.com", email: email }
             ).then(() => {
-                msg.innerHTML = "✅ Subscribed successfully! Check inbox📥!";
-                msg.style.color = "lightgreen";
-                this.reset();
+                newsletterMsg.innerHTML = "✅ Subscribed successfully! Check inbox📥!";
+                newsletterMsg.style.color = "lightgreen";
+                newsletterForm.reset();
+                newsletterBtn.classList.remove('loading');
             }, (error) => {
                 console.error('EmailJS error:', error);
-                msg.innerHTML = "❌ Something went wrong. Try again";
-                msg.style.color = "yellow";
+                newsletterMsg.innerHTML = "❌ Something went wrong. Try again";
+                newsletterMsg.style.color = "yellow";
+                newsletterBtn.classList.remove('loading');
             });
         });
         
-        // Smooth scroll for anchor links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 if(this.getAttribute('href') === '#') return;
-                
                 e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
-                
                 if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
                 }
             });
         });
         
         // Scroll to top button
         const scrollToTopBtn = document.getElementById('scrollToTop');
-        
-        // Show/hide scroll to top button
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                scrollToTopBtn.style.display = 'flex';
-            } else {
-                scrollToTopBtn.style.display = 'none';
-            }
-        }); 
-        
-        // Scroll to top functionality
+            scrollToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+        });
         scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
         
-        // Add floating animation to hero buttons
-        const heroButtons = document.querySelectorAll('.hero-btns .btn');
-        heroButtons.forEach((btn, index) => {
-            btn.style.animationDelay = `${index * 0.1}s`;
-        });
-
-        // Initialize scroll indicator
-        if (window.scrollY > 300) {
-            scrollToTopBtn.style.display = 'flex';
-        }
-        
-        // Textarea auto-resize on focus for better mobile experience
+        // Textarea focus effect
         const messageTextareaElement = document.getElementById('message');
-        
         messageTextareaElement.addEventListener('focus', function() {
-            // On mobile, scroll textarea into view when focused
             if (window.innerWidth <= 768) {
-                setTimeout(() => {
-                    this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 300);
+                setTimeout(() => { this.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 300);
             }
-            
-            // Add animation effect
             this.style.transform = 'scale(1.01)';
             this.style.transition = 'transform 0.3s ease';
         });
-        
         messageTextareaElement.addEventListener('blur', function() {
             this.style.transform = 'scale(1)';
         });
-        
-        // Prevent zoom on focus in mobile iOS
         messageTextareaElement.addEventListener('touchstart', function() {
-            this.style.fontSize = '16px'; // Prevent iOS zoom
+            this.style.fontSize = '16px';
         });
     </script>
 </body>
