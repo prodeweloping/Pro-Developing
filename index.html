@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ---------- base styles from deepseek (preserved) ---------- */
+        /* ---------- base styles ---------- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --bg: #f4f7fc;
@@ -37,8 +37,12 @@
         body { font-family: "Inter", system-ui, sans-serif; background-color: var(--bg); color: var(--gray-dark); line-height: 1.5; overflow-x: hidden; }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
         section { padding: 96px 0; }
-        h1, h2, h3 { font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
-        h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 1.5rem; }
+        /* Hero section specific padding adjustment */
+        .hero {
+            padding-top: 120px; /* Navbar ke niche se proper spacing */
+            padding-bottom: 60px;
+        }
+        h2, h3 { font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
         h2 { font-size: clamp(2rem, 4vw, 2.8rem); text-align: center; margin-bottom: 3.5rem; position: relative; }
         h2::after { content: ''; display: block; width: 80px; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 4px; margin: 1rem auto 0; }
         p { color: var(--gray-mid); margin-bottom: 1.2rem; }
@@ -67,14 +71,32 @@
         nav { max-width: 1280px; margin: 0 auto; background: var(--glass); backdrop-filter: blur(16px) saturate(180%); border-radius: 100px; padding: 10px 28px; box-shadow: var(--shadow-sm), 0 0 0 1px rgba(255,255,255,0.5); display: flex; align-items: center; justify-content: space-between; }
         .logo { font-size: 1.9rem; font-weight: 800; color: var(--primary-dark); text-decoration: none; letter-spacing: -0.5px; }
         .logo span { color: var(--accent); }
-        .nav-links { display: flex; list-style: none; gap: 36px; }
+        /* Always show hamburger menu - BLACK color */
+        .mobile-menu-btn { display: block; background: none; border: none; font-size: 1.8rem; color: #000000; cursor: pointer; }
+        /* Hide nav links by default */
+        .nav-links { display: none; list-style: none; gap: 36px; }
+        /* When active, show dropdown */
+        .nav-links.active { 
+            display: flex; 
+            flex-direction: column; 
+            position: fixed; 
+            top: 90px; 
+            left: 20px; 
+            right: 20px; 
+            background: var(--glass); 
+            backdrop-filter: blur(24px); 
+            border-radius: 40px; 
+            padding: 30px; 
+            box-shadow: var(--shadow-lg); 
+            align-items: center; 
+            gap: 24px; 
+        }
         .nav-links a { text-decoration: none; font-weight: 600; color: var(--gray-dark); transition: var(--transition); position: relative; padding: 6px 0; }
         .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2.5px; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 2px; transition: width 0.3s; }
         .nav-links a:hover::after { width: 100%; }
         .nav-links a:hover { color: var(--primary); }
-        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.8rem; color: var(--gray-dark); cursor: pointer; }
 
-        /* services, office, contact, footer (deepseek styles) */
+        /* services, office, contact, footer */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px; }
         .service-card { background: var(--surface); padding: 40px 28px; border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid white; backdrop-filter: blur(8px); }
         .service-card:hover { transform: translateY(-16px) scale(1.02); box-shadow: var(--shadow-lg); border-color: var(--primary); }
@@ -131,63 +153,102 @@
         .scroll-indicator { position: fixed; right: 30px; bottom: 30px; width: 54px; height: 54px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); z-index: 99; display: none; }
         .scroll-indicator:hover { background: var(--accent); transform: scale(1.1) translateY(-5px); }
 
-        /* ===== slider styles imported from index (overrides) ===== */
-        /* text slider */
-        .text-slider-wrapper {
-            position: relative;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            overflow: hidden;
-        }
-        .text-slider-wrapper:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: var(--gray-dark);
-            border-radius: 2px;
-        }
-        .slider-container-text {
-            position: relative;
-            height: 70px;
-            overflow: hidden;
-        }
-        .slider-track {
+        /* ===== PERFECTLY POSITIONED TYPEWRITER HEADING ===== */
+        .hero-content {
             display: flex;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 400%;
-            animation: slideRightToLeft 12s infinite linear;
-        }
-        .slider-item {
-            width: 25%;
-            display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: center; /* Center horizontally */
             justify-content: center;
-        }
-        .slider-text {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--gray-dark);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            white-space: nowrap;
-        }
-        @keyframes slideRightToLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-25%); }
-        }
-        .slider-container-text:hover .slider-track {
-            animation-play-state: paused;
+            text-align: center;
         }
 
-        /* image slider */
+        .typewriter-heading {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            /* Perfect spacing: from navbar and to slider */
+            margin: 30px 0 40px 0; /* Thoda niche from navbar, thoda upar from slider */
+            min-height: 5rem;
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center the text + cursor */
+            overflow: hidden;
+        }
+
+        #typingText {
+            display: inline-block;
+            min-width: 28ch;
+            width: auto;
+            background: linear-gradient(90deg, #1d4ed8, #ea580c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .cursor {
+            width: 3px;
+            height: 1.2em;
+            margin-left: 6px;
+            background: #1d4ed8;
+            border-radius: 2px;
+            animation: blink 1s infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes blink {
+            0%,50%,100% { opacity: 1; }
+            25%,75% { opacity: 0; }
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 100px;
+            }
+            .typewriter-heading {
+                font-size: 2rem;
+                min-height: 4rem;
+                margin: 20px 0 30px 0;
+            }
+            #typingText {
+                min-width: 24ch;
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .typewriter-heading {
+                font-size: 1.8rem;
+                min-height: 3.8rem;
+                margin: 15px 0 25px 0;
+            }
+            #typingText {
+                min-width: 22ch;
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .typewriter-heading {
+                font-size: 1.6rem;
+                min-height: 3.5rem;
+            }
+            #typingText {
+                min-width: 20ch;
+                font-size: 1.4rem;
+            }
+        }
+
+        /* ===== image slider ===== */
         .hero-slider {
             width: 100%;
             max-width: 1536px;
-            margin: 30px auto 20px;
+            margin: 0 auto 20px; /* Top margin 0, bottom margin as needed */
             border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow-lg);
@@ -196,7 +257,7 @@
         .slider-container {
             position: relative;
             width: 100%;
-            padding-bottom: 66.6667%; /* 1024/1536 */
+            padding-bottom: 66.6667%;
             height: 0;
             overflow: hidden;
         }
@@ -320,34 +381,31 @@
             transform: translateY(-5px);
         }
 
-        /* responsive adjustments (merged) */
-        @media (max-width: 992px) {
-            .slider-text { font-size: 1.8rem; }
-        }
+        /* Responsive */
         @media (max-width: 900px) {
-            .office-container, .contact-container { grid-template-columns: 1fr; padding: 30px; }
-            .footer-content { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-            .nav-links.active { display: flex; flex-direction: column; position: fixed; top: 90px; left: 20px; right: 20px; background: var(--glass); backdrop-filter: blur(24px); border-radius: 40px; padding: 30px; box-shadow: var(--shadow-lg); align-items: center; gap: 24px; }
-            .mobile-menu-btn { display: block; }
-            .hero { padding-top: 140px; }
+            .office-container, .contact-container { 
+                grid-template-columns: 1fr; 
+                padding: 30px; 
+            }
+            .footer-content { 
+                grid-template-columns: 1fr; 
+            }
         }
         @media (max-width: 768px) {
-            .slider-container-text { height: 60px; }
-            .slider-text { font-size: 1.6rem; }
             .hero-slider { border-radius: 16px; }
             .slider-btn { width: 36px; height: 36px; font-size: 1rem; }
             .permanent-btn { font-size: 1rem; }
+            section { padding: 60px 0; }
         }
         @media (max-width: 576px) {
-            .slider-container-text { height: 50px; }
-            .slider-text { font-size: 1.4rem; }
             .hero-slider-btn { padding: 12px 28px; font-size: 1rem; }
         }
         @media (max-width: 480px) {
             .btn { padding: 12px 24px; }
-            .hero-slider-btn { padding: 14px 28px; font-size: 1rem; }
-            .permanent-btn { font-size: 1.1rem; }
+            .hero-slider-btn { padding: 12px 20px; font-size: 0.95rem; }
+            .permanent-btn { font-size: 0.95rem; }
+            .logo { font-size: 1.5rem; }
+            .mobile-menu-btn { font-size: 1.6rem; }
         }
     </style>
 </head>
@@ -355,7 +413,7 @@
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
 
-    <header>
+        <header>
         <nav>
             <a href="#" class="logo">Pro <span>Developing</span></a>
             <ul class="nav-links" id="navLinks">
@@ -368,23 +426,16 @@
         </nav>
     </header>
 
-    <!-- HERO SECTION REPLACED WITH INDEX.HTML VERSION (slider + buttons) -->
+    <!-- HERO SECTION with perfectly positioned typewriter -->
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <!-- Right-to-Left Text Slider (top) -->
-                <div class="text-slider-wrapper">
-                    <div class="slider-container-text">
-                        <div class="slider-track">
-                            <div class="slider-item"><div class="slider-text">Professional Website Development</div></div>
-                            <div class="slider-item"><div class="slider-text">Custom tools work</div></div>
-                             <div class="slider-item"><div class="slider-text">Frontend website work</div></div>
-                        </div>
-                    </div>
+                <!-- Typewriter heading - perfect position: niche from navbar, upar from slider -->
+                <div class="typewriter-heading">
+                    <span id="typingText"></span><span class="cursor"></span>
                 </div>
                 
-                <h1>Professional Web Development</h1>
-                <!-- 3-Image Slider (1536x1024) -->
+                <!-- 3-Image Slider -->
                 <div class="hero-slider">
                     <div class="slider-container" id="heroSlider">
                         <div class="slider-wrapper" id="sliderWrapper">
@@ -402,11 +453,11 @@
                     </div>
                 </div>
                 
-                <!-- Dynamic button that changes per slide -->
+                <!-- Dynamic button -->
                 <div class="hero-slider-btn-container">
                     <a href="proweb.html" class="hero-slider-btn" id="slideBtn">Frontend Web Work</a>
                 </div>
-                <!-- Permanent Get in Touch Button - Full Width -->
+                <!-- Permanent Get in Touch -->
                 <div class="permanent-btn-container">
                     <a href="#contact" class="permanent-btn">Get in Touch</a>
                 </div>
@@ -414,7 +465,7 @@
         </div>
     </section>
 
-    <!-- rest of sections from deepseek (unchanged) -->
+    <!-- rest of sections unchanged -->
     <section id="services">
         <div class="container">
             <h2>our services</h2>
@@ -431,9 +482,7 @@
             <h2>Main office</h2>
             <div class="office-container">
                 <div class="office-image"><img src="Pro.png" alt="workspace"></div>
-                <div class="office-text"><h3>-Pro Developing</h3><p>Pro Developing ka main focus hai high-quality digital solutions banana jo business ko grow kare.</p><p>• Integration Work <br>
-•Custom tools work.<br>
- •Frontend Website work.</p></div>
+                <div class="office-text"><h3>-Pro Developing</h3><p>Pro Developing ka main focus hai high-quality digital solutions banana jo business ko grow kare.</p><p>• Integration Work <br>• Custom tools work.<br> • Frontend Website work.</p></div>
             </div>
         </div>
     </section>
@@ -450,15 +499,9 @@
                 <div class="contact-form">
                     <h3>Send message</h3>
                     <form id="contactForm">
-                        <div class="form-group"><label>Full name</label>
-                            <input type="text" name="name" id="name" class="form-control" placeholder="Enter your full name" required>
-                        </div>
-                        <div class="form-group"><label>Email</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email address" required>
-                        </div>
-                        <div class="form-group"><label>Mobile</label>
-                            <input type="tel" name="phone" id="phone" class="form-control" placeholder="Enter your mobile number" required>
-                        </div>
+                        <div class="form-group"><label>Full name</label><input type="text" name="name" id="name" class="form-control" placeholder="Enter your full name" required></div>
+                        <div class="form-group"><label>Email</label><input type="email" name="email" id="email" class="form-control" placeholder="Enter your email address" required></div>
+                        <div class="form-group"><label>Mobile</label><input type="tel" name="phone" id="phone" class="form-control" placeholder="Enter your mobile number" required></div>
                         <div class="form-group"><label>Service needed</label>
                             <select id="service" name="service" class="service-select" required>
                                 <option value="" disabled selected>Select option</option>
@@ -469,10 +512,7 @@
                             </select>
                         </div>
                         <div class="form-group"><label>Message</label><textarea id="message" name="message" class="form-control" placeholder="Tell us about your project ..." required></textarea></div>
-                        <button type="submit" class="btn btn-accent" id="contactSubmitBtn">
-                            <span class="btn-text">Send message</span>
-                            <span class="spinner"></span>
-                        </button>
+                        <button type="submit" class="btn btn-accent" id="contactSubmitBtn"><span class="btn-text">Send message</span><span class="spinner"></span></button>
                     </form>
                 </div>
             </div>
@@ -485,7 +525,7 @@
                 <div>
                     <a href="#" class="footer-logo">Pro <span>Developing</span></a>
                     <p>Web solutions for modern business.</p>
-                    <p class="ceo-highlight"><i class="fas fa-crown" style="margin-right: 8px; color: #fbbf24;"></i> CEO & Founder :-  MahiPat Suthar</p>
+                    <p class="ceo-highlight"><i class="fas fa-crown" style="margin-right: 8px; color: #fbbf24;"></i> CEO & Founder :- MahiPat Suthar</p>
                     <div class="social-icons">
                         <a href="https://www.instagram.com/prodeweloping.online?igsh=YWd3MWFnaXBwN2d1" class="social-icon"><i class="fab fa-instagram"></i></a>
                         <a href="https://wa.me/916356952788?text=I%20need%20website%20service" class="social-icon"><i class="fab fa-whatsapp"></i></a>
@@ -502,10 +542,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
-        // EmailJS init (from deepseek)
+        // EmailJS init
         (function(){ emailjs.init("O6JKIbUeu1dewfkTH"); })();
 
-        // mobile menu (deepseek)
+        // mobile menu toggle
         const menuBtn = document.getElementById('mobileMenuBtn');
         const nav = document.getElementById('navLinks');
         menuBtn.addEventListener('click', () => {
@@ -520,7 +560,7 @@
             menuBtn.querySelector('i').classList.remove('fa-times');
         }));
 
-        // ---------- SLIDER LOGIC (imported from index) ----------
+        // IMAGE SLIDER LOGIC
         const sliderWrapper = document.getElementById('sliderWrapper');
         const slides = document.querySelectorAll('.slider-slide');
         const prevBtn = document.getElementById('sliderPrev');
@@ -530,7 +570,6 @@
         let currentIndex = 0;
         const totalSlides = slides.length;
 
-        // button config per slide
         const buttonConfig = [
             { text: 'Frontend Web Work', link: 'proweb.html' },
             { text: 'Integration Work', link: 'proform.html' },
@@ -541,45 +580,81 @@
             if (index < 0) index = totalSlides - 1;
             if (index >= totalSlides) index = 0;
             sliderWrapper.style.transform = `translateX(-${index * 100}%)`;
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-            // Update button text and href
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
             slideBtn.textContent = buttonConfig[index].text;
             slideBtn.href = buttonConfig[index].link;
             currentIndex = index;
         }
 
-        prevBtn.addEventListener('click', () => {
-            updateSlider(currentIndex - 1);
-        });
+        prevBtn.addEventListener('click', () => updateSlider(currentIndex - 1));
+        nextBtn.addEventListener('click', () => updateSlider(currentIndex + 1));
+        dots.forEach((dot, idx) => dot.addEventListener('click', () => updateSlider(idx)));
 
-        nextBtn.addEventListener('click', () => {
-            updateSlider(currentIndex + 1);
-        });
-
-        dots.forEach((dot, idx) => {
-            dot.addEventListener('click', () => {
-                updateSlider(idx);
-            });
-        });
-
-        // Auto slide
-        let autoSlide = setInterval(() => {
-            updateSlider(currentIndex + 1);
-        }, 5000);
-
+        let autoSlide = setInterval(() => updateSlider(currentIndex + 1), 5000);
         const sliderContainer = document.getElementById('heroSlider');
-        sliderContainer.addEventListener('mouseenter', () => {
-            clearInterval(autoSlide);
-        });
-        sliderContainer.addEventListener('mouseleave', () => {
-            autoSlide = setInterval(() => {
-                updateSlider(currentIndex + 1);
-            }, 5000);
-        });
+        sliderContainer.addEventListener('mouseenter', () => clearInterval(autoSlide));
+        sliderContainer.addEventListener('mouseleave', () => autoSlide = setInterval(() => updateSlider(currentIndex + 1), 5000));
 
-        // ---------- CONTACT FORM (deepseek) ----------
+        // PERFECT TYPEWRITER EFFECT - no sticking, smooth cycle
+        (function() {
+            const typingElement = document.getElementById('typingText');
+            if (!typingElement) return;
+
+            const texts = [
+                "Professional Website Development",
+                "Custom Tools Work",
+                "Frontend Website Work"
+            ];
+
+            let textIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let timeoutId = null;
+            
+            const typingSpeed = 60;
+            const deletingSpeed = 35;
+            const pauseTime = 1500;
+
+            function type() {
+                // Clear any existing timeout
+                if (timeoutId) clearTimeout(timeoutId);
+                
+                const currentText = texts[textIndex];
+                
+                // Update character index
+                if (isDeleting) {
+                    charIndex--;
+                } else {
+                    charIndex++;
+                }
+                
+                // Update text
+                typingElement.textContent = currentText.substring(0, charIndex);
+                
+                // Handle state transitions
+                if (!isDeleting && charIndex === currentText.length) {
+                    // Finished typing, pause then delete
+                    isDeleting = true;
+                    timeoutId = setTimeout(type, pauseTime);
+                } 
+                else if (isDeleting && charIndex === 0) {
+                    // Finished deleting, move to next text and start typing
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % texts.length;
+                    timeoutId = setTimeout(type, typingSpeed);
+                } 
+                else {
+                    // Continue typing or deleting
+                    const speed = isDeleting ? deletingSpeed : typingSpeed;
+                    timeoutId = setTimeout(type, speed);
+                }
+            }
+
+            // Start the effect
+            timeoutId = setTimeout(type, typingSpeed);
+        })();
+
+        // CONTACT FORM
         const contactForm = document.getElementById("contactForm");
         const contactBtn = document.getElementById("contactSubmitBtn");
         contactForm.addEventListener("submit", function(e){
@@ -608,20 +683,14 @@
             })
             .then(res => res.json())
             .then(data => {
-                if (data.status === "success") { 
-                    alert("✅ Message sent!"); 
-                    contactForm.reset(); 
-                } else {
-                    alert("❌ Error: " + data.message);
-                }
+                if (data.status === "success") { alert("✅ Message sent!"); contactForm.reset(); } 
+                else alert("❌ Error: " + data.message);
             })
             .catch(() => alert("❌ Network error"))
-            .finally(() => {
-                contactBtn.classList.remove('loading');
-            });
+            .finally(() => contactBtn.classList.remove('loading'));
         });
 
-        // ---------- NEWSLETTER (deepseek) ----------
+        // NEWSLETTER
         const newsletterForm = document.getElementById("newsletterForm");
         const newsletterBtn = document.getElementById("newsletterBtn");
         const newsletterMsg = document.getElementById("newsletterMsg");
@@ -631,13 +700,12 @@
             if (!email.includes('@')) { newsletterMsg.innerHTML = "valid email required"; return; }
             newsletterBtn.classList.add('loading');
             emailjs.send("service_sw42q96", "template_5547llk", { to_email: "prodeveloping97@gmail.com", email: email })
-                .then(() => {
-                    newsletterMsg.innerHTML = "✅ Subscribed!";
-                    newsletterForm.reset();
-                }).catch(() => newsletterMsg.innerHTML = "❌ failed").finally(() => newsletterBtn.classList.remove('loading'));
+                .then(() => { newsletterMsg.innerHTML = "✅ Subscribed!"; newsletterForm.reset(); })
+                .catch(() => newsletterMsg.innerHTML = "❌ failed")
+                .finally(() => newsletterBtn.classList.remove('loading'));
         });
 
-        // ---------- SCROLL & SMOOTH (deepseek) ----------
+        // SCROLL
         const topBtn = document.getElementById('scrollToTop');
         window.addEventListener('scroll', () => topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none');
         topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
@@ -650,4 +718,4 @@
         }));
     </script>
 </body>
-</html>
+    </html>
