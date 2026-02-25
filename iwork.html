@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>integration work</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <style>
+        /* ----- RESET / LIGHT THEME VARIABLES ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-light: #f8faff;
+            --card-bg: #ffffff;
+            --surface: #ffffff;
+            --primary: #4361ee;
+            --primary-light: #6c8cff;
+            --secondary: #f72585;
+            --accent: #38b000;
+            --text-dark: #1e293b;
+            --text-muted: #5b6e8c;
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 8px 20px rgba(0,0,0,0.02), 0 0 0 1px rgba(0,0,0,0.02);
+            --shadow-hover: 0 20px 30px -10px rgba(67, 97, 238, 0.15), 0 0 0 1px rgba(67, 97, 238, 0.2);
+            --gradient-1: linear-gradient(135deg, #4361ee, #f72585);
+            --gradient-2: linear-gradient(145deg, #38b000, #4361ee);
+            --transition: all 0.25s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.5;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.03) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 70%, rgba(247, 37, 133, 0.03) 0%, transparent 40%);
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ----- HEADER (light) ----- */
+        .modern-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 40%;
+            height: 3px;
+            background: var(--gradient-2);
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .logo:hover::after {
+            width: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .cta-button {
+            padding: 0.8rem 2rem;
+            background: var(--gradient-1);
+            border: none;
+            border-radius: 3rem;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 8px 18px rgba(67, 97, 238, 0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(67, 97, 238, 0.4);
+        }
+
+        /* ----- HERO (light, fresh) ----- */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 3rem 0 4rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(67, 97, 238, 0.08);
+            color: var(--primary);
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid rgba(67, 97, 238, 0.25);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(to right, #1e293b, #4361ee);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-sub {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 90%;
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--secondary);
+            padding-left: 1.5rem;
+        }
+
+        .hero-cta-block {
+            display: flex;
+            gap: 1.8rem;
+            align-items: center;
+        }
+
+        .primary-btn {
+            padding: 1rem 2.8rem;
+            background: var(--gradient-1);
+            border: none;
+            border-radius: 3rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 8px 22px rgba(67, 97, 238, 0.3);
+            font-size: 1rem;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(67, 97, 238, 0.45);
+        }
+
+        .secondary-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .secondary-link:hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        /* right visual – clean minimal */
+        .hero-visual-white {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 2.5rem;
+            padding: 2rem;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 30px 40px -20px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .visual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .visual-chip {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.4rem 0.8rem;
+            text-align: center;
+            border: 1px solid var(--border-light);
+            transition: 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .visual-chip:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .visual-chip i {
+            font-size: 2.2rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.3rem;
+        }
+
+        .visual-chip span {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .visual-chip small {
+            color: var(--text-muted);
+            font-size: 0.7rem;
+        }
+
+        .wave-line {
+            height: 6px;
+            background: var(--gradient-2);
+            width: 100%;
+            border-radius: 4px;
+            opacity: 0.4;
+        }
+
+        /* ----- SOLUTIONS CARDS (light) ----- */
+        .solutions-section {
+            padding: 4rem 0 3rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-sub {
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #1e293b, #4361ee);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 2rem;
+            padding: 2.2rem 1.8rem;
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: transparent;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            background: var(--gradient-1);
+            padding: 0.2rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .card-icon {
+            width: 65px;
+            height: 65px;
+            background: rgba(67, 97, 238, 0.08);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.8rem;
+            border: 1px solid rgba(67, 97, 238, 0.2);
+            transition: 0.2s;
+        }
+
+        .card-icon i {
+            font-size: 2.2rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .product-card:hover .card-icon {
+            background: rgba(67, 97, 238, 0.15);
+            transform: scale(1.02) rotate(2deg);
+        }
+
+        .card-title {
+            font-size: 1.9rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.8rem;
+            line-height: 1.6;
+        }
+
+        .price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .btn-outline {
+            flex: 1;
+            padding: 0.8rem 0;
+            background: transparent;
+            border: 2px solid rgba(67, 97, 238, 0.2);
+            border-radius: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            flex: 1;
+            padding: 0.8rem 0;
+            background: var(--gradient-1);
+            border: none;
+            border-radius: 2rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            box-shadow: 0 6px 14px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        /* ----- MODAL (light) ----- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modern-modal {
+            background: white;
+            border-radius: 2rem;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 40px 60px rgba(0,0,0,0.1);
+            transform: translateY(30px);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border-light);
+        }
+
+        .modal-overlay.active .modern-modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .close-modal {
+            background: rgba(0,0,0,0.05);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+        }
+
+        .close-modal:hover {
+            background: rgba(0,0,0,0.1);
+            transform: rotate(90deg);
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 1rem;
+            font-size: 1rem;
+            transition: 0.2s;
+            color: var(--text-dark);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+            background: white;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.1rem;
+            background: var(--gradient-1);
+            border: none;
+            border-radius: 3rem;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 8px 22px rgba(67, 97, 238, 0.3);
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 28px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* ----- ALERT (light) ----- */
+        .modern-alert {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            padding: 1.2rem 2rem;
+            background: white;
+            border-left: 5px solid var(--primary);
+            border-radius: 1rem;
+            font-weight: 500;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+            z-index: 1100;
+            transform: translateX(150%);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: var(--text-dark);
+            border: 1px solid var(--border-light);
+        }
+
+        .modern-alert.active {
+            transform: translateX(0);
+        }
+
+        .modern-alert.success {
+            border-left-color: #38b000;
+        }
+
+        .modern-alert.error {
+            border-left-color: #f72585;
+        }
+
+        /* ----- FOOTER (light) ----- */
+        .modern-footer {
+            margin-top: 5rem;
+            padding: 2.5rem 0;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 1.2rem;
+        }
+
+        /* responsive */
+        @media (max-width: 1100px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-sub {
+                max-width: 100%;
+                border-left: none;
+                padding-left: 0;
+            }
+            .hero-cta-block {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .nav-links {
+                display: none;
+            }
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .container {
+                padding: 0 1.2rem;
+            }
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            .card-actions {
+                flex-direction: column;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--border-light);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--primary), var(--secondary));
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- header -->
+        <header class="modern-header">
+            <div class="logo">integration Work</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link">Solutions</a>
+                <a href="#" class="nav-link">Features</a>
+                <a href="#" class="nav-link">Pricing</a>
+                <a href="#" class="nav-link">Contact</a>
+                <button class="cta-button" onclick="showContactAlert()"><i class="fas fa-bolt"></i> Get started</button>
+            </div>
+        </header>
+        <!-- solutions cards -->
+        <section class="solutions-section" id="solutions">
+     <div class="section-header">
+                <div class="section-sub">premium services</div>
+                <h2 class="section-title">pick your One Works .</h2>
+            </div>
+            <div class="cards-grid">
+                <!-- card 1 -->
+                <div class="product-card">
+                    <div class="card-badge">MOST POPULAR</div>
+                    <div class="card-icon"><i class="fas fa-envelope"></i></div>
+                    <h3 class="card-title">Data to Email</h3>
+                    <p class="card-desc">Encrypted email delivery with spam protection, real‑time alerts and full logging.</p>
+                    <div class="price">₹299</div>
+                    <div class="card-actions">
+                        <button class="btn-outline" onclick="window.open('https://prodeweloping.github.io/Data-to-email-/#', '_blank')"><i class="fas fa-eye"></i> Demo</button>
+                        <button class="btn-primary buy-btn" data-product="Form Data to Email (₹299)"><i class="fas fa-shopping-cart"></i> Buy</button>
+                    </div>
+                </div>
+                <!-- card 2 -->
+                <div class="product-card">
+                    <div class="card-badge">BEST VALUE</div>
+                    <div class="card-icon"><i class="fas fa-table"></i></div>
+                    <h3 class="card-title">Data to Sheets</h3>
+                    <p class="card-desc">Google Sheets sync with automatic updates, pivot tables & collaborative editing.</p>
+                    <div class="price">₹199</div>
+                    <div class="card-actions">
+                        <button class="btn-outline" onclick="window.open('https://example.com/demo2', '_blank')"><i class="fas fa-eye"></i> Demo</button>
+                        <button class="btn-primary buy-btn" data-product="Form Data to Google Sheets (₹199)"><i class="fas fa-shopping-cart"></i> Buy</button>
+                    </div>
+                </div>
+                <!-- card 3 -->
+                <div class="product-card">
+                    <div class="card-badge">FASTEST</div>
+                    <div class="card-icon"><i class="fab fa-whatsapp"></i></div>
+                    <h3 class="card-title">Data to WhatsApp</h3>
+                    <p class="card-desc">Instant WhatsApp notifications, group broadcasts, and two‑way conversation starters.</p>
+                    <div class="price">₹99</div>
+                    <div class="card-actions">
+                        <button class="btn-outline" onclick="window.open('https://prodeweloping.github.io/Data-to-WhatsApp-/', '_blank')"><i class="fas fa-eye"></i> Demo</button>
+                        <button class="btn-primary buy-btn" data-product="Form Data to WhatsApp (₹99)"><i class="fas fa-shopping-cart"></i> Buy</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- footer -->
+        <footer class="modern-footer">
+            <div class="logo">integration work</div>
+            <p class="footer-text">© 2026 Pro Developing. integretion work.</p>
+        </footer>
+    </div>
+
+    <!-- modal overlay -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modern-modal">
+            <div class="modal-header">
+                <h3 class="modal-title">order details</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label class="form-label">Full name</label>
+                    <input type="text" name="user_name" class="form-input" placeholder="e.g. Raj Sharma" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email address</label>
+                    <input type="email" name="user_email" class="form-input" placeholder="raj@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone number</label>
+                    <input type="tel" name="user_phone" class="form-input" placeholder="+91 98765 43210" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Selected product</label>
+                    <input type="text" name="product_name" id="productName" class="form-input" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Additional notes</label>
+                    <textarea name="message" class="form-input" rows="2" placeholder="anything special?"></textarea>
+                </div>
+                <input type="hidden" name="order_date_time" id="orderDateTime">
+                <button type="submit" class="btn-submit" id="submitBtn"><i class="fas fa-lock"></i> complete order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- alert -->
+    <div class="modern-alert" id="alertBox"></div>
+
+    <script>
+        // EmailJS config (unchanged from original)
+        const EMAILJS_SERVICE_ID = 'service_dzkmvgb';
+        const EMAILJS_TEMPLATE_ID = 'template_p0xrosb';
+        const EMAILJS_PUBLIC_KEY = 'yrZBMw0TXHttA60sA';
+
+        // DOM
+        const modalOverlay = document.getElementById('modalOverlay');
+        const closeModalBtn = document.getElementById('closeModal');
+        const orderForm = document.getElementById('orderForm');
+        const productNameField = document.getElementById('productName');
+        const dateTimeField = document.getElementById('orderDateTime');
+        const submitBtn = document.getElementById('submitBtn');
+        const alertBox = document.getElementById('alertBox');
+        const buyButtons = document.querySelectorAll('.buy-btn');
+
+        // init EmailJS
+        (function() {
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+        })();
+
+        function setDateTime() {
+            const now = new Date();
+            dateTimeField.value = now.toLocaleString('en-IN', { dateStyle: 'full', timeStyle: 'medium' });
+        }
+
+        function showAlert(msg, type = 'success') {
+            alertBox.textContent = msg;
+            alertBox.className = `modern-alert ${type}`;
+            alertBox.classList.add('active');
+            setTimeout(() => alertBox.classList.remove('active'), 4000);
+        }
+
+        window.showContactAlert = function() {
+            showAlert('Select a product or contact us via the order form.', 'success');
+        };
+
+        function openModal(product) {
+            productNameField.value = product;
+            setDateTime();
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            orderForm.reset();
+        }
+
+        buyButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const product = btn.getAttribute('data-product');
+                openModal(product);
+            });
+        });
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
+        });
+
+        // form submit
+        orderForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> placing order...';
+
+            try {
+                await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, orderForm);
+                showAlert('Order received! We’ll contact you within 24h.', 'success');
+                setTimeout(closeModal, 1500);
+            } catch (err) {
+                console.error(err);
+                showAlert('Submission failed. Please try again.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-lock"></i> complete order';
+            }
+        });
+
+        // tiny mousemove effect for freshness (optional)
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth - e.pageX * 2) / 100;
+            const y = (window.innerHeight - e.pageY * 2) / 100;
+            document.querySelector('.hero-visual-white').style.transform = `translate(${x * 0.5}px, ${y * 0.5}px)`;
+        });
+
+        // page load
+        window.addEventListener('load', () => {
+            setDateTime();
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.4s';
+                document.body.style.opacity = '1';
+            }, 30);
+        });
+    </script>
+</body>
+                    </html>
