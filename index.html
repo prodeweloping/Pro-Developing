@@ -153,95 +153,56 @@
         .scroll-indicator { position: fixed; right: 30px; bottom: 30px; width: 54px; height: 54px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); z-index: 99; display: none; }
         .scroll-indicator:hover { background: var(--accent); transform: scale(1.1) translateY(-5px); }
 
-        /* ===== PERFECTLY POSITIONED TYPEWRITER HEADING ===== */
+        /* ===== NEW CLEAN TYPEWRITER (perfectly centered, no media query clutter) ===== */
         .hero-content {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center horizontally */
+            align-items: center;  /* full horizontal centering */
             justify-content: center;
             text-align: center;
         }
 
         .typewriter-heading {
-            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-size: clamp(1.8rem, 7vw, 4rem); /* single rule: scales fluidly */
             font-weight: 800;
             line-height: 1.2;
-            /* Perfect spacing: from navbar and to slider */
-            margin: 30px 0 40px 0; /* Thoda niche from navbar, thoda upar from slider */
-            min-height: 5rem;
+            margin: 2rem 0 2.5rem 0;   /* stable spacing from navbar / to slider */
+            min-height: 4.5rem;         /* enough space for tallest line */
             width: 100%;
             max-width: 100%;
             display: flex;
             align-items: center;
-            justify-content: center; /* Center the text + cursor */
-            overflow: hidden;
+            justify-content: center;
+            flex-wrap: nowrap;           /* keep text + cursor inline */
+            gap: 0.1rem;                 /* tiny gap between text and cursor */
         }
 
         #typingText {
             display: inline-block;
-            min-width: 28ch;
-            width: auto;
-            background: linear-gradient(90deg, #1d4ed8, #ea580c);
+            background: linear-gradient(135deg, #1d4ed8, #ea580c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            color: transparent;
+            color: transparent;           /* fallback */
             white-space: nowrap;
-            text-align: center;
+            font-weight: 800;
+            font-size: inherit;            /* inherit clamp value */
         }
 
         .cursor {
-            width: 3px;
-            height: 1.2em;
-            margin-left: 6px;
+            display: inline-block;
+            width: 0.25rem;                /* fixed width cursor, no jump */
+            height: 1.2em;                  /* relative to font size */
             background: #1d4ed8;
             border-radius: 2px;
-            animation: blink 1s infinite;
+            animation: cursorBlink 0.9s step-end infinite;
             flex-shrink: 0;
+            vertical-align: middle;
         }
 
-        @keyframes blink {
-            0%,50%,100% { opacity: 1; }
-            25%,75% { opacity: 0; }
-        }
-
-        /* Mobile adjustments */
-        @media (max-width: 768px) {
-            .hero {
-                padding-top: 100px;
-            }
-            .typewriter-heading {
-                font-size: 2rem;
-                min-height: 4rem;
-                margin: 20px 0 30px 0;
-            }
-            #typingText {
-                min-width: 24ch;
-                font-size: 1.8rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .typewriter-heading {
-                font-size: 1.8rem;
-                min-height: 3.8rem;
-                margin: 15px 0 25px 0;
-            }
-            #typingText {
-                min-width: 22ch;
-                font-size: 1.6rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .typewriter-heading {
-                font-size: 1.6rem;
-                min-height: 3.5rem;
-            }
-            #typingText {
-                min-width: 20ch;
-                font-size: 1.4rem;
-            }
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         /* ===== image slider ===== */
@@ -397,16 +358,7 @@
             .permanent-btn { font-size: 1rem; }
             section { padding: 60px 0; }
         }
-        @media (max-width: 576px) {
-            .hero-slider-btn { padding: 12px 28px; font-size: 1rem; }
-        }
-        @media (max-width: 480px) {
-            .btn { padding: 12px 24px; }
-            .hero-slider-btn { padding: 12px 20px; font-size: 0.95rem; }
-            .permanent-btn { font-size: 0.95rem; }
-            .logo { font-size: 1.5rem; }
-            .mobile-menu-btn { font-size: 1.6rem; }
-        }
+        /* all old typewriter media queries REMOVED — only one clamp rule remains */
     </style>
 </head>
 <body>
@@ -426,17 +378,17 @@
         </nav>
     </header>
 
-    <!-- HERO SECTION with perfectly positioned typewriter -->
+    <!-- HERO SECTION with perfectly centered typewriter -->
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <!-- Typewriter heading - perfect position: niche from navbar, upar from slider -->
+                <!-- Typewriter heading - one fluid rule controls size -->
                 <div class="typewriter-heading">
                     <span id="typingText"></span><span class="cursor"></span>
                 </div>
                 
                 <!-- 3-Image Slider -->
-                <div class="hero-slider">
+                 <div class="hero-slider">
                     <div class="slider-container" id="heroSlider">
                         <div class="slider-wrapper" id="sliderWrapper">
                             <div class="slider-slide"><img src="f.png" alt="Frontend development"></div>
@@ -525,7 +477,8 @@
                 <div>
                     <a href="#" class="footer-logo">Pro <span>Developing</span></a>
                     <p>Web solutions for modern business.</p>
-                    <p class="ceo-highlight"><i class="fas fa-crown" style="margin-right: 8px; color: #fbbf24;"></i> CEO & Founder :- MahiPat Suthar</p>
+                    <!-- CEO link updated to CEO.html -->
+                    <a href="CEO.html" style="text-decoration: none;"><p class="ceo-highlight"><i class="fas fa-crown" style="margin-right: 8px; color: #fbbf24;"></i> CEO & Founder :- MahiPat Suthar</p></a>
                     <div class="social-icons">
                         <a href="https://www.instagram.com/prodeweloping.online?igsh=YWd3MWFnaXBwN2d1" class="social-icon"><i class="fab fa-instagram"></i></a>
                         <a href="https://wa.me/916356952788?text=I%20need%20website%20service" class="social-icon"><i class="fab fa-whatsapp"></i></a>
@@ -595,15 +548,15 @@
         sliderContainer.addEventListener('mouseenter', () => clearInterval(autoSlide));
         sliderContainer.addEventListener('mouseleave', () => autoSlide = setInterval(() => updateSlider(currentIndex + 1), 5000));
 
-        // PERFECT TYPEWRITER EFFECT - no sticking, smooth cycle
+        // ========== CLEAN, OPTIMIZED TYPEWRITER (no layout shift, cursor moves with text) ==========
         (function() {
             const typingElement = document.getElementById('typingText');
             if (!typingElement) return;
 
             const texts = [
-                "Professional Website Development",
+                "Professional Web Work",
                 "Custom Tools Work",
-                "integretion Work"
+                "Integration Work"
             ];
 
             let textIndex = 0;
@@ -611,46 +564,38 @@
             let isDeleting = false;
             let timeoutId = null;
             
-            const typingSpeed = 60;
-            const deletingSpeed = 35;
-            const pauseTime = 1500;
+            const typingSpeed = 70;
+            const deletingSpeed = 40;
+            const pauseTime = 1700;
 
             function type() {
-                // Clear any existing timeout
                 if (timeoutId) clearTimeout(timeoutId);
                 
                 const currentText = texts[textIndex];
                 
-                // Update character index
                 if (isDeleting) {
                     charIndex--;
                 } else {
                     charIndex++;
                 }
                 
-                // Update text
                 typingElement.textContent = currentText.substring(0, charIndex);
                 
-                // Handle state transitions
                 if (!isDeleting && charIndex === currentText.length) {
-                    // Finished typing, pause then delete
                     isDeleting = true;
                     timeoutId = setTimeout(type, pauseTime);
                 } 
                 else if (isDeleting && charIndex === 0) {
-                    // Finished deleting, move to next text and start typing
                     isDeleting = false;
                     textIndex = (textIndex + 1) % texts.length;
                     timeoutId = setTimeout(type, typingSpeed);
                 } 
                 else {
-                    // Continue typing or deleting
                     const speed = isDeleting ? deletingSpeed : typingSpeed;
                     timeoutId = setTimeout(type, speed);
                 }
             }
 
-            // Start the effect
             timeoutId = setTimeout(type, typingSpeed);
         })();
 
