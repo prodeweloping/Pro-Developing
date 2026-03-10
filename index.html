@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <link rel="icon" type="image/png" href="Pro.png">
     <title>Pro Developing | Prodeveloping</title>
     <meta name="description" content="Professional web development: custom sites, EmailJS, Google Sheets, UI/UX design. Fresh design, same powerful tools.">
@@ -12,9 +12,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS CSS (Scroll Animation) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
     <style>
-        /* ---------- base styles (unchanged, only additions at bottom) ---------- */
+        /* ---------- base styles ---------- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { overflow-x: hidden; width: 100%; }
         :root {
             --bg: #f4f7fc;
             --surface: #ffffff;
@@ -34,8 +37,8 @@
             --transition: all 0.3s ease;
             --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        body { font-family: "Inter", system-ui, sans-serif; background-color: var(--bg); color: var(--gray-dark); line-height: 1.5; overflow-x: hidden; }
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        body { font-family: "Inter", system-ui, sans-serif; background-color: var(--bg); color: var(--gray-dark); line-height: 1.5; overflow-x: hidden; width: 100%; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; width: 100%; }
         section { padding: 96px 0; }
         .hero {
             padding-top: 120px;
@@ -176,18 +179,6 @@
         .permanent-btn { display: block; width: 100%; padding: 16px 20px; font-size: 1.2rem; background-color: var(--primary); color: white; border-radius: 50px; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: var(--shadow-lg); transition: var(--transition-bounce); text-decoration: none; border: none; cursor: pointer; text-align: center; }
         .permanent-btn:hover { background-color: var(--primary-dark); transform: translateY(-5px); }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .office-container, .contact-container { grid-template-columns: 1fr; padding: 30px; }
-            .footer-content { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 768px) {
-            .hero-slider { border-radius: 16px; }
-            .slider-btn { width: 36px; height: 36px; font-size: 1rem; }
-            .permanent-btn { font-size: 1rem; }
-            section { padding: 60px 0; }
-        }
-
         /* ---------- POPUP – appears on load, image now has explicit 1024x1024 attributes ---------- */
         .popup-overlay {
             position: fixed;
@@ -209,15 +200,14 @@
             visibility: visible;
             opacity: 1;
         }
-       .popup-content {
-    width: 1024px;
-    max-width: 95%;
-}
-
-.popup-img {
-    width: 1024px;
-    height: 1024px;
-}
+        .popup-content {
+            width: 1024px;
+            max-width: 95%;
+        }
+        .popup-img {
+            width: 1024px;
+            height: 1024px;
+        }
         .popup-overlay.show .popup-content {
             transform: scale(1);
         }
@@ -253,6 +243,35 @@
             transform: rotate(90deg) scale(1.1);
         }
         /* arrow button removed as requested */
+
+        /* ========== MOBILE FIXES ========== */
+        @media (max-width: 900px) {
+            .office-container, .contact-container { grid-template-columns: 1fr; padding: 30px; }
+            .footer-content { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .hero-slider { border-radius: 16px; }
+            .slider-btn { width: 36px; height: 36px; font-size: 1rem; }
+            .permanent-btn { font-size: 1rem; }
+            section { padding: 60px 0; }
+        }
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            .office-container, .contact-container { padding: 20px; gap: 30px; }
+            .contact-item { flex-direction: column; text-align: center; gap: 10px; }
+            .contact-icon { margin-bottom: 5px; }
+            .footer-content { gap: 30px; }
+            .newsletter-form { flex-direction: column; background: transparent; gap: 10px; }
+            .newsletter-input { border-radius: 60px; width: 100%; background: white; }
+            .newsletter-btn { border-radius: 60px; width: 100%; padding: 14px; }
+            .hero-slider-btn, .permanent-btn { font-size: 1rem; padding: 12px 20px; }
+            .typewriter-heading { font-size: 1.8rem; }
+        }
+        /* Ensure no horizontal scroll */
+        @media (max-width: 400px) {
+            .slider-btn { width: 30px; height: 30px; font-size: 0.9rem; }
+        }
     </style>
 </head>
 <body>
@@ -275,13 +294,14 @@
     <!-- HERO SECTION -->
     <section class="hero" id="home">
         <div class="container">
-            <div class="hero-content">
-                <div class="typewriter-heading">
+ <div class="hero-content">
+                <!-- typewriter heading with AOS -->
+                <div class="typewriter-heading" data-aos="fade-up">
                     <span id="typingText"></span><span class="cursor"></span>
                 </div>
                 
-                <!-- 3-Image Slider -->
-                 <div class="hero-slider">
+                <!-- 3-Image Slider with AOS -->
+                <div class="hero-slider" data-aos="zoom-in" data-aos-delay="100">
                     <div class="slider-container" id="heroSlider">
                         <div class="slider-wrapper" id="sliderWrapper">
                             <div class="slider-slide"><img src="f.png" alt="Frontend development"></div>
@@ -293,15 +313,15 @@
                         <div class="slider-dots" id="sliderDots">
                             <span class="slider-dot active" data-index="0"></span>
                             <span class="slider-dot" data-index="1"></span>
-         <span class="slider-dot" data-index="2"></span>
+                            <span class="slider-dot" data-index="2"></span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="hero-slider-btn-container">
+                <div class="hero-slider-btn-container" data-aos="fade-up" data-aos-delay="200">
                     <a href="proweb.html" class="hero-slider-btn" id="slideBtn">Frontend Web Work</a>
                 </div>
-                <div class="permanent-btn-container">
+                <div class="permanent-btn-container" data-aos="fade-up" data-aos-delay="300">
                     <a href="#contact" class="permanent-btn">Get in Touch</a>
                 </div>
             </div>
@@ -310,35 +330,62 @@
 
     <section id="services">
         <div class="container">
-            <h2>our services</h2>
+            <h2 data-aos="fade-up">our services</h2>
             <div class="services-grid">
-                <div class="service-card"><div class="service-icon"><i class="fas fa-code"></i></div><h3>Frontend Website Work</h3><p>Responsive, pixel‑perfect modern websites built with HTML, CSS, JavaScript.</p></div>
-                <div class="service-card"><div class="service-icon"><i class="fas fa-plug"></i></div><h3>Integration Work</h3><p>EmailJS, Google Sheets, WhatsApp – connect your site to daily tools seamlessly.</p></div>
-                <div class="service-card"><div class="service-icon"><i class="fas fa-tools"></i></div><h3>Custom Tools Work</h3><p>Tailored web applications & automation that solve your unique challenges.</p></div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Frontend Website Work</h3>
+                    <p>Responsive, pixel‑perfect modern websites built with HTML, CSS, JavaScript.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon"><i class="fas fa-plug"></i></div>
+                    <h3>Integration Work</h3>
+                    <p>EmailJS, Google Sheets, WhatsApp – connect your site to daily tools seamlessly.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Custom Tools Work</h3>
+                    <p>Tailored web applications & automation that solve your unique challenges.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="office" class="office-section">
         <div class="container">
-            <h2>Main office</h2>
+            <h2 data-aos="fade-up">Main office</h2>
             <div class="office-container">
-                <div class="office-image"><img src="Pro.png" alt="workspace"></div>
-                <div class="office-text"><h3>-Pro Developing</h3><p>Pro Developing ka main focus hai high-quality digital solutions banana jo business ko grow kare.</p><p>• Integration Work <br>• Custom tools work.<br> • Frontend Website work.</p></div>
+                <div class="office-image" data-aos="fade-right">
+                    <img src="Pro.png" alt="workspace">
+                </div>
+                <div class="office-text" data-aos="fade-left">
+                    <h3>-Pro Developing</h3>
+                    <p>Pro Developing ka main focus hai high-quality digital solutions banana jo business ko grow kare.</p>
+                    <p>• Integration Work <br>• Custom tools work.<br> • Frontend Website work.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="contact">
         <div class="container">
-            <h2>Get in Touch</h2>
+            <h2 data-aos="fade-up">Get in Touch</h2>
             <div class="contact-container">
                 <div class="contact-info">
-                    <div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div><h3>Location</h3><p>vav Tharad, Gujarat</p></div></div>
-                    <div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><div><h3>Call us</h3><p>+91 63569 52788</p></div></div>
-                    <div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div><h3>Email</h3><p>prodeveloping97@gmail.com</p></div></div>
+                    <div class="contact-item" data-aos="fade-up" data-aos-delay="0">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div><h3>Location</h3><p>Vav Tharad, Gujarat</p></div>
+                    </div>
+                    <div class="contact-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div><h3>Call us</h3><p>+91 63569 52788</p></div>
+                    </div>
+                    <div class="contact-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div><h3>Email</h3><p>prodeveloping97@gmail.com</p></div>
+                    </div>
                 </div>
-                <div class="contact-form">
+                <div class="contact-form" data-aos="fade-up" data-aos-delay="300">
                     <h3>Send message</h3>
                     <form id="contactForm">
                         <div class="form-group"><label>Full name</label><input type="text" name="name" id="name" class="form-control" placeholder="Enter your full name" required></div>
@@ -364,7 +411,7 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div>
+                <div data-aos="fade-right">
                     <a href="#" class="footer-logo">Pro <span>Developing</span></a>
                     <p>Web solutions for modern business.</p>
                     <a href="CEO.html" style="text-decoration: none;"><p class="ceo-highlight"><i class="fas fa-crown" style="margin-right: 8px; color: #fbbf24;"></i> CEO & Founder :- MahiPat Suthar</p></a>
@@ -373,23 +420,44 @@
                         <a href="https://wa.me/916356952788?text=I%20need%20website%20service" class="social-icon"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
-                <div class="footer-links"><h3>Links</h3><ul><li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#office">Office</a></li><li><a href="#contact">Contact</a></li></ul></div>
-                <div class="footer-newsletter"><h3>Newsletter</h3><p>Subscribe for updates & offers.</p><form class="newsletter-form" id="newsletterForm"><input type="email" class="newsletter-input" id="newsletterEmail" placeholder="your@email.com" required><button type="submit" class="newsletter-btn" id="newsletterBtn"><span class="btn-text">Subscribe</span><span class="spinner"></span></button></form><p id="newsletterMsg" style="margin-top:12px; color:#a5f3fc;"></p></div>
+                <div class="footer-links" data-aos="fade-up">
+                    <h3>Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#office">Office</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter" data-aos="fade-left">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe for updates & offers.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="your@email.com" required>
+                        <button type="submit" class="newsletter-btn" id="newsletterBtn"><span class="btn-text">Subscribe</span><span class="spinner"></span></button>
+                    </form>
+                    <p id="newsletterMsg" style="margin-top:12px; color:#a5f3fc;"></p>
+                </div>
             </div>
-            <div class="copyright"><span>&copy; 2026 Pro Developing. All rights reserved.</span><a href="terms.html" class="btn btn-terms btn-small">Terms & Conditions</a></div>
+            <div class="copyright" data-aos="fade-up">
+                <span>&copy; 2026 Pro Developing. All rights reserved.</span>
+                <a href="terms.html" class="btn btn-terms btn-small">Terms & Conditions</a>
+            </div>
         </div>
     </footer>
 
     <div class="scroll-indicator" id="scrollToTop"><i class="fas fa-arrow-up"></i></div>
 
-    <!-- POPUP – image now has width="1024" height="1024" to match requested size -->
+    <!-- POPUP -->
     <div class="popup-overlay" id="popupOverlay">
         <div class="popup-content">
             <button class="popup-close" id="popupClose"><i class="fas fa-times"></i></button>
             <img src="popup.png" alt="Special offer" class="popup-img" width="1024" height="1024">
-            <!-- arrow button deleted as per earlier request -->
         </div>
     </div>
+
+    <!-- Audio element for background sound -->
+    <audio id="bgAudio" src="w.mp3"></audio>
 
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
@@ -411,7 +479,7 @@
             menuBtn.querySelector('i').classList.remove('fa-times');
         }));
 
-        // IMAGE SLIDER LOGIC
+        // IMAGE SLIDER LOGIC (NO AUTO-SLIDE)
         const sliderWrapper = document.getElementById('sliderWrapper');
         const slides = document.querySelectorAll('.slider-slide');
         const prevBtn = document.getElementById('sliderPrev');
@@ -440,11 +508,6 @@
         prevBtn.addEventListener('click', () => updateSlider(currentIndex - 1));
         nextBtn.addEventListener('click', () => updateSlider(currentIndex + 1));
         dots.forEach((dot, idx) => dot.addEventListener('click', () => updateSlider(idx)));
-
-        let autoSlide = setInterval(() => updateSlider(currentIndex + 1), 5000);
-        const sliderContainer = document.getElementById('heroSlider');
-        sliderContainer.addEventListener('mouseenter', () => clearInterval(autoSlide));
-        sliderContainer.addEventListener('mouseleave', () => autoSlide = setInterval(() => updateSlider(currentIndex + 1), 5000));
 
         // TYPEWRITER
         (function() {
@@ -579,5 +642,24 @@
             }
         });
     </script>
+
+    <!-- AOS Library and Init -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200 });
+    </script>
+
+    <!-- Audio System: plays once on page load only (not on every click) -->
+    <script>
+        const audio = document.getElementById("bgAudio");
+        // Play when page loads (browser may block autoplay; if blocked, user can still trigger via any click, but we no longer auto-play on every click)
+        window.addEventListener("load", () => {
+            audio.play().catch(() => {
+                // Autoplay blocked – silently fail; audio will not play automatically.
+                console.log("Autoplay blocked. Audio will not play.");
+            });
+        });
+        // Removed the click listener so audio only plays on load (if allowed)
+    </script>
 </body>
-            </html>
+                                                                    </html>
