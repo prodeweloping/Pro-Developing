@@ -467,6 +467,16 @@
 
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
+fetch("site-status.json")
+.then(res => res.json())
+.then(data => {
+if(data.status === "off"){
+document.body.innerHTML = `
+<h1 style="text-align:center;margin-top:100px;">
+🚧 Website Under Maintenance
+</h1>`;
+}
+});
         (function(){ emailjs.init("O6JKIbUeu1dewfkTH"); })();
 
         // mobile menu
