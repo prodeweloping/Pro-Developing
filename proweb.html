@@ -3,1613 +3,512 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frontend Website</title>
-    <!-- EmailJS CDN -->
+    <title>ProWeb </title>
+    <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary-blue: #4361ee;
-            --primary-purple: #7209b7;
-            --secondary-blue: #4895ef;
-            --secondary-purple: #b5179e;
-            --accent-green: #06d6a0;
-            --accent-orange: #ff9e00;
-            --accent-red: #ff6b6b;
-            --light-blue: #e0f7ff;
+            --primary: #4361ee;
+            --purple: #7209b7;
+            --accent: #06d6a0;
+            --dark: #0b132b;
+            --gray-dark: #4a4e69;
+            --light: #f8f9fa;
             --white: #ffffff;
-            --light-gray: #f8f9fa;
-            --medium-gray: #e9ecef;
-            --dark-gray: #6c757d;
-            --dark: #212529;
-            --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
-            --gradient-secondary: linear-gradient(135deg, var(--secondary-blue), var(--secondary-purple));
-            --gradient-accent: linear-gradient(135deg, var(--accent-green), var(--accent-orange));
-            --gradient-error: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
-            --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
-            --radius: 12px;
-            --radius-lg: 20px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient: linear-gradient(135deg, #4361ee, #7209b7);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+            --radius: 20px;
+            --radius-md: 14px;
+            --transition: 0.25s ease;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
+            background: #f0f4fa;
+            color: var(--dark);
             line-height: 1.6;
-            color: var(--dark);
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-            padding: 0;
         }
-
-        /* Loading Overlay */
+        /* loading */
         .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--white);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            position: fixed; inset: 0; background: var(--white); display: flex; align-items: center; justify-content: center; z-index: 9999;
+            transition: opacity 0.4s, visibility 0.4s;
         }
-
-        .loading-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loading-container {
-            text-align: center;
-            padding: 40px;
-        }
-
+        .loading-overlay.hidden { opacity: 0; visibility: hidden; }
         .loader {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 30px;
-            position: relative;
+            width: 60px; height: 60px; border: 5px solid #e9ecef; border-top-color: var(--primary); border-radius: 50%;
+            animation: spin 1s infinite;
         }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { margin-top: 20px; font-weight: 600; }
 
-        .loader-circle {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 4px solid transparent;
-            border-top-color: var(--primary-blue);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        /* navbar */
+        .navbar {
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(12px);
+            padding: 12px 32px; display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.03);
         }
-
-        .loader-circle:nth-child(2) {
-            border-top-color: var(--primary-purple);
-            animation-delay: 0.2s;
-            width: 70%;
-            height: 70%;
-            top: 15%;
-            left: 15%;
+        .logo {
+            font-size: 1.6rem; font-weight: 800; font-family: 'Poppins', sans-serif;
+            background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-
-        .loader-circle:nth-child(3) {
-            border-top-color: var(--accent-green);
-            animation-delay: 0.4s;
-            width: 50%;
-            height: 50%;
-            top: 25%;
-            left: 25%;
+        .nav-order {
+            padding: 8px 18px !important; font-size: 0.9rem !important; font-weight: 600;
+            border-radius: 40px; background: var(--gradient); color: white; border: none;
+            display: flex; align-items: center; gap: 8px; cursor: pointer;
+            box-shadow: var(--shadow-md); transition: var(--transition);
         }
+        .nav-order:hover { transform: scale(1.02); box-shadow: 0 12px 24px rgba(67,97,238,0.3); }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        .container { max-width: 1300px; margin: 0 auto; padding: 40px 30px; }
 
-        .loading-text {
-            font-size: 1.2rem;
-            color: var(--dark);
-            font-weight: 600;
-            margin-top: 20px;
-            letter-spacing: 1px;
-        }
-
-        .loading-progress {
-            width: 200px;
-            height: 4px;
-            background: var(--medium-gray);
-            border-radius: 2px;
-            margin-top: 30px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .loading-progress-bar {
-            position: absolute;
-            height: 100%;
-            width: 0%;
-            background: var(--gradient-primary);
-            border-radius: 2px;
-            animation: progress 2s ease-in-out forwards;
-        }
-
-        @keyframes progress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-
-        /* Page Reveal Animation */
-        .page-content {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: pageReveal 0.8s ease forwards 0.5s;
-        }
-
-        @keyframes pageReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--light-gray);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-blue);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-purple);
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* Header with Animation */
+        /* header */
         .header {
-            text-align: center;
-            margin-bottom: 80px;
-            padding: 80px 40px;
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            color: var(--dark);
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--medium-gray);
-            animation: headerFloat 6s ease-in-out infinite;
+            background: var(--white); border-radius: var(--radius); padding: 60px 30px; text-align: center;
+            margin-bottom: 60px; box-shadow: var(--shadow-md);
         }
-
-        @keyframes headerFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: var(--gradient-primary);
-        }
-
         .page-title {
-            font-size: 3.8rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            position: relative;
-            font-family: 'Poppins', sans-serif;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
-            animation: titleReveal 1s ease forwards 0.8s;
-            opacity: 0;
+            font-size: 2.5rem; font-weight: 800; font-family: 'Poppins', sans-serif;
+            background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-
-        @keyframes titleReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .page-subtitle {
-            font-size: 1.3rem;
-            font-weight: 400;
-            color: var(--dark-gray);
-            max-width: 700px;
-            margin: 0 auto 40px;
-            position: relative;
-            animation: subtitleReveal 1s ease forwards 1s;
-            opacity: 0;
-        }
-
-        @keyframes subtitleReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Stats with Animation */
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 60px 0 80px;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            text-align: center;
-            background: var(--white);
-            padding: 40px 30px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-md);
-            min-width: 220px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--medium-gray);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: statItemReveal 0.6s ease forwards;
-        }
-
-        .stat-item:nth-child(1) { animation-delay: 1.2s; }
-        .stat-item:nth-child(2) { animation-delay: 1.4s; }
-        .stat-item:nth-child(3) { animation-delay: 1.6s; }
-        .stat-item:nth-child(4) { animation-delay: 1.8s; }
-
-        @keyframes statItemReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            color: var(--dark-gray);
-            font-weight: 500;
-            font-size: 1.1rem;
-        }
-
-        /* Projects Grid with Stagger Animation */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 50px;
-            margin-bottom: 100px;
-        }
-
-        .project-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            border: 1px solid var(--medium-gray);
-            position: relative;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: cardReveal 0.8s ease forwards;
-        }
-
-        .project-card:nth-child(1) { animation-delay: 1.8s; }
-        .project-card:nth-child(2) { animation-delay: 2.0s; }
-        .project-card:nth-child(3) { animation-delay: 2.2s; }
-        .project-card:nth-child(4) { animation-delay: 2.4s; }
-
-        @keyframes cardReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .project-card:hover {
-            transform: translateY(-15px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--gradient-primary);
-            z-index: 2;
-        }
-
-        .project-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--gradient-accent);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            z-index: 3;
-            box-shadow: var(--shadow-sm);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            animation: badgePulse 2s infinite;
-        }
-
-        @keyframes badgePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .project-image {
-            width: 100%;
-            height: 250px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition-slow);
-        }
-
-        .project-card:hover .project-image img {
-            transform: scale(1.1);
-        }
-
-        .project-content {
-            padding: 35px;
-            position: relative;
-        }
-
-        .project-title {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            color: var(--dark);
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .project-description {
-            color: var(--dark-gray);
-            margin-bottom: 25px;
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        .project-features {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-        .project-features li {
-            padding: 10px 0;
-            padding-left: 35px;
-            position: relative;
-            color: var(--dark);
-        }
-
-        .project-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent-green);
-            font-weight: bold;
-            font-size: 1.2rem;
-            background: rgba(6, 214, 160, 0.1);
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .project-buttons {
-            display: flex;
-            gap: 20px;
-        }
-
-        .btn {
-            padding: 16px 30px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            border: none;
-            transition: var(--transition);
-            text-align: center;
-            text-decoration: none;
+        .page-subtitle { color: var(--gray-dark); font-size: 1.2rem; margin-top: 15px; }
+        .header-order-btn {
+            margin-top: 30px;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
-            flex: 1;
-            letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--gradient-primary);
-            z-index: -1;
-            transition: var(--transition);
-            opacity: 1;
-        }
-
-        .btn-preview {
+            background: var(--gradient);
             color: white;
-            box-shadow: 0 5px 20px rgba(67, 97, 238, 0.3);
-        }
-
-        .btn-preview:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(67, 97, 238, 0.4);
-        }
-
-        .btn-preview:hover::before {
-            transform: scale(1.05);
-        }
-
-        .btn-buy {
-            background: transparent;
-            color: var(--primary-blue);
-            border: 2px solid var(--primary-blue);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .btn-buy::before {
-            background: var(--gradient-primary);
-            opacity: 0;
-        }
-
-        .btn-buy:hover {
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(67, 97, 238, 0.4);
-        }
-
-        .btn-buy:hover::before {
-            opacity: 1;
-        }
-
-        /* SMALLER MODAL STYLES */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-            opacity: 1;
-            animation: modalFadeIn 0.3s ease;
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            width: 100%;
-            max-width: 450px; /* Smaller width */
-            max-height: 85vh;
-            overflow-y: auto;
-            box-shadow: var(--shadow-xl);
-            transform: scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid var(--medium-gray);
-        }
-
-        .modal-overlay.active .modal {
-            transform: scale(1);
-            animation: modalScaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes modalScaleIn {
-            0% { transform: scale(0.9); }
-            70% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
-
-        .modal-header {
-            padding: 25px; /* Smaller padding */
-            background: var(--gradient-primary);
-            color: white;
-            position: relative;
-            text-align: center;
-        }
-
-        .modal-title {
-            font-size: 1.8rem; /* Smaller font */
-            font-weight: 800;
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-        }
-
-        .modal-body {
-            padding: 25px; /* Smaller padding */
-        }
-
-        .form-group {
-            margin-bottom: 20px; /* Smaller margin */
-            opacity: 0;
-            transform: translateY(20px);
-            animation: formFieldReveal 0.5s ease forwards;
-        }
-
-        .form-group:nth-child(1) { animation-delay: 0.1s; }
-        .form-group:nth-child(2) { animation-delay: 0.2s; }
-        .form-group:nth-child(3) { animation-delay: 0.3s; }
-        .form-group:nth-child(4) { animation-delay: 0.4s; }
-        .form-group:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes formFieldReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px; /* Smaller margin */
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 0.95rem; /* Smaller font */
-            letter-spacing: 0.5px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 14px 20px; /* Smaller padding */
-            border: 2px solid var(--medium-gray);
-            border-radius: 10px;
-            font-size: 1rem; /* Smaller font */
-            transition: var(--transition);
-            font-family: 'Inter', sans-serif;
-            background: var(--light-gray);
-            color: var(--dark);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-blue);
-            background: var(--white);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
-        }
-
-        .form-control[readonly] {
-            background: var(--light-gray);
-            color: var(--dark-gray);
-            cursor: not-allowed;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 16px; /* Smaller padding */
-            background: var(--gradient-primary);
-            color: white;
-            font-weight: 800;
-            font-size: 1rem; /* Smaller font */
             border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 5px 20px rgba(67, 97, 238, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: buttonReveal 0.5s ease forwards 0.6s;
-        }
-
-        @keyframes buttonReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-     .btn-submit::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--gradient-secondary);
-            z-index: -1;
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .btn-submit:hover:not(:disabled)::after {
-            opacity: 1;
-        }
-
-        .btn-submit:disabled {
-            background: var(--dark-gray);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* Loading state for submit button */
-        .btn-submit.loading {
-            pointer-events: none;
-        }
-
-        .btn-submit.loading span {
-            visibility: hidden;
-        }
-
-        .btn-submit.loading::before {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: buttonSpin 1s linear infinite;
-        }
-
-        @keyframes buttonSpin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Close Button */
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: var(--transition);
-            z-index: 10;
-        }
-
-        .close-modal:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(90deg);
-        }
-
-        /* Error Message Styles */
-        .error-message {
-            display: none;
-            background: var(--gradient-error);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-            animation: errorSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: var(--shadow-md);
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .error-message.show {
-            display: block;
-            animation: errorSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes errorSlideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .error-message i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        /* Toast Notification for Errors */
-        .toast-notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--gradient-error);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: var(--shadow-xl);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            max-width: 350px;
-            opacity: 0;
-            transform: translateX(100px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .toast-notification.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .toast-notification.hide {
-            opacity: 0;
-            transform: translateX(100px);
-        }
-
-        .toast-icon {
-            font-size: 1.5rem;
-        }
-
-        .toast-content {
-            flex: 1;
-        }
-
-        .toast-title {
+            padding: 14px 36px;
+            border-radius: 40px;
             font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .toast-message {
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        /* Success Message */
-        .success-message {
-            display: none;
-            background: var(--gradient-accent);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: center;
-            animation: successSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: var(--shadow-md);
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .success-message.show {
-            display: block;
-            animation: successSlideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes successSlideIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 80px;
-            padding: 60px 40px;
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--medium-gray);
-            color: var(--dark);
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            opacity: 0;
-            transform: translateY(40px);
-            animation: footerReveal 0.8s ease forwards 2.6s;
-        }
-
-        @keyframes footerReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-        }
-
-        .footer-content {
-            max-width: 700px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .footer-title {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--dark);
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .footer-text {
-            color: var(--dark-gray);
-            margin-bottom: 30px;
             font-size: 1.1rem;
-            line-height: 1.8;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
         }
+        .header-order-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 30px rgba(67,97,238,0.3); }
 
-        .footer-copyright {
-            color: var(--dark-gray);
+        /* 4 cards grid */
+        .projects-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-bottom: 80px;
+        }
+        @media (max-width: 1100px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .projects-grid { grid-template-columns: 1fr; } }
+
+        .project-card {
+            background: var(--white); border-radius: var(--radius-md); overflow: hidden;
+            box-shadow: var(--shadow-md); transition: var(--transition);
+            display: flex; flex-direction: column;
+        }
+        .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 30px rgba(67,97,238,0.12); }
+        .project-image {
+            height: 180px; background: #e2e8f0; overflow: hidden;
+        }
+        .project-image img { width: 100%; height: 100%; object-fit: cover; transition: 0.4s; }
+        .project-card:hover .project-image img { transform: scale(1.05); }
+        .project-content { padding: 22px 20px; flex: 1; display: flex; flex-direction: column; }
+        .project-title {
+            font-size: 1.5rem; font-weight: 700; font-family: 'Poppins', sans-serif;
+            margin-bottom: 8px; color: var(--dark);
+        }
+        .project-description { color: var(--gray-dark); font-size: 0.9rem; margin-bottom: 20px; }
+        .btn-preview {
+            background: var(--gradient); color: white; border: none; padding: 12px 20px;
+            border-radius: 40px; font-weight: 600; text-decoration: none; display: inline-flex;
+            align-items: center; justify-content: center; gap: 10px; transition: var(--transition);
+            margin-top: auto; box-shadow: 0 8px 16px rgba(67,97,238,0.2);
+        }
+        .btn-preview:hover { transform: scale(1.02); box-shadow: 0 12px 24px rgba(67,97,238,0.3); }
+
+        /* footer */
+        .footer {
+            background: var(--white); border-radius: var(--radius); padding: 50px 30px; text-align: center;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        .footer-title { font-size: 2rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .footer-copyright { margin-top: 30px; color: var(--gray-dark); }
+
+        /* MODAL (order details) */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: var(--white); border-radius: 30px; width: 100%; max-width: 550px;
+            max-height: 90vh; overflow-y: auto; box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-overlay.active .modal { transform: scale(1); }
+        .modal-header {
+            padding: 26px; background: var(--gradient); color: white; position: relative;
+            border-radius: 30px 30px 0 0; text-align: center;
+        }
+        .modal-title { font-size: 2rem; font-weight: 700; font-family: 'Poppins', sans-serif; }
+        .close-modal {
+            position: absolute; top: 18px; right: 20px; background: rgba(255,255,255,0.2);
+            border: none; color: white; font-size: 2rem; width: 42px; height: 42px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: 0.2s;
+        }
+        .close-modal:hover { background: rgba(255,255,255,0.4); transform: rotate(90deg); }
+        .modal-body { padding: 30px; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-label {
+            font-weight: 600; display: block; margin-bottom: 6px; color: var(--dark);
             font-size: 0.95rem;
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid var(--medium-gray);
         }
-
-        /* Responsive Styles */
-        @media (max-width: 1200px) {
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .form-control, .form-select {
+            width: 100%; padding: 14px 18px; border: 2px solid #e9ecef; border-radius: 18px;
+            font-size: 1rem; background: #f8fafc; transition: 0.2s; font-family: 'Inter', sans-serif;
         }
-
-        @media (max-width: 992px) {
-            .page-title {
-                font-size: 3.2rem;
-            }
-            
-            .stats {
-                gap: 30px;
-            }
-            
-            .stat-item {
-                min-width: 200px;
-                padding: 35px 25px;
-            }
+        .form-control:focus, .form-select:focus {
+            outline: none; border-color: var(--primary); background: white;
+            box-shadow: 0 0 0 4px rgba(67,97,238,0.1);
         }
-
-        @media (max-width: 768px) {
-            .page-title {
-                font-size: 2.8rem;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .stats {
-                gap: 25px;
-            }
-            
-            .stat-item {
-                min-width: 180px;
-                padding: 30px 20px;
-            }
-            
-            .project-buttons {
-                flex-direction: column;
-            }
-            
-            .modal {
-                max-width: 90%;
-                max-height: 90vh;
-            }
-            
-            .modal-body {
-                padding: 20px;
-            }
-            
-            .modal-header {
-                padding: 20px;
-            }
-            
-            .modal-title {
-                font-size: 1.6rem;
-            }
+        .btn-submit {
+            width: 100%; padding: 18px; background: var(--gradient); border: none;
+            border-radius: 40px; color: white; font-weight: 700; font-size: 1.2rem;
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            cursor: pointer; transition: 0.2s; box-shadow: 0 8px 20px rgba(67,97,238,0.3);
+            margin-top: 12px;
         }
-
-        @media (max-width: 576px) {
-            .container {
-                padding: 20px 15px;
-            }
-            
-            .page-title {
-                font-size: 2.3rem;
-            }
-            
-            .page-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .header {
-                padding: 50px 25px;
-                margin-bottom: 60px;
-            }
-            
-            .project-content {
-                padding: 25px;
-            }
-            
-            .btn {
-                padding: 18px 25px;
-            }
-            
-            .stats {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .stat-item {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .footer {
-                padding: 40px 25px;
-                margin-top: 60px;
-            }
-            
-            .footer-title {
-                font-size: 1.8rem;
-            }
-            
-            .modal {
-                max-width: 95%;
-            }
-            
-            .modal-title {
-                font-size: 1.4rem;
-            }
-            
-            .close-modal {
-                top: 10px;
-                right: 10px;
-                width: 35px;
-                height: 35px;
-            }
+        .btn-submit:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 16px 30px rgba(67,97,238,0.4); }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-submit.loading span { visibility: hidden; }
+        .btn-submit.loading::after {
+            content: ''; position: absolute; width: 24px; height: 24px;
+            border: 3px solid white; border-top-color: transparent; border-radius: 50%;
+            animation: spin 0.8s infinite;
         }
+        .error-message, .success-message {
+            display: none; padding: 14px 18px; border-radius: 16px; margin-bottom: 25px;
+            font-weight: 500;
+        }
+        .error-message { background: #ffe9e9; color: #b00020; border-left: 5px solid #ff6b6b; }
+        .success-message { background: #e3f9ed; color: #0b5e42; border-left: 5px solid #06d6a0; }
+        .error-message.show, .success-message.show { display: block; }
+        .toast-notification {
+            position: fixed; top: 30px; right: 30px; background: #ff6b6b; color: white;
+            padding: 16px 24px; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            display: flex; align-items: center; gap: 15px; z-index: 3000;
+            transform: translateX(400px); transition: 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        .toast-notification.show { transform: translateX(0); }
     </style>
 </head>
 <body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-container">
-            <div class="loader">
-                <div class="loader-circle"></div>
-                <div class="loader-circle"></div>
-                <div class="loader-circle"></div>
-                <div class="loader-circle"></div>
+    <!-- navigation with order now button -->
+    <nav class="navbar">
+        <span class="logo">✦ ProWeb</span>
+        <button class="nav-order" id="navbarOrderBtn"><i class="fas fa-pen"></i> Order now</button>
+    </nav>
+
+    <div class="container">
+        <!-- header with additional order now button (added) -->
+        <header class="header">
+            <h1 class="page-title">Custom Website Work</h1>
+           <p class="page-subtitle">
+Premium website designs by Pro Developing. Explore live demos and order your custom website today.
+</p>
+            <!-- new header order button -->
+            <button class="header-order-btn" id="headerOrderBtn"><i class="fas fa-pen"></i> Custom Web Order</button>
+        </header>
+
+        <!-- exactly 4 cards, each with only ONE button (live preview) -->
+        <div class="projects-grid">
+            <!-- card 1 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="demo1.png" alt="Design Forward" onerror="this.src='https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&auto=format'">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Design Forward</h3>
+                    <p class="project-description">Clean & minimal business template</p>
+                    <a href="https://prodeweloping.github.io/Demo1/" class="btn-preview" target="_blank"><i class="fas fa-eye"></i> Live preview</a>
+                </div>
             </div>
-            <div class="loading-text">Loading Proweb Projects...</div>
-            <div class="loading-progress">
-                <div class="loading-progress-bar"></div>
+            <!-- card 2 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="demo2.png" alt="ProDev 3D" onerror="this.src='https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=400&auto=format'">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">ProDev 3D</h3>
+                    <p class="project-description">Immersive 3D & interactive</p>
+                    <a href="https://prodeweloping.github.io/Demo2/" class="btn-preview" target="_blank"><i class="fas fa-eye"></i> Live preview</a>
+                </div>
+            </div>
+            <!-- card 3 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="demo3.jpg" alt="PolyRhython" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&auto=format'">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">PolyRhython</h3>
+                    <p class="project-description">Creative portfolio pattern</p>
+                    <a href="https://prodeweloping.github.io/Demo3/" class="btn-preview" target="_blank"><i class="fas fa-eye"></i> Live preview</a>
+                </div>
+            </div>
+            <!-- card 4 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="demo4.jpg" alt="Nexus E‑commerce" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&auto=format'">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Nexus E‑commerce</h3>
+                    <p class="project-description">Full shop & dashboard</p>
+                    <a href="https://prodeweloping.github.io/Demo4/" class="btn-preview" target="_blank"><i class="fas fa-eye"></i> Live preview</a>
+                </div>
             </div>
         </div>
+
+        <!-- footer -->
+        <footer class="footer">
+            <div class="footer-copyright">© 2026 Pro Developing · need a website? click order now</div>
+        </footer>
     </div>
 
-    <!-- Page Content -->
-    <div class="page-content">
-        <div class="container">
-            <!-- Header Section -->
-            <header class="header">
-                <h1 class="page-title">Frontend Website Work</h1>
-                <p class="page-subtitle">Premium website templates with cutting-edge design and seamless performance</p>
-            </header>
-            <!-- Projects Grid -->
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <div class="project-card">
-                    <div class="project-badge">Most Popular</div>
-                    <div class="project-image">
-                        <img src="demo1.png" alt="Design Forward Web" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Design Forward Web</h3>
-                        <p class="project-description">Modern, responsive website template with clean aesthetics and performance-driven design principles.</p>
-                        <ul class="project-features">
-                            <li>Fully Responsive Design</li>
-                            <li>Modern UI/UX Components</li>
-                            <li>Optimized Performance</li>
-                            <li>Cross-browser Compatible</li>
-                        </ul>
-                        <div class="project-buttons">
-                            <a href="https://prodeweloping.github.io/Demo1/" class="btn btn-preview" target="_blank">
-                                <i class="fas fa-eye"></i>
-                                <span>Live Preview</span>
-                            </a>
-                            <button class="btn btn-buy" 
-                                data-project="Design Forward Web"
-                                data-github="https://github.com/prodeweloping/Demo1.git"
-                                data-live="https://prodeweloping.github.io/Demo1/">
-                                <i class="fas fa-shopping-cart"></i>
-                                <span>Buy Now</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 2 -->
-                <div class="project-card">
-                    <div class="project-badge">3D Effects</div>
-                    <div class="project-image">
-                        <img src="demo2.png" alt="ProDev 3D Website" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">ProDev 3D Website</h3>
-                        <p class="project-description">Immersive 3D website with smooth animations and interactive elements for engaging user experiences.</p>
-                        <ul class="project-features">
-                            <li>3D Animations & Effects</li>
-                            <li>Interactive UI Elements</li>
-                            <li>Performance Optimized</li>
-                            <li>Mobile First Design</li>
-                        </ul>
-                        <div class="project-buttons">
-                            <a href="https://prodeweloping.github.io/Demo2/" class="btn btn-preview" target="_blank">
-                                <i class="fas fa-eye"></i>
-                                <span>Live Preview</span>
-                            </a>
-                            <button class="btn btn-buy" 
-                                data-project="ProDev 3D Website"
-                                data-github="https://github.com/prodeweloping/Demo2.git"
-                                data-live="https://prodeweloping.github.io/Demo2/">
-                                <i class="fas fa-shopping-cart"></i>
-                                <span>Buy Now</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 3 -->
-                <div class="project-card">
-                    <div class="project-badge">Creative</div>
-                    <div class="project-image">
-                        <img src="demo3.jpg" alt="PolyRhython Web" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">PolyRhython Web</h3>
-                        <p class="project-description">Creative portfolio template with geometric patterns and rhythmic design elements for visual impact.</p>
-                        <ul class="project-features">
-                            <li>Geometric Design Patterns</li>
-                            <li>Smooth Animations</li>
-                            <li>SEO Optimized</li>
-                            <li>Fast Loading</li>
-                        </ul>
-                        <div class="project-buttons">
-                            <a href="https://prodeweloping.github.io/Demo3/" class="btn btn-preview" target="_blank">
-                                <i class="fas fa-eye"></i>
-                                <span>Live Preview</span>
-                            </a>
-                            <button class="btn btn-buy" 
-                                data-project="PolyRhython Web"
-                                data-github="https://github.com/prodeweloping/Demo3.git"
-                                data-live="https://prodeweloping.github.io/Demo3/">
-                                <i class="fas fa-shopping-cart"></i>
-                                <span>Buy Now</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 4 -->
-                <div class="project-card">
-                    <div class="project-badge">E-commerce</div>
-                    <div class="project-image">
-                        <img src="demo4.jpg" alt="Nexus Ecommerce Web" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Nexus Ecommerce Web</h3>
-                        <p class="project-description">Complete e-commerce solution with modern design, secure payments, and seamless shopping experience.</p>
-                        <ul class="project-features">
-                            <li>E-commerce Ready</li>
-                            <li>Secure Payment Integration</li>
-                            <li>Product Management</li>
-                            <li>Analytics Dashboard</li>
-                        </ul>
-                        <div class="project-buttons">
-                            <a href="https://prodeweloping.github.io/Demo4/" class="btn btn-preview" target="_blank">
-                                <i class="fas fa-eye"></i>
-                                <span>Live Preview</span>
-                            </a>
-                            <button class="btn btn-buy" 
-                                data-project="Nexus Ecommerce Web"
-                                data-github="https://github.com/prodeweloping/Demo4.git"
-                                data-live="https://prodeweloping.github.io/Demo4/">
-                                <i class="fas fa-shopping-cart"></i>
-                                <span>Buy Now</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <footer class="footer">
-                <div class="footer-content">
-                    <h3 class="footer-title">Ready to Transform Your Digital Presence?</h3>
-                    <p class="footer-text">Each template comes with full documentation, dedicated support, and easy customization options to match your brand identity. Get started with our premium templates today!</p>
-                    <div class="footer-copyright">
-                        © 2026 Powered by Pro Developing. All rights reserved. | Contact: prodeveloping97@gmail.com
-                    </div>
-                </div>
-            </footer>
-        </div>
-    </div>
-
-   <!-- Purchase Modal -->
-    <div class="modal-overlay" id="modal">
+    <!-- ORDER MODAL (now with the detailed fields from second form) -->
+    <div class="modal-overlay" id="orderModal">
         <div class="modal">
             <div class="modal-header">
-                <h2 class="modal-title">Purchase Project</h2>
-                <button class="close-modal">&times;</button>
+                <h2 class="modal-title">Custom Website Order</h2>
+                <button class="close-modal" id="closeModalBtn">&times;</button>
             </div>
             <div class="modal-body">
-                <div id="errorMsg" class="error-message">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span id="errorText">Please check your information and try again.</span>
-                </div>
-                
-                <form id="purchaseForm">
+                <div id="errorMsg" class="error-message"><i class="fas fa-exclamation-circle"></i> <span id="errorText"></span></div>
+                <div id="successMsg" class="success-message"><i class="fas fa-check-circle"></i> ✅ request sent! we'll contact you soon.</div>
+
+                <!-- updated form with extra fields (business name, pages, features, reference, budget) -->
+                <form id="orderForm">
                     <div class="form-group">
-                        <label class="form-label" for="name">Full Name *</label>
-                        <input type="text" id="name" class="form-control" placeholder="Enter your full name" required>
+                        <label class="form-label" for="name">full name *</label>
+                        <input type="text" id="name" class="form-control" placeholder="John Doe" required>
                     </div>
-                    
                     <div class="form-group">
-                        <label class="form-label" for="email">Email Address *</label>
-                        <input type="email" id="email" class="form-control" placeholder="Enter your email address" required>
+                        <label class="form-label" for="mobile">mobile number *</label>
+                        <input type="tel" id="mobile" class="form-control" placeholder="+91 6356952788" required>
                     </div>
-                    
-   <div class="form-group">
-                        <label class="form-label" for="mobile">Mobile Number *</label>
-                        <input type="tel" id="mobile" class="form-control" placeholder="Enter your mobile number" required>
-                    </div>
-                    
                     <div class="form-group">
-                        <label class="form-label" for="project">Selected Project</label>
-                        <input type="text" id="project" class="form-control" readonly>
+                        <label class="form-label" for="email">email address *</label>
+                        <input type="email" id="email" class="form-control" placeholder="businessemail@gmail.com" required>
                     </div>
-                    
-                    <input type="hidden" id="github">
-                    <input type="hidden" id="live">
-                    
+
+                    <!-- new fields from second form -->
                     <div class="form-group">
-                        <label class="form-label" for="message">Message (Optional)</label>
-                        <textarea id="message" class="form-control" rows="3" placeholder="Any specific customization or requirements..."></textarea>
+                        <label class="form-label" for="businessName">business name (optional)</label>
+                        <input type="text" id="businessName" class="form-control" placeholder="Your company or brand">
                     </div>
-                    
-                    <div id="successMsg" class="success-message">
-                        <i class="fas fa-check-circle"></i> ✅ Request Sent Successfully! Check Email Inbox.
+
+                    <div class="form-group">
+                        <label class="form-label" for="websiteType">website type *</label>
+                        <select id="websiteType" class="form-select" required>
+                            <option value="" disabled selected>– select one –</option>
+                            <option value="Business Website">Business Website</option>
+                            <option value="Ecommerce Website">Ecommerce Website</option>
+                            <option value="Portfolio Website">Portfolio Website</option>
+                            <option value="Blog Website">Blog Website</option>
+                            <option value="Custom Website">Custom Website</option>
+                        </select>
                     </div>
-                    
-                    <button type="submit" class="btn-submit" id="submitBtn">
-                        <i class="fas fa-paper-plane"></i>
-                        <span>Purchase Request</span>
-                    </button>
+
+                    <div class="form-group">
+                        <label class="form-label" for="pagesNeeded">pages needed (e.g. Home, About, Services) *</label>
+                        <input type="text" id="pagesNeeded" class="form-control" placeholder="Home, About, Services, Contact" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="featuresRequired">features required (optional)</label>
+                        <input type="text" id="featuresRequired" class="form-control" placeholder="Payment, WhatsApp chat, login, etc.">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="referenceWebsite">reference website (optional)</label>
+                        <input type="text" id="referenceWebsite" class="form-control" placeholder="https://example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="budgetRange">budget range (optional)</label>
+                        <select id="budgetRange" class="form-select">
+                            <option value="" selected>– select (optional) –</option>
+                            <option>₹1000 - ₹3000</option>
+                            <option>₹3000 - ₹7000</option>
+                            <option>₹7000+</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="description">describe your website *</label>
+                        <textarea id="description" class="form-control" rows="4" placeholder="Explain what type of website you want, colors, style, functionality..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submitBtn"><i class="fas fa-paper-plane"></i> <span>send request</span></button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Toast Notification for Errors -->
+    <!-- toast notification -->
     <div id="toast" class="toast-notification">
-        <div class="toast-icon">
-            <i class="fas fa-exclamation-circle"></i>
-        </div>
-        <div class="toast-content">
-            <div class="toast-title" id="toastTitle">Error</div>
-            <div class="toast-message" id="toastMessage">Something went wrong</div>
-        </div>
+        <div><i class="fas fa-exclamation-triangle"></i></div>
+        <div><strong id="toastTitle">Error</strong><br><span id="toastMessage"></span></div>
     </div>
 
-   <script>
-        // Initialize EmailJS with your User ID
-        (function() {
-            emailjs.init("FfnVW2oPii98q0uHl");
-        })();
+    <script>
+        (function() { emailjs.init("FfnVW2oPii98q0uHl"); })();
 
-        // DOM Elements
-        const loadingOverlay = document.getElementById("loadingOverlay");
-        const modal = document.getElementById("modal");
-        const projectInput = document.getElementById("project");
-        const githubInput = document.getElementById("github");
-        const liveInput = document.getElementById("live");
-        const successMsg = document.getElementById("successMsg");
-        const errorMsg = document.getElementById("errorMsg");
-        const errorText = document.getElementById("errorText");
-        const closeModalBtn = document.querySelector(".close-modal");
-        const purchaseForm = document.getElementById("purchaseForm");
-        const submitBtn = document.getElementById("submitBtn");
-        const toast = document.getElementById("toast");
-        const toastTitle = document.getElementById("toastTitle");
-        const toastMessage = document.getElementById("toastMessage");
+        // elements
+        const loading = document.getElementById('loadingOverlay');
+        const modal = document.getElementById('orderModal');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const navbarBtn = document.getElementById('navbarOrderBtn');
+        const headerBtn = document.getElementById('headerOrderBtn');   // new header button
+        const form = document.getElementById('orderForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMsgDiv = document.getElementById('errorMsg');
+        const errorTextSpan = document.getElementById('errorText');
+        const successMsgDiv = document.getElementById('successMsg');
+        const toast = document.getElementById('toast');
+            const toastTitle = document.getElementById('toastTitle');
+        const toastMsg = document.getElementById('toastMessage');
 
-        // Page Loading Animation
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                loadingOverlay.classList.add('hidden');
-                document.querySelector('.page-content').style.opacity = '1';
-                document.querySelector('.page-content').style.transform = 'translateY(0)';
-            }, 2000);
-        });
+        // loading hide
+        window.addEventListener('load', () => setTimeout(() => loading.classList.add('hidden'), 1500));
+        setTimeout(() => loading.classList.add('hidden'), 3000);
 
-        // If page takes too long to load, hide loader anyway
-        setTimeout(() => {
-            loadingOverlay.classList.add('hidden');
-        }, 4000);
+        // open modal when navbar order clicked OR header button clicked
+        function openModal() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            successMsgDiv.classList.remove('show');
+            errorMsgDiv.classList.remove('show');
+        }
+        navbarBtn.addEventListener('click', openModal);
+        headerBtn.addEventListener('click', openModal);
 
-        // Open modal when Buy Now is clicked and set data attributes
-        document.querySelectorAll(".btn-buy").forEach(btn => {
-            btn.addEventListener("click", () => {
-                // Get all data attributes
-                const projectName = btn.getAttribute("data-project");
-                const githubUrl = btn.getAttribute("data-github");
-                const liveUrl = btn.getAttribute("data-live");
-                
-                console.log("Opening modal for project:", projectName);
-                console.log("GitHub URL:", githubUrl);
-                console.log("Live URL:", liveUrl);
-                
-                // Set form values
-                projectInput.value = projectName;
-                githubInput.value = githubUrl;
-                liveInput.value = liveUrl;
-                
-                modal.classList.add("active");
-                document.body.style.overflow = "hidden";
-                successMsg.classList.remove("show");
-                errorMsg.classList.remove("show");
-                purchaseForm.reset();
-                
-                // Reset project field
-                projectInput.value = projectName;
-            });
-        });
+        // close modal
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            form.reset();
+            successMsgDiv.classList.remove('show');
+            errorMsgDiv.classList.remove('show');
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+            // reset border colors
+            document.querySelectorAll('.form-control, .form-select').forEach(f => f.style.borderColor = '#e9ecef');
+        }
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+        document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
 
-        // Close modal when X is clicked
-        closeModalBtn.addEventListener("click", () => {
-            closeModalHandler();
-        });
+        // helpers
+        function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+        function isValidMobile(m) { return m.replace(/\D/g,'').length >= 10; }
+        function highlightField(id) {
+            const f = document.getElementById(id);
+            if(f) { f.style.borderColor = '#ff6b6b'; setTimeout(() => f.style.borderColor = '', 2500); f.focus(); }
+        }
+        function showModalError(msg) { errorTextSpan.innerText = msg; errorMsgDiv.classList.add('show'); setTimeout(() => errorMsgDiv.classList.remove('show'), 5000); }
+        function showToast(title, msg) { toastTitle.innerText = title; toastMsg.innerText = msg; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 5000); }
 
-        // Close modal when clicking outside
-        modal.addEventListener("click", (e) => {
-            if (e.target === modal) {
-                closeModalHandler();
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && modal.classList.contains("active")) {
-                closeModalHandler();
-            }
-        });
-
-        // Form submission handler - FIXED VERSION
-        purchaseForm.addEventListener("submit", async function(e) {
+        // form submit (adapted to new fields)
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Hide previous messages
-            successMsg.classList.remove("show");
-            errorMsg.classList.remove("show");
-            
-            // Get form values
-            const name = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const mobile = document.getElementById("mobile").value.trim();
-            const message = document.getElementById("message").value.trim();
-            const project = projectInput.value; // Get project name from input
-            
-            console.log("Form submission values:");
-            console.log("Name:", name);
-            console.log("Email:", email);
-            console.log("Mobile:", mobile);
-            console.log("Project:", project);
-            console.log("GitHub:", githubInput.value);
-            console.log("Live:", liveInput.value);
-            
-            // Validation
-            let error = null;
-            
-            if (!name) {
-                error = "Please enter your full name.";
-                highlightErrorField("name");
-            } else if (!email) {
-                error = "Please enter your email address.";
-                highlightErrorField("email");
-            } else if (!isValidEmail(email)) {
-                error = "Please enter a valid email address.";
-                highlightErrorField("email");
-            } else if (!mobile) {
-                error = "Please enter your mobile number.";
-                highlightErrorField("mobile");
-            } else if (!isValidMobile(mobile)) {
-                error = "Please enter a valid mobile number (at least 10 digits).";
-                highlightErrorField("mobile");
-            }
-            
-            if (error) {
-                showErrorInModal(error);
-                showToast("Validation Error", error);
-                return;
-            }
-            
-            // Show loading state on submit button
+            successMsgDiv.classList.remove('show');
+            errorMsgDiv.classList.remove('show');
+
+            // get all field values
+            const name = document.getElementById('name').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const businessName = document.getElementById('businessName').value.trim();
+            const websiteType = document.getElementById('websiteType').value;
+            const pagesNeeded = document.getElementById('pagesNeeded').value.trim();
+            const featuresRequired = document.getElementById('featuresRequired').value.trim();
+            const referenceWebsite = document.getElementById('referenceWebsite').value.trim();
+            const budgetRange = document.getElementById('budgetRange').value;
+            const description = document.getElementById('description').value.trim();
+
+            // validations (required: name, mobile, email, websiteType, pagesNeeded, description)
+            if (!name) { showModalError('full name is required'); highlightField('name'); return; }
+            if (!mobile || !isValidMobile(mobile)) { showModalError('mobile with at least 10 digits'); highlightField('mobile'); return; }
+            if (!email || !isValidEmail(email)) { showModalError('valid email required'); highlightField('email'); return; }
+            if (!websiteType) { showModalError('please select website type'); document.getElementById('websiteType').focus(); return; }
+            if (!pagesNeeded) { showModalError('please list pages needed'); highlightField('pagesNeeded'); return; }
+            if (!description) { showModalError('please describe your website idea'); highlightField('description'); return; }
+
             submitBtn.classList.add('loading');
             submitBtn.disabled = true;
-            
+
             try {
-                // Prepare template parameters - FIXED: project_name parameter
-                const templateParams = {
+                // build a comprehensive message including all fields
+                const fullMessage = `
+BUSINESS NAME: ${businessName || '(not provided)'}
+WEBSITE TYPE: ${websiteType}
+PAGES NEEDED: ${pagesNeeded}
+FEATURES REQUIRED: ${featuresRequired || '(not specified)'}
+REFERENCE WEBSITE: ${referenceWebsite || '(none)'}
+BUDGET RANGE: ${budgetRange || '(not specified)'}
+DESCRIPTION: ${description}
+                `.trim();
+
+                // Use same template but pack everything into message.
+                // project_name can be websiteType.
+                const response = await emailjs.send('service_snv7hbg', 'template_x7cfn8f', {
                     full_name: name,
                     email: email,
                     mobile: mobile,
-                    project_name: project, // This is the key fix
-                    github_url: githubInput.value,
-                    live_url: liveInput.value,
-                    message: message || "No message provided",
+                    project_name: websiteType,           // website type as project name
+                    github_url: '',                       // not used
+                    live_url: '',                          // not used
+                    message: fullMessage,                  // all details combined
                     date: new Date().toLocaleDateString(),
                     time: new Date().toLocaleTimeString()
-                };
-                
-                console.log("Sending email with parameters:", templateParams);
-                
-                // Send email using EmailJS
-                const response = await emailjs.send(
-                    "service_snv7hbg", 
-                    "template_x7cfn8f", 
-                    templateParams
-                );
-                
-                console.log("Email sent successfully:", response);
-                
-                // Show success message with animation
-                successMsg.classList.add("show");
-                
-                // Reset form but keep project name
-                document.getElementById("name").value = "";
-                document.getElementById("email").value = "";
-                document.getElementById("mobile").value = "";
-                document.getElementById("message").value = "";
-                
-                // Remove loading state
+                });
+
+                console.log('order sent', response);
+                successMsgDiv.classList.add('show');
+                // reset form
+                document.getElementById('name').value = '';
+                document.getElementById('mobile').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('businessName').value = '';
+                document.getElementById('websiteType').value = '';
+                document.getElementById('pagesNeeded').value = '';
+                document.getElementById('featuresRequired').value = '';
+                document.getElementById('referenceWebsite').value = '';
+                document.getElementById('budgetRange').value = '';
+                document.getElementById('description').value = '';
+
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
-                
-                // Close modal after 3 seconds
-                setTimeout(() => {
-                    closeModalHandler();
-                }, 3000);
-                
-            } catch (error) {
-                console.error("EmailJS Error:", error);
-                const errorMessage = "Sorry, there was an error sending your request. Please try again.";
-                showErrorInModal(errorMessage);
-                showToast("Submission Failed", errorMessage);
+
+                setTimeout(closeModal, 2500);
+            } catch (err) {
+                console.error(err);
+                showModalError('failed to send. check network or try again.');
+                showToast('submission error', 'emailjs failed');
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
             }
         });
 
-        // Helper Functions
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-
-        function isValidMobile(mobile) {
-            const mobileDigits = mobile.replace(/\D/g, '');
-            return mobileDigits.length >= 10;
-        }
-
-        function highlightErrorField(fieldId) {
-            const field = document.getElementById(fieldId);
-            if (field) {
-                field.style.borderColor = 'var(--accent-red)';
-                field.style.boxShadow = '0 0 0 3px rgba(255, 107, 107, 0.1)';
-                field.focus();
-                
-                // Remove error styling after 3 seconds
-                setTimeout(() => {
-                    field.style.borderColor = '';
-                    field.style.boxShadow = '';
-                }, 3000);
-            }
-        }
-
-        function showErrorInModal(message) {
-            errorText.textContent = message;
-            errorMsg.classList.add("show");
-            
-            // Auto hide after 5 seconds
-            setTimeout(() => {
-                errorMsg.classList.remove("show");
-            }, 5000);
-        }
-
-        function showToast(title, message) {
-            toastTitle.textContent = title;
-            toastMessage.textContent = message;
-            
-            toast.classList.remove('hide');
-            toast.classList.add('show');
-            
-            // Auto hide after 5 seconds
-            setTimeout(() => {
-                toast.classList.remove('show');
-                toast.classList.add('hide');
-            }, 5000);
-        }
-
-        // Close modal handler function
-        function closeModalHandler() {
-            modal.classList.remove("active");
-            document.body.style.overflow = "auto";
-            purchaseForm.reset();
-            successMsg.classList.remove("show");
-            errorMsg.classList.remove("show");
-            submitBtn.classList.remove('loading');
-            submitBtn.disabled = false;
-        }
-
-        // Add input validation styling
-        const inputs = document.querySelectorAll('.form-control');
-        inputs.forEach(input => {
-            input.addEventListener('blur', function() {
-                if (this.value.trim() !== '' && this.checkValidity()) {
-                    this.style.borderColor = '#06d6a0';
-                    this.style.boxShadow = '0 0 0 3px rgba(6, 214, 160, 0.1)';
-                } else if (this.value.trim() === '') {
-                    this.style.borderColor = 'var(--medium-gray)';
-                    this.style.boxShadow = 'none';
-                } else {
-                    this.style.borderColor = '#ff6b6b';
-                    this.style.boxShadow = '0 0 0 3px rgba(255, 107, 107, 0.1)';
-                }
+        // input focus style reset
+        document.querySelectorAll('.form-control, .form-select').forEach(inp => {
+            inp.addEventListener('blur', function() {
+                if (this.checkValidity && !this.checkValidity()) this.style.borderColor = '#ff6b6b';
+                else this.style.borderColor = '#e9ecef';
             });
-            
-            input.addEventListener('focus', function() {
-                this.style.borderColor = 'var(--primary-blue)';
-                this.style.boxShadow = '0 0 0 3px rgba(67, 97, 238, 0.1)';
-            });
-        });
-
-        // Add hover effect to cards
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-15px)';
-                card.style.boxShadow = 'var(--shadow-xl)';
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-                card.style.boxShadow = 'var(--shadow-md)';
-            });
-        });
-
-        // Add scroll animation for elements
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all cards for scroll animations
-        document.querySelectorAll('.project-card, .stat-item').forEach(el => {
-            observer.observe(el);
+            inp.addEventListener('focus', function() { this.style.borderColor = '#4361ee'; });
         });
     </script>
 </body>
-</html>
+</html>                                                                     
