@@ -636,7 +636,7 @@ Operated from Vav-Tharad, Gujarat by Mahipat Suthar.
                     const sheetOk = results[0].status === 'fulfilled' && results[0].value?.status === 'success';
                     const emailOk = results[1].status === 'fulfilled';
                     if (sheetOk || emailOk) {
-                        newsletterMsg.innerHTML = "✅ Subscribed & saved!";
+                        newsletterMsg.innerHTML = "✅ Subscribed!";
                         newsletterForm.reset();
                     } else {
                         newsletterMsg.innerHTML = "❌ failed. Try again.";
