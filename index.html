@@ -12,8 +12,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- AOS CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { overflow-x: hidden; width: 100%; }
@@ -139,41 +137,45 @@
         .footer-links a { color: #b0c4de; text-decoration: none; transition: 0.2s; }
         .footer-links a:hover { color: white; padding-left: 8px; }
 
-        /* newsletter stacked - slightly bigger button */
+        /* ✅ FIXED NEWSLETTER FORM – ROW LAYOUT */
         .newsletter-form {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
+            align-items: center;
+            background: white;
+            border-radius: 60px;
+            padding: 4px;
+            width: 100%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         .newsletter-input {
-            width: 100%;
-            padding: 14px 20px;
+            flex: 1;
             border: none;
-            border-radius: 60px;
+            padding: 12px 18px;
             font-size: 1rem;
-            background: white;
+            border-radius: 60px;
+            outline: none;
+            background: transparent;
+            min-width: 0;
         }
-        .newsletter-input:focus { outline: 2px solid var(--accent); }
         .newsletter-btn {
-            background: var(--accent);
-            border: none;
-            border-radius: 60px;
-            padding: 12px 32px;        /* balanced size */
-            font-size: 1rem;
+            background: #ea580c;
             color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 60px;
             font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
-            transition: var(--transition);
+            white-space: nowrap;
+            transition: 0.2s;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            white-space: nowrap;
             line-height: 1.2;
-            min-height: 48px;
-            width: fit-content;
-            margin: 0 auto;
+            flex-shrink: 0;
+        }
+        .newsletter-btn:hover {
+            background: #c2410c;
         }
         .newsletter-btn.loading .btn-text { display: none; }
         .newsletter-btn .spinner { display: none; width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; }
@@ -272,7 +274,8 @@
             .contact-item { flex-direction: column; text-align: center; gap: 10px; }
             .contact-icon { margin-bottom: 5px; }
             .footer-content { gap: 30px; }
-            .newsletter-btn { width: 100%; }
+            /* newsletter already row, but ensure button doesn't shrink too much */
+            .newsletter-btn { padding: 10px 16px; }
             .hero-slider-btn, .permanent-btn { font-size: 1rem; padding: 12px 20px; }
             .typewriter-heading { font-size: 1.8rem; }
         }
@@ -296,9 +299,9 @@
             </ul>
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="menu"><i class="fas fa-bars"></i></button>
         </nav>
-    </header>
+   </header>
 
- <section class="hero" id="home">
+    <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
                 <div class="typewriter-heading" data-aos="fade-up">
@@ -362,8 +365,13 @@
                 </div>
                 <div class="office-text" data-aos="fade-left">
                     <h3>-Pro Developing</h3>
-                    <p>Pro Developing ka main focus hai high-quality digital solutions banana jo business ko grow kare.</p>
-                    <p>• Integration Work <br>• Custom tools work.<br> • Frontend Website work.</p>
+             <p>
+Pro Developing is an online web service platform that creates modern websites and digital tools. All services are provided online.
+</p>
+
+<p>
+Operated from Vav-Tharad, Gujarat by Mahipat Suthar.
+</p>
                 </div>
             </div>
         </div>
@@ -420,7 +428,6 @@
                         <p class="ceo-highlight">
                             <i class="fas fa-crown" style="margin-right: 8px; color: #fbbf24;"></i> 
                             CEO & Founder :- MahiPat Suthar
-                            <span class="click-now"><i class="fas fa-hand-pointer"></i> click now</span>
                         </p>
                     </a>
                     <div class="social-icons">
@@ -440,16 +447,19 @@
                 <div class="footer-newsletter" data-aos="fade-left">
                     <h3>Newsletter</h3>
                     <p>Subscribe for updates & offers.</p>
+                    <!-- ✅ Fixed newsletter form with proper IDs and row layout -->
                     <form class="newsletter-form" id="newsletterForm">
-                        <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="your@email.com" required>
-                        <button type="submit" class="newsletter-btn" id="newsletterBtn"><span class="btn-text">Subscribe</span><span class="spinner"></span></button>
+                        <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Your email" required>
+                        <button type="submit" class="newsletter-btn" id="newsletterBtn">
+                            <span class="btn-text">Subscribe</span>
+                            <span class="spinner"></span>
+                        </button>
                     </form>
                     <p id="newsletterMsg" style="margin-top:12px; color:#a5f3fc;"></p>
                 </div>
             </div>
             <div class="copyright" data-aos="fade-up">
                 <span>&copy; 2026 Pro Developing. All rights reserved.</span>
-                <a href="terms.html" class="btn btn-terms btn-small">Terms & Conditions</a>
             </div>
         </div>
     </footer>
@@ -467,16 +477,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
-fetch("site-status.json")
-.then(res => res.json())
-.then(data => {
-if(data.status === "off"){
-document.body.innerHTML = `
-<h1 style="text-align:center;margin-top:100px;">
-🚧 Website Under Maintenance
-</h1>`;
-}
-});
         (function(){ emailjs.init("O6JKIbUeu1dewfkTH"); })();
 
         // mobile menu
@@ -608,7 +608,7 @@ document.body.innerHTML = `
             .finally(() => contactBtn.classList.remove('loading'));
         });
 
-        // NEWSLETTER
+        // NEWSLETTER (fixed IDs)
         const newsletterForm = document.getElementById("newsletterForm");
         const newsletterBtn = document.getElementById("newsletterBtn");
         const newsletterMsg = document.getElementById("newsletterMsg");
@@ -616,7 +616,8 @@ document.body.innerHTML = `
 
         newsletterForm.addEventListener("submit", function(e){
             e.preventDefault();
-            const email = document.getElementById("newsletterEmail").value.trim();
+            const emailInput = document.getElementById("newsletterEmail");
+            const email = emailInput.value.trim();
             if (!email.includes('@')) { 
                 newsletterMsg.innerHTML = "❌ valid email required"; 
                 return; 
@@ -676,4 +677,4 @@ document.body.innerHTML = `
         });
     </script>
 </body>
-    </html>
+                                                                                                                                                                                        </html>
