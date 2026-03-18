@@ -38,7 +38,7 @@
         .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; width: 100%; }
         section { padding: 80px 0; }
         .hero {
-            padding-top: 100px;   /* reduced from 120px to 100px */
+            padding-top: 100px;
             padding-bottom: 40px;
         }
         h2, h3 { font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
@@ -90,16 +90,15 @@
         .nav-links a:hover::after { width: 100%; }
         .nav-links a:hover { color: var(--primary); }
 
-        /* Services section – more compact grid */
         .services-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 16px;   /* reduced from 20px */
+            gap: 16px; 
             margin-top: 10px; 
         }
         .service-card { 
             background: var(--surface); 
-            padding: 28px 20px;   /* reduced from 35px 24px */
+            padding: 28px 20px; 
             border-radius: var(--radius-lg); 
             text-align: center; 
             box-shadow: var(--shadow-sm); 
@@ -115,12 +114,12 @@
         }
         .service-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: var(--shadow-lg); border-color: var(--primary); }
         .service-icon { 
-            font-size: 2.8rem;    /* slightly reduced from 3rem */
+            font-size: 2.8rem; 
             color: var(--primary); 
-            margin-bottom: 16px;   /* reduced from 20px */
+            margin-bottom: 16px; 
             display: inline-block; 
             background: #e0edff; 
-            padding: 14px;         /* reduced from 16px */
+            padding: 14px; 
             border-radius: 60px; 
             transition: var(--transition); 
         }
@@ -149,6 +148,11 @@
         textarea.form-control { min-height: 140px; border-radius: 28px; resize: vertical; }
         ::placeholder { color: #94a3b8; font-weight: 500; }
 
+        /* sub-service select styling */
+        .sub-service-group { margin-top: 15px; display: none; }
+        .sub-service-group label { font-size: 0.95rem; color: var(--primary-dark); }
+        .sub-service-select { width: 100%; padding: 14px 20px; border: 1px solid #d1d9e6; border-radius: 40px; font-size: 1rem; background: white; }
+
         footer { background: #0f172a; color: white; border-radius: 60px 60px 0 0; padding: 70px 0 30px; margin-top: 40px; }
         .footer-content { display: grid; grid-template-columns: 1.5fr 1fr 1.5fr; gap: 50px; margin-bottom: 50px; }
         .footer-logo { font-size: 2rem; font-weight: 800; color: white; text-decoration: none; }
@@ -167,7 +171,6 @@
         .footer-links a { color: #b0c4de; text-decoration: none; transition: 0.2s; }
         .footer-links a:hover { color: white; padding-left: 8px; }
 
-        /* Newsletter form – row layout */
         .newsletter-form {
             display: flex;
             align-items: center;
@@ -204,9 +207,7 @@
             line-height: 1.2;
             flex-shrink: 0;
         }
-        .newsletter-btn:hover {
-            background: #c2410c;
-        }
+        .newsletter-btn:hover { background: #c2410c; }
         .newsletter-btn.loading .btn-text { display: none; }
         .newsletter-btn .spinner { display: none; width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; }
         .newsletter-btn.loading .spinner { display: inline-block; }
@@ -218,7 +219,6 @@
         .scroll-indicator { position: fixed; right: 30px; bottom: 30px; width: 54px; height: 54px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); z-index: 99; display: none; }
         .scroll-indicator:hover { background: var(--accent); transform: scale(1.1) translateY(-5px); }
 
-        /* typewriter */
         .typewriter-heading {
             font-size: clamp(1.8rem, 7vw, 4rem);
             font-weight: 800;
@@ -245,7 +245,6 @@
         }
         @keyframes cursorBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* slider */
         .hero-slider { width: 100%; max-width: 1536px; margin: 0 auto 10px; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-lg); background: #f0f0f0; }
         .slider-container { position: relative; width: 100%; padding-bottom: 66.6667%; height: 0; overflow: hidden; background: #e2e8f0; }
         .slider-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; transition: transform 0.5s ease-in-out; }
@@ -265,7 +264,6 @@
         .permanent-btn { display: block; width: 100%; padding: 14px 20px; font-size: 1.1rem; background-color: var(--primary); color: white; border-radius: 50px; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: var(--shadow-lg); transition: var(--transition-bounce); text-decoration: none; border: none; cursor: pointer; text-align: center; }
         .permanent-btn:hover { background-color: var(--primary-dark); transform: translateY(-5px); }
 
-        /* POPUP */
         .popup-overlay {
             position: fixed;
             top: 0;
@@ -318,8 +316,8 @@
     <div class="blob blob-2"></div>
 
     <header>
-     <nav>
-            <a href="#" class="logo">Pro <span>Developing</span></a>
+        <nav>
+          <a href="#" class="logo">Pro <span>Developing</span></a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
@@ -339,21 +337,19 @@
                 <div class="hero-slider" data-aos="zoom-in" data-aos-delay="100">
                     <div class="slider-container" id="heroSlider">
                         <div class="slider-wrapper" id="sliderWrapper">
-                            <div class="slider-slide"><img src="f.png" alt="Frontend development" onerror="this.src='https://via.placeholder.com/800x533?text=Frontend'"></div>
-                            <div class="slider-slide"><img src="i.png" alt="Integration tools" onerror="this.src='https://via.placeholder.com/800x533?text=Integration'"></div>
-                            <div class="slider-slide"><img src="c.png" alt="Custom tools" onerror="this.src='https://via.placeholder.com/800x533?text=Custom'"></div>
+                            <div class="slider-slide"><img src="f.png" alt="Premium Web Work" onerror="this.src='https://via.placeholder.com/800x533?text=Premium+Web+Work'"></div>
+                            <div class="slider-slide"><img src="c.png" alt="Custom Tools Work" onerror="this.src='https://via.placeholder.com/800x533?text=Custom+Tools'"></div>
                         </div>
                         <button class="slider-btn slider-prev" id="sliderPrev"><i class="fas fa-chevron-left"></i></button>
                         <button class="slider-btn slider-next" id="sliderNext"><i class="fas fa-chevron-right"></i></button>
                         <div class="slider-dots" id="sliderDots">
                             <span class="slider-dot active" data-index="0"></span>
                             <span class="slider-dot" data-index="1"></span>
-                            <span class="slider-dot" data-index="2"></span>
                         </div>
                     </div>
                 </div>
                 <div class="hero-slider-btn-container" data-aos="fade-up" data-aos-delay="200">
-                    <a href="proweb.html" class="hero-slider-btn" id="slideBtn">Frontend Web Work</a>
+                    <a href="proweb.html" class="hero-slider-btn" id="slideBtn">Premium Web Work</a>
                 </div>
                 <div class="permanent-btn-container" data-aos="fade-up" data-aos-delay="300">
                     <a href="#contact" class="permanent-btn">Get in Touch</a>
@@ -368,13 +364,8 @@
             <div class="services-grid">
                 <a href="proweb.html" class="service-card" data-aos="fade-up" data-aos-delay="0">
                     <div class="service-icon"><i class="fas fa-code"></i></div>
-                    <h3>Frontend Website Work</h3>
-                    <p>Responsive, pixel‑perfect modern websites built with HTML, CSS, JavaScript.</p>
-                </a>
-                <a href="iwork.html" class="service-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="service-icon"><i class="fas fa-plug"></i></div>
-                    <h3>Integration Work</h3>
-                    <p>EmailJS, Google Sheets, WhatsApp – connect your site to daily tools seamlessly.</p>
+                    <h3>Premium Website Work</h3>
+                    <p>Responsive, pixel‑perfect modern websites built with HTML, CSS, JavaScript. We focus on performance, SEO, and engaging user interfaces to grow your business.</p>
                 </a>
                 <a href="cwork.html" class="service-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="service-icon"><i class="fas fa-tools"></i></div>
@@ -394,13 +385,8 @@
                 </div>
                 <div class="office-text" data-aos="fade-left">
                     <h3>-Pro Developing</h3>
-             <p>
-Pro Developing is an online web service platform that creates modern websites and digital tools. All services are provided online.
-</p>
-
-<p>
-Operated from Vav-Tharad, Gujarat by Mahipat Suthar.
-</p>
+                    <p>Pro Developing is an online web service platform that creates modern websites and digital tools. All services are provided online.</p>
+                    <p>Operated from Vav-Tharad, Gujarat by Mahipat Suthar.</p>
                 </div>
             </div>
         </div>
@@ -430,16 +416,34 @@ Operated from Vav-Tharad, Gujarat by Mahipat Suthar.
                         <div class="form-group"><label>Full name</label><input type="text" name="name" id="name" class="form-control" placeholder="Enter your full name" required></div>
                         <div class="form-group"><label>Email</label><input type="email" name="email" id="email" class="form-control" placeholder="Enter your email address" required></div>
                         <div class="form-group"><label>Mobile</label><input type="tel" name="phone" id="phone" class="form-control" placeholder="Enter your mobile number" required></div>
-                        <div class="form-group"><label>Service needed</label>
+                        
+                        <!-- Main service dropdown -->
+                        <div class="form-group">
+                            <label>Service needed</label>
                             <select id="service" name="service" class="service-select" required>
-                                <option value="" disabled selected>Select option</option>
-                                <option value="Test">Test</option><option value="New user">New user</option><option value="Old user">Old user</option>
-                                <option value="EmailJS integration">EmailJS</option><option value="Google Sheets integration">Google Sheets</option>
-                                <option value="WhatsApp Integration">WhatsApp</option><option value="Custom Web Tools">Custom Tools</option>
-                                <option value="UI/UX Design">UI/UX</option><option value="website Needs">Website needs</option><option value="Other">Other</option>
+                                <option value="" disabled selected>Select main service</option>
+                                <option value="Test">Test</option>
+                                <option value="New user">New user</option>
+                                <option value="Old user">Old user</option>
+                                <option value="Premium Web work">Premium Web work</option>
+                                <option value="Custom tools">Custom tools</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
+
+                        <!-- Sub-service dropdown (hidden initially) -->
+                        <div class="form-group sub-service-group" id="subServiceGroup">
+                            <label for="subService">Select sub‑service <span id="subServiceLabel"></span></label>
+                            <select id="subService" class="sub-service-select">
+                                <option value="" disabled selected>-- choose one --</option>
+                            </select>
+                        </div>
+
                         <div class="form-group"><label>Message</label><textarea id="message" name="message" class="form-control" placeholder="Tell us about your project ..." required></textarea></div>
+                        
+                        <!-- Hidden field to hold combined service value -->
+                        <input type="hidden" id="combinedService" name="combinedService">
+
                         <button type="submit" class="btn btn-accent" id="contactSubmitBtn"><span class="btn-text">Send message</span><span class="spinner"></span></button>
                     </form>
                 </div>
@@ -453,8 +457,7 @@ Operated from Vav-Tharad, Gujarat by Mahipat Suthar.
                 <div data-aos="fade-right">
                     <a href="#" class="footer-logo">Pro <span>Developing</span></a>
                     <p>Web solutions for modern business.</p>
-                    <!-- CEO link now opens Instagram in new tab -->
-                    <a href="https://www.instagram.com/m_gajjar_09?igsh=MW1tMzc2dHZqeWQxbw==" target="_blank" rel="noopener" class="ceo-link">
+                    <a href="https://www.instagram.com/m_gajjar_09/" target="_blank" rel="noopener" class="ceo-link">
                         <p class="ceo-highlight">
                             <i class="fas fa-crown" style="margin-right: 8px; color: #fbbf24;"></i> 
                             CEO & Founder :- MahiPat Suthar
@@ -508,7 +511,7 @@ Operated from Vav-Tharad, Gujarat by Mahipat Suthar.
     <script>
         (function(){ emailjs.init("O6JKIbUeu1dewfkTH"); })();
 
-        // mobile menu
+        // Mobile menu
         const menuBtn = document.getElementById('mobileMenuBtn');
         const nav = document.getElementById('navLinks');
         menuBtn.addEventListener('click', () => {
@@ -523,7 +526,7 @@ Operated from Vav-Tharad, Gujarat by Mahipat Suthar.
             menuBtn.querySelector('i').classList.remove('fa-times');
         }));
 
-        // SLIDER elements
+        // SLIDER (unchanged)
         const sliderWrapper = document.getElementById('sliderWrapper');
         const slides = document.querySelectorAll('.slider-slide');
         const prevBtn = document.getElementById('sliderPrev');
@@ -532,13 +535,10 @@ Operated from Vav-Tharad, Gujarat by Mahipat Suthar.
         const slideBtn = document.getElementById('slideBtn');
         let currentIndex = 0;
         const totalSlides = slides.length;
-
         const buttonConfig = [
-            { text: 'Professional Web Work', link: 'proweb.html' },
-            { text: 'Integration Work', link: 'iwork.html' },
+            { text: 'Premium Web Work', link: 'proweb.html' },
             { text: 'Custom Tools Work', link: 'cwork.html' }
         ];
-
         function updateSlider(index) {
             if (index < 0) index = totalSlides - 1;
             if (index >= totalSlides) index = 0;
@@ -548,78 +548,119 @@ Operated from Vav-Tharad, Gujarat by Mahipat Suthar.
             slideBtn.href = buttonConfig[index].link;
             currentIndex = index;
         }
-
-        // Initialize slider
         updateSlider(0);
-
         prevBtn.addEventListener('click', () => updateSlider(currentIndex - 1));
         nextBtn.addEventListener('click', () => updateSlider(currentIndex + 1));
         dots.forEach((dot, idx) => dot.addEventListener('click', () => updateSlider(idx)));
 
-        // TYPEWRITER - perfectly synced with slider
+        // TYPEWRITER (two texts)
         (function() {
             const typingElement = document.getElementById('typingText');
             if (!typingElement) return;
-
-            const texts = ["Professional Web Work", "Integretion Work", "Custom tools Work"];
+            const texts = ["Premium Web Work", "Custom tools Work"];
             let textIndex = 0, charIndex = 0, isDeleting = false;
             let timeoutId = null;
-            const typingSpeed = 80;
-            const deletingSpeed = 50;
-            const pauseTime = 1800;
-
+            const typingSpeed = 80, deletingSpeed = 50, pauseTime = 1800;
             function type() {
                 if (timeoutId) clearTimeout(timeoutId);
-                
                 const currentText = texts[textIndex];
-                if (isDeleting) {
-                    charIndex--;
-                } else {
-                    charIndex++;
-                }
-                
+                if (isDeleting) charIndex--; else charIndex++;
                 typingElement.textContent = currentText.substring(0, charIndex);
-                
                 if (!isDeleting && charIndex === currentText.length) {
-                    // Finished typing – pause
                     isDeleting = true;
                     timeoutId = setTimeout(type, pauseTime);
                 } else if (isDeleting && charIndex === 0) {
-                    // Deleted completely – move to next text and update slider
                     isDeleting = false;
                     textIndex = (textIndex + 1) % texts.length;
-                    // SYNC SLIDER WITH NEW TEXT INDEX
-                    updateSlider(textIndex);
+                    updateSlider(textIndex);  // sync slider
                     timeoutId = setTimeout(type, typingSpeed);
                 } else {
                     const speed = isDeleting ? deletingSpeed : typingSpeed;
                     timeoutId = setTimeout(type, speed);
                 }
             }
-
-            // Start after a tiny delay
             setTimeout(() => { type(); }, 100);
         })();
 
-        // CONTACT FORM
-        const contactForm = document.getElementById("contactForm");
-        const contactBtn = document.getElementById("contactSubmitBtn");
-        contactForm.addEventListener("submit", function(e){
+        // ----- DYNAMIC SUB-SERVICE -----
+        const mainService = document.getElementById('service');
+        const subGroup = document.getElementById('subServiceGroup');
+        const subSelect = document.getElementById('subService');
+        const subLabel = document.getElementById('subServiceLabel');
+
+        // Options for sub-services
+        const subOptions = {
+            'Premium Web work': ['Landing page design', 'Business website', 'Portfolio website', 'Ecommerce website'],
+            'Custom tools': ['Admin panel tools', 'Custom dashboard tool']
+        };
+
+        function updateSubService() {
+            const selected = mainService.value;
+            if (subOptions[selected]) {
+                // populate sub-select
+                subSelect.innerHTML = '<option value="" disabled selected>-- choose one --</option>';
+                subOptions[selected].forEach(opt => {
+                    const option = document.createElement('option');
+                    option.value = opt;
+                    option.textContent = opt;
+                    subSelect.appendChild(option);
+                });
+                subLabel.textContent = `(${selected})`;
+                subGroup.style.display = 'block';
+                subSelect.required = true;
+            } else {
+                subGroup.style.display = 'none';
+                subSelect.required = false;
+                subSelect.innerHTML = '<option value="" disabled selected>-- choose one --</option>';
+            }
+        }
+
+        mainService.addEventListener('change', updateSubService);
+        // Initial call in case of pre-selected (none)
+        updateSubService();
+
+        // ----- FORM SUBMIT with combined service -----
+        const contactForm = document.getElementById('contactForm');
+        const contactBtn = document.getElementById('contactSubmitBtn');
+        const combinedHidden = document.getElementById('combinedService');
+
+        contactForm.addEventListener('submit', function(e){
             e.preventDefault();
             if (contactBtn.classList.contains('loading')) return;
 
-            const formData = {
-                name: document.getElementById("name").value.trim(),
-                email: document.getElementById("email").value.trim(),
-                phone: document.getElementById("phone").value.trim(),
-                service: document.getElementById("service").value,
-                message: document.getElementById("message").value.trim()
-            };
+            // Basic field validation
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const mainVal = mainService.value;
+            const msg = document.getElementById("message").value.trim();
 
-            if (!formData.name || !formData.email || !formData.phone || !formData.service || !formData.message) {
-                alert("Please fill all fields");
+            if (!name || !email || !phone || !mainVal || !msg) {
+                alert("Please fill all required fields");
                 return;
             }
+
+            // If sub-service is visible, it must be selected
+            if (subGroup.style.display === 'block' && !subSelect.value) {
+                alert("Please select a sub-service");
+                return;
+            }
+
+            // Construct combined service string
+            let combined = mainVal;
+            if (subSelect.value) {
+                combined += ' - ' + subSelect.value;
+            }
+            combinedHidden.value = combined;
+
+            // Prepare data for Google Sheets (using combined service)
+            const formData = {
+                name: name,
+                email: email,
+                phone: phone,
+                service: combined,   // send combined value
+                message: msg
+            };
 
             contactBtn.classList.add('loading');
 
@@ -630,14 +671,14 @@ Operated from Vav-Tharad, Gujarat by Mahipat Suthar.
             })
             .then(res => res.json())
             .then(data => {
-                if (data.status === "success") { alert("✅ Message sent!"); contactForm.reset(); } 
+                if (data.status === "success") { alert("✅ Message sent!"); contactForm.reset(); updateSubService(); } 
                 else alert("❌ Error: " + data.message);
             })
             .catch(() => alert("❌ Network error"))
             .finally(() => contactBtn.classList.remove('loading'));
         });
 
-        // NEWSLETTER (fixed IDs)
+        // NEWSLETTER (unchanged)
         const newsletterForm = document.getElementById("newsletterForm");
         const newsletterBtn = document.getElementById("newsletterBtn");
         const newsletterMsg = document.getElementById("newsletterMsg");
@@ -658,7 +699,7 @@ Operated from Vav-Tharad, Gujarat by Mahipat Suthar.
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: new URLSearchParams(sheetData)
-            }).then(res => res.json());
+        }).then(res => res.json());
             const sendEmail = emailjs.send("service_sw42q96", "template_5547llk", { to_email: "prodeveloping97@gmail.com", email: email });
             Promise.allSettled([fetchSheet, sendEmail])
                 .then(results => {
@@ -696,7 +737,7 @@ Operated from Vav-Tharad, Gujarat by Mahipat Suthar.
         popupOverlay.addEventListener('click', e => { if (e.target === popupOverlay) closePopup(); });
     </script>
 
-     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script> AOS.init({ duration: 1200 }); </script>
 
     <script>
