@@ -640,7 +640,27 @@
     { title: "Education information Website", desc: "Lightning-fast static sites, SEO-friendly.", image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format", }
   ];
   const dynamicServices = [
-html += `
+    { title: "Ecommerce website ", desc: "Scalable full-stack apps with real-time data.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format", url: "https://prodeveloping.github.io/Demo1/" },
+    { title: "Booking system Website", desc: "Complete online stores with cart & payment.", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&auto=format", url: "https://prodeveloping.github.io/Demo2/" },
+    { title: "Admin panel website", desc: "Dynamic content management with admin panel.", image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&auto=format", url: "https://prodeveloping.github.io/Demo3/" },
+    { title: "Hospital manegement website", desc: "Interactive dashboards with charts & analytics.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format", url: "https://prodeveloping.github.io/Demo4/" }
+  ];
+
+  let currentCategory = 'static';
+  const staticBtn = document.getElementById('staticToggleBtn');
+  const dynamicBtn = document.getElementById('dynamicToggleBtn');
+  const categoryTitle = document.getElementById('categoryDynamicTitle');
+  const gridContainer = document.getElementById('servicesGridContainer');
+
+  // ---------- UPDATED renderServices() function ----------
+  // Only the first service card (index === 0) shows the Live Preview button.
+  // All other cards have no button (empty placeholder or no button element).
+  function renderServices() {
+    const services = currentCategory === 'static' ? staticServices : dynamicServices;
+    categoryTitle.textContent = currentCategory === 'static' ? '📁 Static Solutions' : '⚡ Dynamic Solutions';
+    let html = '';
+    services.forEach((s, index) => {
+      html += `
         <div class="service-card fade-up">
           <div class="card-image"><img src="${s.image}" alt="${s.title}"></div>
           <div class="card-content">
