@@ -494,10 +494,6 @@
   </style>
 </head>
 <body>
-<!-- Loading overlay -->
-<div class="loading-overlay">
-  <div class="loader"></div>
-</div>
 
 <nav class="navbar">
   <div class="logo">✦ Premium Work</div>
@@ -518,7 +514,7 @@
 </main>
 
 <footer class="footer">
-  <p><i class="fas fa-code"></i> © 2026 ProDeveloping – Premium Web Work | Static & Dynamic Websites</p>
+  <p><i class="fas fa-code"></i> © 2026 ProDeveloping – Premium Web Work</p>
 </footer>
 
 <!-- ORDER MODAL with enhanced package selection -->
@@ -641,44 +637,33 @@
     { title: "Portfolio Website", desc: "Showcase your creativity with a stunning portfolio.", image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&auto=format", url: "https://prodeveloping.github.io/Demo1/" },
     { title: "Business Website", desc: "Professional corporate presence with lead generation.", image: "https://picsum.photos/id/48/600/400", url: "https://prodeveloping.github.io/Demo2/" },
     { title: "Landing Page Design", desc: "High-conversion landing pages for campaigns.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format", url: "https://prodeveloping.github.io/Demo3/" },
-    { title: "Static Website Development", desc: "Lightning-fast static sites, SEO-friendly.", image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format", url: "https://prodeveloping.github.io/Demo4/" }
+    { title: "Education information Website", desc: "Lightning-fast static sites, SEO-friendly.", image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format", }
   ];
   const dynamicServices = [
-     { title: "Web Application", desc: "Scalable full-stack apps with real-time data.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format", url: "https://prodeveloping.github.io/Demo1/" },
-    { title: "eCommerce Website", desc: "Complete online stores with cart & payment.", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&auto=format", url: "https://prodeveloping.github.io/Demo2/" },
-    { title: "Admin Panel Development", desc: "Dynamic content management with admin panel.", image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&auto=format", url: "https://prodeveloping.github.io/Demo3/" },
-    { title: "Booking System Website", desc: "Interactive dashboards with charts & analytics.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format", url: "https://prodeveloping.github.io/Demo4/" }
-  ];
-
-  let currentCategory = 'static';
-  const staticBtn = document.getElementById('staticToggleBtn');
-  const dynamicBtn = document.getElementById('dynamicToggleBtn');
-  const categoryTitle = document.getElementById('categoryDynamicTitle');
-  const gridContainer = document.getElementById('servicesGridContainer');
-
-  function renderServices() {
-    const services = currentCategory === 'static' ? staticServices : dynamicServices;
-    categoryTitle.textContent = currentCategory === 'static' ? '📁 Static Solutions' : '⚡ Dynamic Solutions';
-    let html = '';
-    services.forEach(s => {
-      html += `
+html += `
         <div class="service-card fade-up">
           <div class="card-image"><img src="${s.image}" alt="${s.title}"></div>
           <div class="card-content">
             <h4>${s.title}</h4>
             <p>${s.desc}</p>
-            <a class="btn-preview" href="${s.url}" target="_blank" rel="noopener noreferrer"><i class="fas fa-eye"></i> Live Preview</a>
-          </div>
-        </div>
       `;
+      // Condition: only show Live Preview button for the first service (index === 0)
+      if (index === 0) {
+        html += `<a class="btn-preview" href="${s.url}" target="_blank" rel="noopener noreferrer"><i class="fas fa-eye"></i> Live Preview</a>`;
+      } else {
+  html += ``;
+}
+      html += `</div></div>`;
     });
     gridContainer.innerHTML = html;
   }
+  // ---------- end of updated function ----------
+
   staticBtn.addEventListener('click', () => { if(currentCategory !== 'static') { currentCategory = 'static'; staticBtn.classList.add('active'); dynamicBtn.classList.remove('active'); renderServices(); } });
   dynamicBtn.addEventListener('click', () => { if(currentCategory !== 'dynamic') { currentCategory = 'dynamic'; dynamicBtn.classList.add('active'); staticBtn.classList.remove('active'); renderServices(); } });
   renderServices();
 
-  // ---------- Dynamic Package Selection Logic ----------
+  // ---------- Dynamic Package Selection Logic (unchanged) ----------
   const typeRadios = document.querySelectorAll('input[name="websiteType"]');
   const packageSelect = document.getElementById('packageSelect');
   const packagePreviewLink = document.getElementById('packagePreviewLink');
@@ -695,25 +680,24 @@
       option.setAttribute('data-desc', service.desc);
       packageSelect.appendChild(option);
     });
-    // Reset selected preview
     packagePreviewLink.innerHTML = '';
     selectedPackageUrl = '';
     if (packageSelect.options.length > 1) {
-      packageSelect.selectedIndex = 1; // auto-select first package
+      packageSelect.selectedIndex = 1;
       packageSelect.dispatchEvent(new Event('change'));
     }
   }
 
   packageSelect.addEventListener('change', function() {
-    const selectedOption = packageSelect.options[packageSelect.selectedIndex];
-    if (selectedOption && selectedOption.value) {
-      selectedPackageUrl = selectedOption.value;
-      packagePreviewLink.innerHTML = `<i class="fas fa-eye"></i> Preview: <a href="${selectedPackageUrl}" target="_blank" style="color: var(--primary);">${selectedOption.text} Live Demo →</a>`;
-    } else {
-      selectedPackageUrl = '';
-      packagePreviewLink.innerHTML = '';
-    }
-  });
+  const selectedOption = packageSelect.options[packageSelect.selectedIndex];
+  if (selectedOption && selectedOption.value) {
+    selectedPackageUrl = selectedOption.value;
+    packagePreviewLink.innerHTML = '';
+  } else {
+    selectedPackageUrl = '';
+    packagePreviewLink.innerHTML = '';
+  }
+});
 
   typeRadios.forEach(radio => {
     radio.addEventListener('change', () => {
@@ -721,10 +705,9 @@
     });
   });
 
-  // Initialize package dropdown on page load
   updatePackageOptions();
 
-  // ---------- BUDGET LOGIC (presets + manual) ----------
+  // ---------- BUDGET LOGIC (unchanged) ----------
   const presetBtns = document.querySelectorAll('.preset-btn');
   const customInput = document.getElementById('customBudget');
   const selectedBudgetSpan = document.getElementById('selectedBudgetSpan');
@@ -790,7 +773,7 @@
     }
   });
 
-  // ---------- MODAL LOGIC ----------
+  // ---------- MODAL LOGIC (unchanged) ----------
   const modalOverlay = document.getElementById('orderModal');
   const orderNavBtn = document.getElementById('orderNavBtn');
   const closeModalBtn = document.getElementById('closeModalBtn');
@@ -810,12 +793,10 @@
   }
   function resetFormFields() {
     orderForm.reset();
-    // Reset checkboxes
     document.querySelectorAll('#pageNeedsGroup input[type="checkbox"]').forEach(cb => cb.checked = false);
     document.querySelectorAll('#featuresGroup input[type="checkbox"]').forEach(cb => cb.checked = false);
-    // Reset radio to Statics
     document.querySelector('input[value="Statics"]').checked = true;
-    updatePackageOptions(); // this also selects first package
+    updatePackageOptions();
     resetBudget();
   }
   function openModal() { hideModalMessages(); modalOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
@@ -834,7 +815,6 @@
     e.preventDefault();
     hideModalMessages();
 
-    // Get form values
     const name = document.getElementById('name').value.trim();
     const mobile = document.getElementById('mobile').value.trim();
     const email = document.getElementById('email').value.trim();
@@ -843,27 +823,23 @@
     const selectedPackageText = packageSelect.options[packageSelect.selectedIndex]?.text || '';
     const selectedPackageUrl = packageSelect.value;
 
-    // Budget - must be set
     if (currentBudget === null || isNaN(currentBudget)) {
       showModalError('Please select or enter your budget (2k, 5k, 10k or custom amount).');
       return;
     }
     const budgetValue = `₹ ${currentBudget.toLocaleString('en-IN')}`;
 
-    // Pages
     const pageCheckboxes = document.querySelectorAll('#pageNeedsGroup input[type="checkbox"]:checked');
     let selectedPages = Array.from(pageCheckboxes).map(cb => cb.value);
     const otherPagesInput = document.getElementById('otherPages').value.trim();
     if (selectedPages.includes('Other') && otherPagesInput) selectedPages.push(`Other: ${otherPagesInput}`);
     const pagesNeeded = selectedPages.length ? selectedPages.join(', ') : '';
 
-    // Features
     const featureCheckboxes = document.querySelectorAll('#featuresGroup input[type="checkbox"]:checked');
     const featuresRequired = Array.from(featureCheckboxes).map(cb => cb.value).join(', ') || 'None selected';
     
     const description = document.getElementById('description').value.trim();
 
-    // Validation
     if (!name || !mobile || !email || !websiteName || !pagesNeeded) {
       showModalError('Please fill all required fields: Name, Mobile, Email, Website Name, and at least one Page.');
       return;
@@ -875,7 +851,6 @@
       return;
     }
 
-    // Prepare EmailJS parameters (matching your template)
     const templateParams = {
       from_name: name,
       user_email: email,
@@ -892,7 +867,6 @@
     submitBtn.disabled = true;
     submitBtn.classList.add('loading');
     try {
-      // Using your new service ID and template ID
       await emailjs.send("service_snv7hbg", "template_x7cfn8f", templateParams);
       showModalSuccess();
       resetFormFields();
@@ -906,7 +880,6 @@
     }
   });
 
-  // Remove loading overlay after page fully loaded
   window.addEventListener('load', () => {
     const loader = document.querySelector('.loading-overlay');
     if(loader) {
