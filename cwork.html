@@ -4,29 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Custom Tools Work</title>
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Free professional web tools: Age Calculator, YouTube Thumbnail Downloader, QR Code Generator, Image Compressor, Resume Builder & more. Order custom tools with 24h response.">
-    <meta name="keywords" content="custom tools, web development tools, free online tools, image compressor, qr generator, youtube thumbnail downloader">
+    
+    <meta name="description" content="Free professional web tools: Age Calculator, YouTube Thumbnail Downloader, QR Code Generator, Image Compressor, Resume Builder & more.">
     <meta name="author" content="Pro Developing">
-    <meta name="robots" content="index, follow">
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Custom Tools Work - Free & Professional Utilities">
-    <meta property="og:description" content="Create, download, and convert with our free tools. Need a custom tool? Order now and get reply within 24 hours.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://prodeveloping.github.io">
-    <meta property="og:image" content="https://prodeveloping.github.io/og-image.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%234361ee'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='white'%3E🔧%3C/text%3E%3C/svg%3E">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- SweetAlert2 -->
+    
+
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <style>
-        :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
+</head>
+<body>
+<style>    :root {
+            --primary: #fc8014;
+            --primary-dark: #2e4bd0;
             --primary-glow: rgba(67, 97, 238, 0.25);
             --secondary: #7209b7;
             --secondary-light: #9d4edd;
@@ -87,6 +80,9 @@
         .nav-logo {
             display: flex;
             align-items: center;
+            lign-items: center;
+            margin-left: auto;
+             margin-right: auto;
             gap: 12px;
             text-decoration: none;
             font-weight: 700;
@@ -130,6 +126,9 @@
             background: linear-gradient(105deg, var(--primary), var(--secondary));
             border: none;
             padding: 0.7rem 1.8rem;
+            lign-items: center;
+            margin-left: auto;
+            margin-right: auto;
             border-radius: 60px;
             font-weight: 600;
             font-size: 0.95rem;
@@ -522,38 +521,169 @@
                 grid-template-columns: 1fr;
             }
         }
-    </style>
-</head>
-<body>
-    <!-- Navigation Bar (Icon Fixed) -->
+        /* ========= 1. GLOBAL ENTRANCE ANIMATIONS ========= */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pulse-glow {
+    0% { box-shadow: 0 8px 18px -8px rgba(67, 97, 238, 0.4); }
+    50% { box-shadow: 0 8px 25px 2px rgba(67, 97, 238, 0.6); }
+    100% { box-shadow: 0 8px 18px -8px rgba(67, 97, 238, 0.4); }
+}
+
+/* ========= 2. APPLYING ANIMATIONS TO COMPONENTS ========= */
+
+/* Hero Text Sequence */
+.hero-badge {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.hero-title {
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+    opacity: 0; /* Ensures it stays hidden until animation starts */
+}
+
+.hero-description {
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+}
+
+.hero-stats {
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+    opacity: 0;
+}
+
+/* Floating Stats Cards */
+.hero-stat-card {
+    animation: float 4s ease-in-out infinite;
+}
+.hero-stat-card:nth-child(2) {
+    animation-delay: 1s;
+}
+
+/* Main Action Button Pulse */
+.order-now-btn {
+    animation: pulse-glow 3s infinite;
+}
+
+/* ========= 3. ENHANCED HOVER PHYSICS ========= */
+
+.tool-card {
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tool-card:hover .tool-icon {
+    transform: rotate(-5deg) scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.tool-icon {
+    transition: transform 0.3s ease;
+}
+
+.nav-logo:hover .nav-logo-icon {
+    transform: rotate(360deg);
+    transition: transform 0.8s cubic-bezier(0.5, 0, 0.5, 1);
+}
+
+/* ========= 4. MODAL ANIMATION REFINEMENT ========= */
+.order-modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    animation: slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes fadeIn {
+    from { background: rgba(0,0,0,0); }
+    to { background: rgba(0,0,0,0.6); }
+}
+/* Hide the default cursor for a truly custom feel (Optional) */
+
+    
+
+/* The actual point of interaction */
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary);
+    position: left;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+    transition: width 0.3s, height 0.3s;
+}
+
+/* The soft trailing ring */
+.cursor-outline {
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--primary);
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9998;
+    pointer-events: none;
+    /* This cubic-bezier creates the "smooth follow" effect */
+    transition: all 0.15s cubic-bezier(0.23, 1, 0.32, 1);
+    background: rgba(67, 97, 238, 0.05);
+}
+
+/* Animation when clicking */
+.cursor-active {
+    transform: translate(-50%, -50%) scale(0.5);
+    background-color: var(--secondary) !important;
+    border-color: var(--secondary) !important;
+}
+
+/* Expand the ring when hovering over buttons/links */
+.cursor-hover {
+    width: 20px;
+    height: 20px;
+    background: #7109b758;
+    border-color: var(--secondary);
+}</style>
+<div class="cursor-dot" data-cursor-dot></div>
+<div class="cursor-outline" data-cursor-outline></div>
     <nav class="navbar">
         <div class="container nav-container">
             <a href="#" class="nav-logo">
-                <div class="nav-logo-icon">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <div class="nav-logo-text">Custom<span></span> Work</div>
+                <div class="nav-logo-icon"><i class="fas fa-tools"></i></div>
+                  <div class="nav-logo-text">Custom<span> Work</span></div>
             </a>
             <button class="order-now-btn" id="openOrderModalBtn">
-                <i class="fas fa-bolt"></i> Order Now
-                <i class="fas fa-arrow-right"></i>
+                <i class="fas fa-bolt"></i> Order Now <i class="fas fa-arrow-right"></i>
             </button>
         </div>
     </nav>
-    
-    <!-- Hero Section (New Design) -->
+    <div class="cursor-glow" id="cursorGlow"></div>
     <section class="hero-section">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fas fa-crown"></i> Custom Tools Work
-                </div>
-                <h1 class="hero-title">
-                    Build, Convert & <span class="hero-highlight">Create</span><br>with Our Custom Tools
-                </h1>
-                <p class="hero-description">
-                    Free, fast, and developer-friendly utilities for everyday tasks. From image compression to PDF generation — and if you need a unique tool, just order one.
-                </p>
+                <div class="hero-badge"><i class="fas fa-crown"></i> Custom Tools Work</div>
+                <h1 class="hero-title">Build, Convert & <span class="hero-highlight">Create</span><br>with Our Custom Tools</h1>
+                <p class="hero-description">Free, fast, and developer-friendly utilities. Need a unique tool? Just order one and get a reply within 24 hours.</p>
             </div>
         </div>
     </section>
@@ -561,14 +691,13 @@
     <main class="container">
         <section class="tools-section">
             <div class="tools-grid">
-                <!-- All tools with corrected prodeveloping URLs -->
-                <div class="tool-card"><div class="tool-icon"><i class="fas fa-birthday-cake"></i></div><h3 class="tool-title">Age Calculator</h3><p class="tool-description">Precise age calculation from birth date to today.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Age/'"><i class="fas fa-external-link-alt"></i> OPEN TOOL</button></div>
-                <div class="tool-card"><div class="tool-icon"><i class="fab fa-youtube"></i></div><h3 class="tool-title">YouTube Thumbnail Downloader</h3><p class="tool-description">Download any YouTube thumbnail in HD.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Youtube-thumbnail-download-/'"><i class="fas fa-external-link-alt"></i> OPEN TOOL</button></div>
-                <div class="tool-card"><div class="tool-icon"><i class="fas fa-qrcode"></i></div><h3 class="tool-title">QR Code Generator</h3><p class="tool-description">Create and download custom QR codes instantly.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Qr-generator-/'"><i class="fas fa-external-link-alt"></i> OPEN TOOL</button></div>
-                <div class="tool-card"><div class="tool-icon"><i class="fas fa-file-pdf"></i></div><h3 class="tool-title">Photo to PDF</h3><p class="tool-description">Convert images to PDF with one click.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Photos-to-pdf-converter-/'"><i class="fas fa-external-link-alt"></i> OPEN TOOL</button></div>
-                <div class="tool-card"><div class="tool-icon"><i class="fas fa-exchange-alt"></i></div><h3 class="tool-title">PNG to JPG</h3><p class="tool-description">Convert PNG ↔ JPG seamlessly.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Png-to-jpg/'"><i class="fas fa-external-link-alt"></i> OPEN TOOL</button></div>
-                <div class="tool-card"><div class="tool-icon"><i class="fas fa-compress-alt"></i></div><h3 class="tool-title">Image Compressor</h3><p class="tool-description">Reduce image size from MB to KB.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Mb-to-kb-converter-/'"><i class="fas fa-external-link-alt"></i> OPEN TOOL</button></div>
-                <div class="tool-card"><div class="tool-icon"><i class="fas fa-file-alt"></i><span class="new-badge">NEW</span></div><h3 class="tool-title">Resume Builder</h3><p class="tool-description">Build professional resumes and download as PDF.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Resumebuilder/'"><i class="fas fa-external-link-alt"></i> OPEN TOOL</button></div>
+                <div class="tool-card"><div class="tool-icon"><i class="fas fa-birthday-cake"></i></div><h3 class="tool-title">Age Calculator</h3><p class="tool-description">Precise age calculation from birth date to today.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Age/'">OPEN TOOL</button></div>
+                <div class="tool-card"><div class="tool-icon"><i class="fab fa-youtube"></i></div><h3 class="tool-title">YouTube Thumbnail</h3><p class="tool-description">Download any YouTube thumbnail in HD.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Youtube-thumbnail-download-/'">OPEN TOOL</button></div>
+                <div class="tool-card"><div class="tool-icon"><i class="fas fa-qrcode"></i></div><h3 class="tool-title">QR Generator</h3><p class="tool-description">Create and download custom QR codes instantly.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Qr-generator-/'">OPEN TOOL</button></div>
+                <div class="tool-card"><div class="tool-icon"><i class="fas fa-file-pdf"></i></div><h3 class="tool-title">Photo to PDF</h3><p class="tool-description">Convert images to PDF with one click.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Photos-to-pdf-converter-/'">OPEN TOOL</button></div>
+                <div class="tool-card"><div class="tool-icon"><i class="fas fa-exchange-alt"></i></div><h3 class="tool-title">PNG to JPG</h3><p class="tool-description">Convert PNG ↔ JPG seamlessly.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Png-to-jpg/'">OPEN TOOL</button></div>
+                <div class="tool-card"><div class="tool-icon"><i class="fas fa-compress-alt"></i></div><h3 class="tool-title">Image Compressor</h3><p class="tool-description">Reduce image size from MB to KB.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Mb-to-kb-converter-/'">OPEN TOOL</button></div>
+                <div class="tool-card"><div class="tool-icon"><i class="fas fa-file-alt"></i><span class="new-badge">NEW</span></div><h3 class="tool-title">Resume Builder</h3><p class="tool-description">Build professional resumes and download as PDF.</p><button class="tool-btn" onclick="window.location.href='https://prodeweloping.github.io/Resumebuilder/'">OPEN TOOL</button></div>
             </div>
         </section>
     </main>
@@ -576,30 +705,68 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="copyright"><p>© 2026 Pro Developing — Custom Tools Work.<i class="fas" style="color: #ff6b6b;"></i></p></div>
+                <p>© 2026 Pro Developing — Custom Tools Work.</p>
             </div>
         </div>
     </footer>
     
-    <!-- Order Modal -->
     <div id="orderModal" class="order-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3><i class="fas fa-hammer"></i> Order Custom Tool</h3>
+                <h3><i class="fas fa-hammer"></i> Order Tool</h3>
                 <button class="close-modal" id="closeModalBtn">&times;</button>
             </div>
             <form id="orderForm">
-                <div class="form-group"><label>Your Name *</label><input type="text" id="userName" placeholder="John Carter" required></div>
-                <div class="form-group"><label>Email Address *</label><input type="email" id="userEmail" placeholder="prodeveloping97@gmail.com" required></div>
-                <div class="form-group"><label>Mobile Number * (10 digits)</label><input type="tel" id="userMobile" placeholder="635695788" required></div>
+                <div class="form-group"><label>Your Name *</label><input type="text" id="userName" placeholder="Your Name" required></div>
+                <div class="form-group"><label>Email Address *</label><input type="email" id="userEmail" placeholder="Your Email Adreess" required></div>
+                <div class="form-group"><label>Mobile Number * (10 digits)</label><input type="tel" id="userMobile" placeholder="Your Mobile Number" required></div>
                 <div class="form-group"><label>Tool Names *</label><textarea id="toolDescription" rows="3" placeholder="Describe the custom tool you need..."></textarea></div>
-                <button type="submit" class="submit-order-btn" id="sendOrderBtn"><i class="fas fa-paper-plane"></i> Send Request</button>
-                <div class="reply-note"><i class="fas fa-clock"></i> We'll reply within 24 hours</div>
+                <button type="submit" class="submit-order-btn" id="sendOrderBtn">Send Request</button>
             </form>
         </div>
     </div>
 
-    <script>
+      <script>
+const cursorDot = document.querySelector("[data-cursor-dot]");
+const cursorOutline = document.querySelector("[data-cursor-outline]");
+
+window.addEventListener("mousemove", function (e) {
+    const posX = e.clientX;
+    const posY = e.clientY;
+
+    // Direct follow for the dot
+    cursorDot.style.left = `${posX}px`;
+    cursorDot.style.top = `${posY}px`;
+
+    // The outline uses the CSS transition for the "lagging" feel
+    cursorOutline.style.left = `${posX}px`;
+    cursorOutline.style.top = `${posY}px`;
+});
+
+// Click Animation
+window.addEventListener("mousedown", () => {
+    cursorDot.classList.add("cursor-active");
+    cursorOutline.classList.add("cursor-active");
+});
+
+window.addEventListener("mouseup", () => {
+    cursorDot.classList.remove("cursor-active");
+    cursorOutline.classList.remove("cursor-active");
+});
+
+// Hover Effect for Buttons and Cards
+const interactiveElements = document.querySelectorAll('button, a, .tool-card, input, textarea');
+
+interactiveElements.forEach(el => {
+    el.addEventListener("mouseenter", () => {
+        cursorOutline.classList.add("cursor-hover");
+        cursorDot.style.opacity = "0"; // Hide the dot to emphasize the expanded ring
+    });
+    el.addEventListener("mouseleave", () => {
+        cursorOutline.classList.remove("cursor-hover");
+        cursorDot.style.opacity = "1";
+    });
+});
         // ======================== EMAILJS CONFIGURATION (YOUR CREDENTIALS) ========================
         // ✅ Using your provided credentials
         const EMAILJS_PUBLIC_KEY = "yrZBMw0TXHttA60sA";
@@ -752,5 +919,6 @@
             });
         });
     </script>
+
 </body>
 </html>
