@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>NovaBulk | Smart Email Sender</title>
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #dce9ff 0%, #b0c8f0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    /* glassmorphic card + modern design */
+    .sender-card {
+      max-width: 480px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(2px);
+      border-radius: 2rem;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 2rem 1.8rem;
+      transition: transform 0.2s ease, box-shadow 0.2s;
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .sender-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 30px 55px -14px rgba(0, 0, 0, 0.35);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.8rem;
+      border-left: 5px solid #2b7a4b;
+      padding-left: 18px;
+    }
+
+    .card-header i {
+      font-size: 2rem;
+      color: #2b7a4b;
+      background: #e9f5ef;
+      padding: 10px;
+      border-radius: 1.5rem;
+    }
+
+    .card-header h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1a5d3c, #2b9e5c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+
+    .input-group {
+      margin-bottom: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .input-group label {
+      font-weight: 600;
+      color: #1f2a3e;
+      font-size: 0.85rem;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .input-group label i {
+      font-size: 0.9rem;
+      color: #2b7a4b;
+      width: 20px;
+    }
+
+    .input-group input {
+      padding: 14px 16px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 1.2rem;
+      font-size: 1rem;
+      transition: all 0.2s;
+      background: #fefefe;
+      outline: none;
+      font-weight: 500;
+      color: #0f172a;
+    }
+
+    .input-group input:focus {
+      border-color: #2b7a4b;
+      box-shadow: 0 0 0 3px rgba(43, 122, 75, 0.2);
+      background: white;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 14px;
+      margin: 28px 0 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 14px 12px;
+      border: none;
+      border-radius: 2rem;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    .btn-primary {
+      background: linear-gradient(95deg, #2b7a4b, #1e5a3a);
+      color: white;
+      box-shadow: 0 8px 18px -8px rgba(43, 122, 75, 0.4);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: linear-gradient(95deg, #236a40, #184c30);
+      transform: scale(0.98);
+      box-shadow: 0 4px 12px -4px rgba(43, 122, 75, 0.5);
+    }
+
+    .btn-secondary {
+      background: white;
+      border: 1.5px solid #cbd5e1;
+      color: #334155;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: #f8fafc;
+      border-color: #94a3b8;
+      transform: translateY(-2px);
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+    }
+
+    .btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* loading spinner inside button */
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* progress bar container */
+    .progress-section {
+      margin: 20px 0 12px 0;
+    }
+
+    .progress-bar-container {
+      background-color: #e2e8f0;
+      border-radius: 40px;
+      height: 8px;
+      width: 100%;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #2b7a4b, #48b47a);
+      border-radius: 40px;
+      transition: width 0.25s ease-out;
+      box-shadow: 0 0 4px #2b7a4b;
+    }
+
+    .status-text {
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-top: 10px;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .message-area {
+      background: #f1f5f9;
+      border-radius: 1.2rem;
+      padding: 14px 18px;
+      margin-top: 18px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #0f2b1f;
+      border-left: 4px solid #2b7a4b;
+      word-break: break-word;
+      transition: all 0.2s;
+    }
+
+    .message-area i {
+      margin-right: 8px;
+      color: #2b7a4b;
+    }
+
+    .badge-note {
+      font-size: 0.7rem;
+      margin-top: 15px;
+      text-align: center;
+      color: #5b6e8c;
+      background: #eef2ff80;
+      padding: 8px;
+      border-radius: 40px;
+    }
+
+    @media (max-width: 480px) {
+      .sender-card {
+        padding: 1.5rem;
+      }
+      .btn {
+        padding: 12px 8px;
+        font-size: 0.9rem;
+      }
+      .card-header h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sender-card">
+  <div class="card-header">
+    <i class="fas fa-envelope-open-text"></i>
+    <h2>Bulk Pulse</h2>
+  </div>
+
+  <div class="input-group">
+    <label><i class="fas fa-at"></i> Recipient Email</label>
+    <input type="email" id="emailInput" placeholder="hello@example.com" autocomplete="off">
+  </div>
+
+  <div class="input-group">
+    <label><i class="fas fa-chart-simple"></i> Email Count</label>
+    <input type="number" id="countInput" placeholder="e.g., 25" min="1" max="150" value="10">
+  </div>
+
+  <!-- Double button row: Send (with loading animation) + Refresh -->
+  <div class="button-row">
+    <button class="btn btn-primary" id="sendBtn">
+      <i class="fas fa-paper-plane"></i> 
+      <span id="sendBtnText">Send Emails</span>
+    </button>
+    <button class="btn btn-secondary" id="refreshBtn">
+      <i class="fas fa-arrows-rotate"></i> Refresh
+    </button>
+  </div>
+
+  <!-- Progress + live status -->
+  <div class="progress-section" id="progressArea" style="display: none;">
+    <div class="progress-bar-container">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="status-text" id="liveStatus">
+      <i class="fas fa-hourglass-half"></i> <span id="statusDetail">Ready</span>
+    </div>
+  </div>
+
+  <div class="message-area" id="msgArea">
+    <i class="fas fa-info-circle"></i> Fill details & hit send. Bulk emails will be sent one by one with live progress.
+  </div>
+  <div class="badge-note">
+    <i class="fas fa-shield-alt"></i> Sequential sending • Real-time progress • Refresh resets form
+  </div>
+</div>
+
+<script>
+  (function() {
+    // EmailJS initialization (using your provided keys)
+    emailjs.init("O6JKIbUeu1dewfkTH");
+  })();
+
+  // DOM elements
+  const emailInput = document.getElementById('emailInput');
+  const countInput = document.getElementById('countInput');
+  const sendBtn = document.getElementById('sendBtn');
+  const refreshBtn = document.getElementById('refreshBtn');
+  const sendBtnTextSpan = document.getElementById('sendBtnText');
+  const msgArea = document.getElementById('msgArea');
+  const progressArea = document.getElementById('progressArea');
+  const progressFill = document.getElementById('progressFill');
+  const statusDetailSpan = document.getElementById('statusDetail');
+
+  // Service & Template IDs (as per original working config)
+  const SERVICE_ID = "service_sw42q96";
+  const TEMPLATE_ID = "template_5547llk";
+
+  // State variables
+  let isSending = false;
+  let abortFlag = false;       // future-safe but we don't implement external abort, just to prevent double send
+
+  // Helper: show message in message area (different styles)
+  function setMessage(text, isError = false) {
+    msgArea.innerHTML = `<i class="fas ${isError ? 'fa-circle-exclamation' : 'fa-check-circle'}"></i> ${text}`;
+    if (isError) {
+      msgArea.style.borderLeftColor = "#dc2626";
+      msgArea.style.background = "#fff0f0";
+    } else {
+      msgArea.style.borderLeftColor = "#2b7a4b";
+      msgArea.style.background = "#f1f5f9";
+    }
+  }
+
+  // reset UI completely (refresh action)
+  function resetFormUI() {
+    if (isSending) {
+      setMessage("⏳ Sending in progress, please wait before refresh.", true);
+      return false;
+    }
+    // clear fields
+    emailInput.value = '';
+    countInput.value = '10';
+    // reset progress display
+    progressArea.style.display = 'none';
+    progressFill.style.width = '0%';
+    statusDetailSpan.innerText = 'Ready';
+    setMessage("✨ Form refreshed. Ready for new bulk send.");
+    // remove any sending styles on button
+    if (!isSending) {
+      sendBtn.disabled = false;
+      sendBtnTextSpan.innerHTML = '<i class="fas fa-paper-plane"></i> Send Emails';
+      // ensure no spinner left
+      const existingSpinner = sendBtn.querySelector('.spinner');
+      if(existingSpinner) existingSpinner.remove();
+    }
+    return true;
+  }
+
+  // Add loading animation to send button (spinner + disabled)
+  function enableSendButtonLoading(loadingText = "Sending...") {
+    sendBtn.disabled = true;
+    // clear any previous manual spinner
+    const oldSpinner = sendBtn.querySelector('.spinner');
+    if(oldSpinner) oldSpinner.remove();
+    // hide icon and text, replace with spinner + text
+    sendBtnTextSpan.innerHTML = `<span class="spinner"></span> ${loadingText}`;
+  }
+
+  // Restore send button to normal state
+  function disableSendButtonLoading() {
+    sendBtn.disabled = false;
+    sendBtnTextSpan.innerHTML = '<i class="fas fa-paper-plane"></i> Send Emails';
+    const spinnerElem = sendBtn.querySelector('.spinner');
+    if(spinnerElem) spinnerElem.remove();
+  }
+
+  // Update progress bar and live status
+  function updateProgress(current, total, successCount, failCount) {
+    if (total === 0) return;
+    const percent = (current / total) * 100;
+    progressFill.style.width = `${percent}%`;
+    let statusMsg = `📤 ${current}/${total} emails processed  |  ✅ ${successCount}  |  ❌ ${failCount}`;
+    statusDetailSpan.innerText = statusMsg;
+    if (current === total) {
+      statusDetailSpan.innerText = `✅ Completed: ${successCount} sent, ${failCount} failed.`;
+    }
+  }
+
+  // core send logic: sequential emails with loading animation, progress, refresh prevention
+  async function performBulkSend(email, totalCount) {
+    let successCount = 0;
+    let failureCount = 0;
+
+    // Show progress area and reset fill
+    progressArea.style.display = 'block';
+    progressFill.style.width = '0%';
+    updateProgress(0, totalCount, 0, 0);
+    setMessage(`⏳ Starting bulk send to ${email} — ${totalCount} emails (sequential)`, false);
+
+    for (let i = 1; i <= totalCount; i++) {
+      // if refresh aborted? we have isSending flag check each iteration but no external abort needed. 
+      // In case the component state gets weird but isSending controls UI, we keep checking
+      if (!isSending) {
+        // this handles scenario where something externally might try to reset but we break
+        console.log("Sending cancelled by refresh or external flag");
+        break;
+      }
+
+      // Update button inner status dynamically (current progress number)
+      if (sendBtn && !sendBtn.disabled) {
+        // keep disabled but we update text to show exact progress
+        sendBtnTextSpan.innerHTML = `<span class="spinner"></span> ${i}/${totalCount}`;
+      } else if (sendBtn) {
+        sendBtnTextSpan.innerHTML = `<span class="spinner"></span> ${i}/${totalCount}`;
+      }
+
+      // update progress indicator before sending each email
+      updateProgress(i-1, totalCount, successCount, failureCount);
+      
+      // EmailJS send with proper parameters (template expects "email" variable)
+      try {
+        const templateParams = {
+          email: email
+        };
+        // send email
+        const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
+        if (response && response.status === 200) {
+          successCount++;
+          // minor visual: update status message per success
+          statusDetailSpan.innerText = `📨 Sent ${i}/${totalCount} • ✅ ${successCount} success`;
+        } else {
+          failureCount++;
+          console.warn(`Email ${i} response not 200:`, response);
+        }
+      } catch (err) {
+        failureCount++;
+        console.error(`Failed sending email #${i}:`, err);
+        // still continue to next email (resilient)
+      }
+      
+      // update progress after each email attempt
+      updateProgress(i, totalCount, successCount, failureCount);
+      
+      // Tiny delay (0.2s) to respect email service rate limits and smooth UI animation
+      if (i < totalCount) {
+        await new Promise(resolve => setTimeout(resolve, 220));
+      }
+    }
+    
+    // final update after loop finishes (if process ended normally or break)
+    const finalProgress = totalCount;
+    updateProgress(finalProgress, totalCount, successCount, failureCount);
+    
+    // final message based on results
+    if (successCount === totalCount) {
+      setMessage(`🎉 Perfect! All ${totalCount} emails sent successfully to ${email}.`, false);
+    } else if (successCount > 0) {
+      setMessage(`⚠️ Bulk send completed: ${successCount} sent, ${failureCount} failed. Check email/network or try again.`, false);
+    } else {
+      setMessage(`❌ Delivery failed! ${failureCount} emails could not be sent. Verify EmailJS service & recipient address.`, true);
+    }
+    
+    // If we had zero emails? but totalCount > 0
+    if (totalCount === 0) {
+      setMessage("⚠️ Count cannot be zero. Refresh & try again.", true);
+    }
+    
+    // re-enable send button and clear loading animation
+    disableSendButtonLoading();
+    sendBtn.disabled = false;
+    isSending = false;
+    // also enable refresh button style (refresh always enabled when not sending)
+    refreshBtn.disabled = false;
+  }
+
+  // main send handler (validation + start)
+  async function handleSend() {
+    if (isSending) {
+      setMessage("⏳ Already sending emails! Please wait.", true);
+      return;
+    }
+    
+    let email = emailInput.value.trim();
+    let rawCount = countInput.value.trim();
+    
+    if (!email) {
+      setMessage("📧 Please enter a valid email address.", true);
+      return;
+    }
+    // basic email regex
+    const emailPattern = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+    if (!emailPattern.test(email)) {
+      setMessage("❌ Enter a correct email format (example@domain.com).", true);
+      return;
+    }
+    
+    let count = parseInt(rawCount, 10);
+    if (isNaN(count) || count <= 0) {
+      setMessage("🔢 Count must be a positive number (min 1).", true);
+      return;
+    }
+    if (count > 150) {
+      setMessage("⚠️ Max limit 150 emails per session to avoid abuse. Adjust count.", true);
+      return;
+    }
+    
+    // start sending sequence
+    isSending = true;
+    refreshBtn.disabled = true;   // disable refresh during sending (prevent conflicts)
+    sendBtn.disabled = true;       // will be overridden by loading animation anyway
+    enableSendButtonLoading(`0/${count}`);
+    
+    try {
+      await performBulkSend(email, count);
+    } catch (err) {
+      console.error("Critical error in send process:", err);
+      setMessage("❗ Unexpected error. Please try again later.", true);
+      disableSendButtonLoading();
+      sendBtn.disabled = false;
+      isSending = false;
+      refreshBtn.disabled = false;
+      progressArea.style.display = 'none';
+    } finally {
+      // ensure final cleanup if something unusual happens but normally performBulkSend does reenable
+      if (isSending === true) {
+        // in case performBulkSend finished but flags not reset? double safe
+        isSending = false;
+        refreshBtn.disabled = false;
+        disableSendButtonLoading();
+        sendBtn.disabled = false;
+      } else {
+        refreshBtn.disabled = false;
+      }
+    }
+  }
+
+  // refresh click handler: clears form and stops any visual sending state
+  function handleRefresh() {
+    if (isSending) {
+      setMessage("🚫 Sending in progress. Please wait for completion before refresh.", true);
+      return;
+    }
+    // fully reset all UI fields and progress
+    resetFormUI();
+    // extra check to ensure any stuck loading is cleared
+    if (!isSending) {
+      disableSendButtonLoading();
+      sendBtn.disabled = false;
+      refreshBtn.disabled = false;
+    }
+    // hide progress area if visible
+    progressArea.style.display = 'none';
+    progressFill.style.width = '0%';
+    statusDetailSpan.innerText = 'Ready';
+    // reset any error border on message area
+    msgArea.style.borderLeftColor = "#2b7a4b";
+    msgArea.style.background = "#f1f5f9";
+  }
+
+  // attach event listeners
+  sendBtn.addEventListener('click', handleSend);
+  refreshBtn.addEventListener('click', handleRefresh);
+
+  // initial small style: set count input attributes
+  countInput.setAttribute('min', '1');
+  countInput.setAttribute('max', '150');
+  countInput.value = "10";
+  
+  // Disable right-click on buttons? not needed. 
+  // Also pressing Enter on inputs can trigger send? optional: improve UX
+  const inputs = [emailInput, countInput];
+  inputs.forEach(inp => {
+    inp.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !isSending) {
+        e.preventDefault();
+        handleSend();
+      }
+    });
+  });
+  
+  // initial message & hide progress bar initially
+  progressArea.style.display = 'none';
+  setMessage("✨ New design with refresh & live loading animation. Ready to send!", false);
+</script>
+</body>
+</html>
