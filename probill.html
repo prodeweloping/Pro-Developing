@@ -2,14 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="Pro.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro Developing | A4 Optimized Invoice</title>
+    <link rel="icon" type="image/png" href="Pro.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Pro Developing | Smart Invoice Pro</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --primary: #3d5a80;
             --dark: #293241;
             --gray: #64748b;
+            --light-bg: #f8fafc;
+            --border-light: #e2e8f0;
         }
 
         /* A4 Setup */
@@ -20,29 +28,33 @@
 
         body {
             background: #e2e8f0;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
 
-        /* Main A4 Container */
+        /* INVOICE CONTAINER */
         .a4-container {
             width: 210mm;
             min-height: 297mm;
             padding: 20mm;
             margin: 20px auto;
             background: white;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
             box-sizing: border-box;
             position: relative;
+            display: none;
         }
 
         /* Header */
         .header {
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
             margin-bottom: 30px;
+            gap: 20px;
         }
 
         .logo-section img {
@@ -63,30 +75,34 @@
         .banner {
             background: var(--primary);
             color: white;
-            font-size: 38px;
+            font-size: 32px;
             font-weight: 900;
-            padding: 8px 30px;
-            border-left: 10px solid var(--dark);
+            padding: 6px 28px;
+            border-left: 8px solid var(--dark);
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
 
         .meta {
-            margin-top: 15px;
+            margin-top: 12px;
             font-size: 14px;
         }
 
-        .meta input {
+        .meta input, .meta .invoice-number-static {
             border: none;
+            border-bottom: 1px dashed var(--border-light);
             text-align: right;
             font-weight: bold;
-            width: 100px;
+            width: 110px;
+            background: transparent;
+            font-family: inherit;
         }
 
         /* Billing */
         .billing-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            gap: 20px;
             border-top: 2px solid var(--primary);
             padding-top: 20px;
             margin-bottom: 30px;
@@ -98,62 +114,73 @@
             font-size: 12px;
             text-transform: uppercase;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .bill-input {
-            width: 90%;
+            width: 100%;
             border: none;
             border-bottom: 1px solid transparent;
-            padding: 2px 0;
+            padding: 6px 0;
             font-size: 14px;
+            background: transparent;
         }
 
         .bill-input:focus {
             outline: none;
-            background: #f8fafc;
+            background: #f1f5f9;
             border-bottom-color: var(--primary);
         }
 
-        /* Table */
+        /* Invoice Table */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 500px;
         }
 
         th {
             background: #f1f5f9;
             color: var(--primary);
             text-align: left;
-            padding: 12px;
+            padding: 12px 8px;
             font-size: 13px;
             border-bottom: 2px solid var(--primary);
         }
 
         td {
-            padding: 12px;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 10px 8px;
+            border-bottom: 1px solid var(--border-light);
+            vertical-align: middle;
         }
 
         .row-input {
             width: 100%;
             border: none;
             font-size: 14px;
+            background: transparent;
+            padding: 4px 0;
         }
 
         .num-in {
-            width: 60px;
+            width: 70px;
             text-align: right;
-            border: 1px solid #ddd;
-            padding: 4px;
-            border-radius: 4px;
+            border: 1px solid #cbd5e1;
+            padding: 6px;
+            border-radius: 6px;
+            font-size: 13px;
         }
 
-        /* Totals */
+        /* Totals & Payment */
         .summary-box {
             margin-top: 30px;
             display: flex;
-            justify-content: flex-end;
+            flex-direction: column;
+            align-items: flex-end;
         }
 
         .total-table {
@@ -170,46 +197,236 @@
         .grand-total {
             background: var(--primary);
             color: white;
-            padding: 15px;
+            padding: 14px 18px;
             font-size: 20px;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 12px;
             display: flex;
             justify-content: space-between;
+            border-radius: 8px;
         }
 
-        /* Controls */
+        .payment-status {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+            font-weight: 500;
+        }
+        .payment-status select {
+            padding: 8px 16px;
+            border-radius: 40px;
+            border: 1px solid var(--primary);
+            background: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+        .invoice-footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #475569;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 20px;
+        }
+        .thanks-line {
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        .generated-note {
+            font-size: 11px;
+            color: #64748b;
+            letter-spacing: 0.3px;
+        }
+
+        /* Controls (floating buttons) */
         .controls {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
+            bottom: 24px;
+            right: 24px;
+            display: none;
+            gap: 12px;
+            z-index: 100;
         }
 
         .btn {
-            padding: 12px 25px;
+            padding: 12px 28px;
             border: none;
-            border-radius: 50px;
+            border-radius: 60px;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+            transition: 0.2s;
         }
 
-        .btn-add { background: #10b981; color: white; }
-        .btn-print { background: var(--dark); color: white; }
+        .btn-add {
+            background: #10b981;
+            color: white;
+        }
+        .btn-pdf {
+            background: var(--dark);
+            color: white;
+        }
+        .btn-add:hover, .btn-pdf:hover {
+            opacity: 0.9;
+            transform: scale(0.97);
+        }
+
+        /* ========= MODAL WIZARD ========= */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 16px;
+        }
+
+        .wizard-modal {
+            background: white;
+            max-width: 600px;
+            width: 100%;
+            border-radius: 32px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        .wizard-header {
+            background: var(--primary);
+            padding: 20px 28px;
+            color: white;
+        }
+        .wizard-header h2 { font-size: 1.7rem; margin-bottom: 6px; }
+        .step-indicator { font-size: 0.85rem; opacity: 0.9; }
+
+        .wizard-body {
+            padding: 28px 28px 20px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        .step { display: none; }
+        .step.active-step { display: block; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 16px;
+            font-size: 1rem;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .services-list { margin: 16px 0; max-height: 280px; overflow-y: auto; }
+        .service-item {
+            background: var(--light-bg);
+            border-radius: 20px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid var(--border-light);
+        }
+        .service-name-input { flex: 2; min-width: 140px; padding: 10px 12px; border-radius: 40px; border: 1px solid #cbd5e1; }
+        .service-price-input { flex: 1; min-width: 100px; padding: 10px 12px; border-radius: 40px; border: 1px solid #cbd5e1; }
+        .remove-srv-btn {
+            background: #fee2e2;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 40px;
+            cursor: pointer;
+            color: #b91c1c;
+            font-weight: bold;
+        }
+        .add-service-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 12px;
+            border-radius: 40px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+        .step-total {
+            background: #f1f5f9;
+            padding: 14px;
+            border-radius: 20px;
+            text-align: right;
+            font-weight: bold;
+            margin: 16px 0;
+        }
+        .preview-service-item {
+            background: white;
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .wizard-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 28px 28px;
+            gap: 12px;
+        }
+        .btn-wiz { padding: 12px 24px; border-radius: 40px; font-weight: bold; border: none; cursor: pointer; }
+        .btn-next { background: var(--primary); color: white; }
+        .btn-back { background: #e2e8f0; color: #1e293b; }
+        .error-msg { color: #dc2626; font-size: 0.75rem; margin-top: 5px; }
 
         @media print {
             body { background: white; }
-            .a4-container { margin: 0; box-shadow: none; width: 100%; }
-            .controls, .btn-del { display: none !important; }
-            .num-in { border: none; }
+            .a4-container { margin: 0; box-shadow: none; width: 100%; display: block !important; }
+            .controls, .modal-overlay, .btn-del, .btn-add, .btn-pdf { display: none !important; }
+            .num-in { border: none; background: transparent; }
+            .payment-status select { border: none; background: transparent; appearance: none; color: black; }
+            .invoice-footer { margin-top: 30px; }
+        }
+
+        @media (max-width: 700px) {
+            .a4-container { padding: 12mm; width: 100%; margin: 0; }
+            .billing-grid { grid-template-columns: 1fr; gap: 16px; }
+            .banner { font-size: 24px; padding: 4px 20px; }
+            .controls { bottom: 16px; right: 16px; }
+            .btn { padding: 8px 18px; font-size: 12px; }
+            .num-in { width: 55px; font-size: 12px; }
+            th, td { font-size: 12px; padding: 6px 4px; }
         }
     </style>
 </head>
 <body>
 
-<div class="a4-container" id="invoice">
+<!-- INVOICE SECTION -->
+<div class="a4-container" id="invoiceContainer">
     <div class="header">
         <div class="logo-section">
             <img src="Propng.png" alt="Pro Developing">
@@ -222,8 +439,8 @@
         <div class="invoice-banner-box">
             <div class="banner">INVOICE</div>
             <div class="meta">
-                <b>No:</b> <input type="text" value="PRO-01"><br>
-                <b>Date:</b> <input type="text" id="dateText">
+                <b>No:</b> <span id="invoiceNumberDisplay" class="invoice-number-static">PRO-001</span><br>
+                <b>Date:</b> <span id="dateTextDisplay">11 April 2026</span>
             </div>
         </div>
     </div>
@@ -237,91 +454,349 @@
         </div>
         <div>
             <span class="label">Bill To</span>
-            <input type="text" class="bill-input" placeholder="Client Name" style="font-weight:bold"><br>
-            <input type="text" class="bill-input" placeholder="Address Line 1"><br>
-            <input type="text" class="bill-input" placeholder="Phone Number">
+            <input type="text" class="bill-input" id="clientNameField" placeholder="Client Name" style="font-weight:bold"><br>
+            <input type="text" class="bill-input" id="clientAddressField" placeholder="Address Line 1"><br>
+            <input type="text" class="bill-input" id="clientPhoneField" placeholder="Phone Number">
         </div>
     </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th width="40%">Item Description</th>
-                <th style="text-align:right">Qty</th>
-                <th style="text-align:right">Rate</th>
-                <th style="text-align:right">Tax%</th>
-                <th style="text-align:right">Total</th>
-                <th class="btn-del" width="30"></th>
-            </tr>
-        </thead>
-        <tbody id="itemsBody">
-            </tbody>
-    </table>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr><th width="40%">Item Description</th><th style="text-align:right">Qty</th><th style="text-align:right">Rate</th><th style="text-align:right">Tax%</th><th style="text-align:right">Total</th><th class="btn-del" width="30"></th></tr>
+            </thead>
+            <tbody id="itemsBody"></tbody>
+        </table>
+    </div>
 
     <div class="summary-box">
         <div class="total-table">
-            <div class="total-item">
-                <span>Subtotal</span>
-                <span>₹<span id="subTotal">0.00</span></span>
+            <div class="total-item"><span>Subtotal</span><span>₹<span id="subTotal">0.00</span></span></div>
+            <div class="total-item"><span>Tax</span><span>₹<span id="taxTotal">0.00</span></span></div>
+            <div class="grand-total"><span>Total</span><span>₹<span id="grandTotal">0.00</span></span></div>
+        </div>
+        <div class="payment-status">
+            <span>Payment Status:</span>
+            <select id="paymentStatusSelect">
+                <option value="Pending">Pending</option>
+                <option value="Paid">Paid</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="invoice-footer">
+        <div class="thanks-line">🙏 Thanks for visit again 🙏</div>
+        <div class="generated-note">This is a computer generated invoice. No signature required.</div>
+    </div>
+</div>
+
+<div class="controls" id="actionControls">
+    <button class="btn btn-add" id="addItemBtn">+ Add Item</button>
+    <button class="btn btn-pdf" id="downloadPdfBtn">📄 Download PDF</button>
+</div>
+
+<!-- MODAL WIZARD -->
+<div class="modal-overlay" id="wizardOverlay">
+    <div class="wizard-modal">
+        <div class="wizard-header"><h2>📄 Generate Invoice</h2><div class="step-indicator" id="stepIndicator">Step 1 / 3</div></div>
+        <div class="wizard-body">
+            <div class="step" id="step1">
+                <div class="form-group"><label>👤 Customer Name *</label><input type="text" id="custName" placeholder="e.g., John Doe"></div>
+                <div class="form-group"><label>📍 Address *</label><input type="text" id="custAddress" placeholder="Street, City, ZIP"></div>
+                <div class="form-group"><label>📞 Phone Number *</label><input type="tel" id="custPhone" placeholder="+91 9876543210"></div>
             </div>
-            <div class="total-item">
-                <span>Tax</span>
-                <span>₹<span id="taxTotal">0.00</span></span>
+            <div class="step" id="step2">
+                <div style="margin-bottom: 10px; font-weight: 600;">📋 Services / Products</div>
+                <div id="servicesDynamicList" class="services-list"></div>
+                <button type="button" class="add-service-btn" id="addServiceBtn">+ Add another service</button>
+                <div class="step-total" id="step2TotalPreview">💰 Total (excl. tax): ₹0.00</div>
+                <div class="error-msg" id="step2Error"></div>
             </div>
-            <div class="grand-total">
-                <span>Total</span>
-                <span>₹<span id="grandTotal">0.00</span></span>
+            <div class="step" id="step3">
+                <div style="font-weight: 700; margin-bottom: 16px;">🔍 Review & Confirm</div>
+                <div id="previewServicesContainer" style="max-height: 240px; overflow-y: auto; border-radius: 20px; background: #f8fafc; padding: 12px;"></div>
+                <div class="step-total" id="step3TotalPreview">💰 Grand Total: ₹0.00</div>
+                <div class="error-msg" id="step3Error"></div>
             </div>
+        </div>
+        <div class="wizard-buttons">
+            <button class="btn-wiz btn-back" id="backBtn" style="visibility: hidden;">← Back</button>
+            <button class="btn-wiz btn-next" id="nextBtn">Next →</button>
         </div>
     </div>
 </div>
 
-<div class="controls">
-    <button class="btn btn-add" onclick="addRow()">+ Add Item</button>
-    <button class="btn btn-print" onclick="window.print()">Print Invoice</button>
-</div>
-
 <script>
-    document.getElementById('dateText').value = new Date().toLocaleDateString();
+    (function() {
+        // ---------- STORAGE KEYS ----------
+        const STORAGE_LAST_INVOICE = "pro_invoice_last_number";
+        const STORAGE_CUSTOMER = "pro_customer_data";
 
-    function addRow() {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td><input type="text" class="row-input" value="Consulting Service"></td>
-            <td style="text-align:right"><input type="number" class="num-in qty" value="1" oninput="calc()"></td>
-            <td style="text-align:right"><input type="number" class="num-in rate" value="0" oninput="calc()"></td>
-            <td style="text-align:right"><input type="number" class="num-in tax" value="0" oninput="calc()"></td>
-            <td style="text-align:right; font-weight:bold">₹<span class="row-amt">0.00</span></td>
-            <td class="btn-del"><button onclick="this.parentElement.parentElement.remove();calc()" style="color:red; border:none; background:none; cursor:pointer">✕</button></td>
-        `;
-        document.getElementById('itemsBody').appendChild(tr);
-        calc();
-    }
+        // ---------- GLOBALS ----------
+        let currentStep = 1;
+        let customerData = { name: "", address: "", phone: "" };
+        let servicesArray = [];  // { name, price }
 
-    function calc() {
-        let sub = 0, tax = 0;
-        document.querySelectorAll('#itemsBody tr').forEach(row => {
-            const q = parseFloat(row.querySelector('.qty').value) || 0;
-            const r = parseFloat(row.querySelector('.rate').value) || 0;
-            const t = parseFloat(row.querySelector('.tax').value) || 0;
-            
-            const base = q * r;
-            const taxAmt = base * (t / 100);
-            const total = base + taxAmt;
-            
-            row.querySelector('.row-amt').innerText = total.toFixed(2);
-            sub += base;
-            tax += taxAmt;
-        });
-        
-        document.getElementById('subTotal').innerText = sub.toFixed(2);
-        document.getElementById('taxTotal').innerText = tax.toFixed(2);
-        document.getElementById('grandTotal').innerText = (sub + tax).toFixed(2);
-    }
+        // DOM elements
+        const wizardOverlay = document.getElementById('wizardOverlay');
+        const invoiceContainer = document.getElementById('invoiceContainer');
+        const actionControls = document.getElementById('actionControls');
+        const itemsBody = document.getElementById('itemsBody');
+        const stepIndicator = document.getElementById('stepIndicator');
+        const backBtn = document.getElementById('backBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const step1Div = document.getElementById('step1');
+        const step2Div = document.getElementById('step2');
+        const step3Div = document.getElementById('step3');
+        const custNameInput = document.getElementById('custName');
+        const custAddressInput = document.getElementById('custAddress');
+        const custPhoneInput = document.getElementById('custPhone');
+        const servicesDynamicList = document.getElementById('servicesDynamicList');
+        const addServiceBtn = document.getElementById('addServiceBtn');
+        const step2TotalPreviewSpan = document.getElementById('step2TotalPreview');
+        const previewServicesContainer = document.getElementById('previewServicesContainer');
+        const step3TotalPreviewSpan = document.getElementById('step3TotalPreview');
+        const invoiceNumberDisplay = document.getElementById('invoiceNumberDisplay');
+        const dateTextDisplay = document.getElementById('dateTextDisplay');
+        const clientNameField = document.getElementById('clientNameField');
+        const clientAddressField = document.getElementById('clientAddressField');
+        const clientPhoneField = document.getElementById('clientPhoneField');
 
-    // Default 3 rows
-    window.onload = () => { addRow(); addRow(); addRow(); };
+        // Format date: 11 April 2026
+        function formatDate(date) {
+            return date.getDate() + ' ' + date.toLocaleString('default', { month: 'long' }) + ' ' + date.getFullYear();
+        }
+        dateTextDisplay.innerText = formatDate(new Date());
+
+        // Invoice number generator
+        function getNextInvoiceNumber() {
+            let lastNum = localStorage.getItem(STORAGE_LAST_INVOICE);
+            if (!lastNum) {
+                lastNum = 1;
+            } else {
+                lastNum = parseInt(lastNum) + 1;
+            }
+            const padded = String(lastNum).padStart(3, '0');
+            const newInv = `PRO-${padded}`;
+            localStorage.setItem(STORAGE_LAST_INVOICE, lastNum);
+            return { number: newInv, raw: lastNum };
+        }
+
+        // Save customer to localStorage
+        function saveCustomerToStorage(name, addr, phone) {
+            localStorage.setItem(STORAGE_CUSTOMER, JSON.stringify({ name, address: addr, phone }));
+        }
+        function loadCustomerFromStorage() {
+            const saved = localStorage.getItem(STORAGE_CUSTOMER);
+            if (saved) {
+                try {
+                    const c = JSON.parse(saved);
+                    custNameInput.value = c.name || '';
+                    custAddressInput.value = c.address || '';
+                    custPhoneInput.value = c.phone || '';
+                } catch(e) {}
+            }
+        }
+
+        function updateStep2Total() {
+            let total = 0;
+            servicesArray.forEach(s => { let p = parseFloat(s.price); if (!isNaN(p)) total += p; });
+            step2TotalPreviewSpan.innerHTML = `💰 Total (excl. tax): ₹${total.toFixed(2)}`;
+            return total;
+        }
+
+        function renderStep2Services() {
+            servicesDynamicList.innerHTML = '';
+            if (servicesArray.length === 0) servicesArray.push({ name: "", price: 0 });
+            servicesArray.forEach((service, idx) => {
+                const div = document.createElement('div');
+                div.className = 'service-item';
+                div.innerHTML = `
+                    <input type="text" class="service-name-input" placeholder="Service name" value="${escapeHtml(service.name)}">
+                    <input type="number" class="service-price-input" placeholder="Price (₹)" value="${service.price}">
+                    <button class="remove-srv-btn" ${servicesArray.length === 1 ? 'disabled style="opacity:0.4;"' : ''}>✕</button>
+                `;
+                const nameInp = div.querySelector('.service-name-input');
+                const priceInp = div.querySelector('.service-price-input');
+                const rmBtn = div.querySelector('.remove-srv-btn');
+                nameInp.addEventListener('input', (e) => { servicesArray[idx].name = e.target.value; updateStep2Total(); });
+                priceInp.addEventListener('input', (e) => { let v = parseFloat(e.target.value) || 0; servicesArray[idx].price = v; updateStep2Total(); });
+                if (rmBtn && !rmBtn.disabled) {
+                    rmBtn.addEventListener('click', () => {
+                        if (servicesArray.length > 1) { servicesArray.splice(idx, 1); renderStep2Services(); updateStep2Total(); }
+                    });
+                }
+                servicesDynamicList.appendChild(div);
+            });
+            updateStep2Total();
+        }
+
+        function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+
+        function updateStep3Preview() {
+            previewServicesContainer.innerHTML = '';
+            let total = 0;
+            servicesArray.forEach(s => { let p = parseFloat(s.price)||0; total+=p; const div=document.createElement('div'); div.className='preview-service-item'; div.innerHTML=`<span><strong>${escapeHtml(s.name)||'Unnamed'}</strong></span><span>₹${p.toFixed(2)}</span>`; previewServicesContainer.appendChild(div); });
+            if(servicesArray.length===0) previewServicesContainer.innerHTML='<div class="preview-service-item">⚠️ No services</div>';
+            step3TotalPreviewSpan.innerHTML = `💰 Grand Total: ₹${total.toFixed(2)}`;
+            return total;
+        }
+
+        function validateStep1() {
+            const name = custNameInput.value.trim(), addr = custAddressInput.value.trim(), phone = custPhoneInput.value.trim();
+            if(!name || !addr || !phone) { alert("Please fill all customer details"); return false; }
+            customerData = { name, address: addr, phone };
+            return true;
+        }
+        function validateStep2() {
+            if(servicesArray.length===0) { document.getElementById('step2Error').innerText="Add at least one service."; return false; }
+            for(let i=0;i<servicesArray.length;i++) {
+                const s=servicesArray[i];
+                if(!s.name.trim()) { document.getElementById('step2Error').innerText=`Service #${i+1} has no name.`; return false; }
+                if(isNaN(parseFloat(s.price)) || parseFloat(s.price)<0) { document.getElementById('step2Error').innerText=`Invalid price for ${s.name}.`; return false; }
+            }
+            document.getElementById('step2Error').innerText="";
+            return true;
+        }
+
+        // Add row to invoice table
+        function addInvoiceRow(desc, qty, rate, taxPercent) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><input type="text" class="row-input" value="${escapeHtml(desc)}"></td>
+                <td style="text-align:right"><input type="number" class="num-in qty" value="${qty}" oninput="window.calcInvoiceTotals()"></td>
+                <td style="text-align:right"><input type="number" class="num-in rate" value="${rate}" oninput="window.calcInvoiceTotals()"></td>
+                <td style="text-align:right"><input type="number" class="num-in tax" value="${taxPercent}" oninput="window.calcInvoiceTotals()"></td>
+                <td style="text-align:right; font-weight:bold">₹<span class="row-amt">0.00</span></td>
+                <td class="btn-del"><button onclick="this.parentElement.parentElement.remove();window.calcInvoiceTotals()" style="color:red; border:none; background:none; cursor:pointer;">✕</button></td>
+            `;
+            itemsBody.appendChild(tr);
+            window.calcInvoiceTotals();
+        }
+
+        window.calcInvoiceTotals = function() {
+            let sub=0, taxTotal=0;
+            document.querySelectorAll('#itemsBody tr').forEach(row => {
+                const qty=parseFloat(row.querySelector('.qty')?.value)||0;
+                const rate=parseFloat(row.querySelector('.rate')?.value)||0;
+                const tax=parseFloat(row.querySelector('.tax')?.value)||0;
+                const base=qty*rate;
+                const taxAmt=base*(tax/100);
+                const total=base+taxAmt;
+                const span=row.querySelector('.row-amt');
+                if(span) span.innerText=total.toFixed(2);
+                sub+=base;
+                taxTotal+=taxAmt;
+            });
+            document.getElementById('subTotal').innerText=sub.toFixed(2);
+            document.getElementById('taxTotal').innerText=taxTotal.toFixed(2);
+            document.getElementById('grandTotal').innerText=(sub+taxTotal).toFixed(2);
+        };
+
+        function populateInvoiceFromWizard() {
+            // Save customer to memory
+            saveCustomerToStorage(customerData.name, customerData.address, customerData.phone);
+            // Fill bill-to fields
+            clientNameField.value = customerData.name;
+            clientAddressField.value = customerData.address;
+            clientPhoneField.value = customerData.phone;
+            // Clear existing rows
+            itemsBody.innerHTML = '';
+            // Add service rows (qty=1, tax=0)
+            for(let serv of servicesArray) {
+                addInvoiceRow(serv.name.trim() || "Service", 1, parseFloat(serv.price)||0, 0);
+            }
+            window.calcInvoiceTotals();
+            // Generate & update invoice number
+            const { number } = getNextInvoiceNumber();
+            invoiceNumberDisplay.innerText = number;
+            // Reset payment status to Pending
+            document.getElementById('paymentStatusSelect').value = "Pending";
+        }
+
+        // Wizard navigation
+        function showStep(step) {
+            step1Div.classList.remove('active-step');
+            step2Div.classList.remove('active-step');
+            step3Div.classList.remove('active-step');
+            if(step===1) {
+                step1Div.classList.add('active-step');
+                backBtn.style.visibility = 'hidden';
+                nextBtn.innerText = 'Next →';
+                stepIndicator.innerText = 'Step 1 / 3 : Customer Info';
+            } else if(step===2) {
+                step2Div.classList.add('active-step');
+                backBtn.style.visibility = 'visible';
+                nextBtn.innerText = 'Next →';
+                stepIndicator.innerText = 'Step 2 / 3 : Services';
+                renderStep2Services();
+                updateStep2Total();
+            } else if(step===3) {
+                step3Div.classList.add('active-step');
+                backBtn.style.visibility = 'visible';
+                nextBtn.innerText = 'Confirm ✓';
+                stepIndicator.innerText = 'Step 3 / 3 : Review';
+                updateStep3Preview();
+            }
+            currentStep = step;
+        }
+
+        function nextStepHandler() {
+            if(currentStep===1) { 
+                if(validateStep1()) showStep(2); 
+            }
+            else if(currentStep===2) { 
+                if(validateStep2()) showStep(3); 
+            }
+            else if(currentStep===3) {
+                if(servicesArray.length===0) { 
+                    document.getElementById('step3Error').innerText="No services added."; 
+                    return; 
+                }
+                // CONFIRM: generate invoice and close modal
+                populateInvoiceFromWizard();
+                wizardOverlay.style.display = 'none';
+                invoiceContainer.style.display = 'block';
+                actionControls.style.display = 'flex';
+            }
+        }
+
+        function backStepHandler() {
+            if(currentStep===2) showStep(1);
+            else if(currentStep===3) showStep(2);
+        }
+
+        // Initial setup
+        function init() {
+            itemsBody.innerHTML = ''; // No default rows
+            invoiceContainer.style.display = 'none';
+            actionControls.style.display = 'none';
+            loadCustomerFromStorage();
+            // Set initial invoice number preview
+            let lastRaw = localStorage.getItem(STORAGE_LAST_INVOICE);
+            if(lastRaw) {
+                let nextRaw = parseInt(lastRaw)+1;
+                let padded = String(nextRaw).padStart(3,'0');
+                invoiceNumberDisplay.innerText = `PRO-${padded}`;
+            } else {
+                invoiceNumberDisplay.innerText = "PRO-001";
+            }
+            servicesArray = [{ name: "", price: 0 }];
+            renderStep2Services();
+            showStep(1);
+            wizardOverlay.style.display = 'flex';
+        }
+
+        // Event listeners
+        nextBtn.addEventListener('click', nextStepHandler);
+        backBtn.addEventListener('click', backStepHandler);
+        addServiceBtn.onclick = () => { servicesArray.push({ name: "", price: 0 }); renderStep2Services(); if(currentStep===3) updateStep3Preview(); };
+        document.getElementById('addItemBtn')?.addEventListener('click', () => { addInvoiceRow("New Service", 1, 0, 0); });
+        document.getElementById('downloadPdfBtn')?.addEventListener('click', () => { window.print(); });
+
+        // Start the app
+        init();
+    })();
 </script>
-
 </body>
 </html>
