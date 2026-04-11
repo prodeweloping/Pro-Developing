@@ -469,7 +469,7 @@
 
         .contact-container { display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; background: white; border-radius: 60px; padding: 50px; box-shadow: var(--shadow-lg); }
         .contact-info { display: flex; flex-direction: column; gap: 30px; }
-         .contact-item { display: flex; align-items: center; gap: 20px; background: #f8fafc; padding: 20px; border-radius: 40px; transition: var(--transition); }
+ .contact-item { display: flex; align-items: center; gap: 20px; background: #f8fafc; padding: 20px; border-radius: 40px; transition: var(--transition); }
         .contact-item:hover { background: linear-gradient(105deg, #fc8014, #7209b7); transform: translateX(10px); }
         .contact-item:hover .contact-icon { background: white; color: var(--primary); }
         .contact-item:hover h3, .contact-item:hover p { color: white; }
@@ -701,7 +701,27 @@
         const prevBtn = document.getElementById('sliderPrev');
         const nextBtn = document.getElementById('sliderNext');
         const dots = document.querySelectorAll('.slider-dot');
-        const slideBtn = document.getElementById('slideBtn');function type(){ if(timeoutId) clearTimeout(timeoutId); const currentText=texts[textIndex]; if(isDeleting) charIndex--; else charIndex++; typingElement.textContent=currentText.substring(0,charIndex); if(!isDeleting && charIndex===currentText.length){ isDeleting=true; timeoutId=setTimeout(type,1800); } else if(isDeleting && charIndex===0){ isDeleting=false; textIndex=(textIndex+1)%texts.length; updateSlider(textIndex); timeoutId=setTimeout(type,80); } else { const speed=isDeleting?50:80; timeoutId=setTimeout(type,speed); } } setTimeout(()=>type(),100);
+        const slideBtn = document.getElementById('slideBtn');
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        const buttonConfig = [{ text: 'Premium Web Work', link: 'proweb.html' },{ text: 'Custom Tools Work', link: 'cwork.html' }];
+        
+        function updateSlider(index) {
+            if(index < 0) index = totalSlides - 1;
+            if(index >= totalSlides) index = 0;
+            sliderWrapper.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+            slideBtn.textContent = buttonConfig[index].text;
+            slideBtn.href = buttonConfig[index].link;
+            currentIndex = index;
+        }
+        updateSlider(0);
+        prevBtn.addEventListener('click', () => updateSlider(currentIndex - 1));
+        nextBtn.addEventListener('click', () => updateSlider(currentIndex + 1));
+        dots.forEach((dot, idx) => dot.addEventListener('click', () => updateSlider(idx)));
+        
+        // Typewriter effect
+        const typingElement = document.getElementById('typingText'), texts = ["Premium Web Work", "Custom tools Work"]; let textIndex=0,charIndex=0,isDeleting=false,timeoutId=null;function type(){ if(timeoutId) clearTimeout(timeoutId); const currentText=texts[textIndex]; if(isDeleting) charIndex--; else charIndex++; typingElement.textContent=currentText.substring(0,charIndex); if(!isDeleting && charIndex===currentText.length){ isDeleting=true; timeoutId=setTimeout(type,1800); } else if(isDeleting && charIndex===0){ isDeleting=false; textIndex=(textIndex+1)%texts.length; updateSlider(textIndex); timeoutId=setTimeout(type,80); } else { const speed=isDeleting?50:80; timeoutId=setTimeout(type,speed); } } setTimeout(()=>type(),100);
         
         // Dynamic form logic - updated to handle new service options
         const mainService = document.getElementById('service');
