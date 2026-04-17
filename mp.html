@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MP Store</title>
+
+<style>
+body{font-family:Arial;margin:0;background:#f5f5f5}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+background:#222;
+color:white;
+padding:15px
+}
+
+.navbar a{
+color:white;
+margin-left:15px;
+text-decoration:none
+}
+
+.container{text-align:center;padding:20px}
+
+.product{
+border:1px solid #ddd;
+padding:15px;
+margin:10px;
+display:inline-block;
+width:200px;
+background:white
+}
+
+button{padding:8px 15px;cursor:pointer}
+
+footer{
+background:#222;
+color:white;
+padding:20px;
+margin-top:40px;
+text-align:center
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function(){
+emailjs.init("yrZBMw0TXHttA60sA");
+})();
+</script>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+import {
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs,
+query,
+where
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+
+const firebaseConfig={
+apiKey:"AIzaSyCIe9xLDNE7keqjXLmvR3xHVXqPp-ZrYwo",
+authDomain:"order-96de7.firebaseapp.com",
+projectId:"order-96de7"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+window.cart=[];
+
+window.signup=()=>{
+createUserWithEmailAndPassword(auth,email.value,password.value)
+.then(()=>alert("Signup success"))
+}
+
+window.login=()=>{
+signInWithEmailAndPassword(auth,email.value,password.value)
+.then(()=>alert("Login success"))
+}
+
+window.addToCart=(p)=>{
+
+if(!auth.currentUser){
+alert("Login required");
+return;
+}
+
+cart.push(p);
+alert(p+" added");
+
+}
+
+
+// 🔢 Sequential Order ID Generator
+
+window.generateOrderID=async()=>{
+
+const snapshot=await getDocs(collection(db,"orders"));
+
+let used=[];
+
+snapshot.forEach(doc=>{
+let id=doc.data().orderID.replace("ORD","");
+used.push(parseInt(id));
+});
+
+used.sort((a,b)=>a-b);
+
+let next=1;
+
+for(let i=0;i<used.length;i++){
+
+if(used[i]!==next) break;
+
+next++;
+
+}
+
+return "ORD"+String(next).padStart(3,"0");
+
+}
+
+
+// 📦 Confirm Order
+
+window.confirmOrder=async()=>{
+
+if(!auth.currentUser){
+alert("Login first");
+return;
+}
+
+if(cart.length==0){
+alert("Cart empty");
+return;
+}
+
+let orderID=await generateOrderID();
+
+await addDoc(collection(db,"orders"),{
+
+orderID,
+email:auth.currentUser.email,
+products:cart,
+status:"Pending",
+time:new Date().toLocaleString()
+
+});
+
+emailjs.send("service_dzkmvgb","template_56v9ww8",{
+
+order_id:orderID,
+products:cart.join(", "),
+to_email:auth.currentUser.email
+
+});
+
+alert("Order Confirmed: "+orderID);
+
+cart=[];
+
+}
+
+
+// 🔎 Tracking
+
+window.trackOrder=async()=>{
+
+const q=query(
+collection(db,"orders"),
+where("orderID","==",trackID.value)
+);
+
+const snap=await getDocs(q);
+
+if(snap.empty){
+statusResult.innerText="Order not found";
+return;
+}
+
+snap.forEach(doc=>{
+statusResult.innerText="Status: "+doc.data().status;
+});
+
+}
+
+</script>
+</head>
+
+
+<body>
+
+<div class="navbar">
+<h2>MP Store</h2>
+
+<div>
+<a href="#">Home</a>
+<a href="#products">Products</a>
+<a href="#track">Track</a>
+<a href="admin.html">Admin</a>
+</div>
+</div>
+
+
+<div class="container">
+
+<h3>Login</h3>
+
+<input id="email" placeholder="Email"><br><br>
+<input id="password" placeholder="Password"><br><br>
+
+<button onclick="signup()">Signup</button>
+<button onclick="login()">Login</button>
+
+
+<h2 id="products">Products</h2>
+
+<div class="product">Book 1 ₹199<br><br>
+<button onclick="addToCart('Book 1')">Add</button></div>
+
+<div class="product">Book 2 ₹249<br><br>
+<button onclick="addToCart('Book 2')">Add</button></div>
+
+<div class="product">Book 3 ₹299<br><br>
+<button onclick="addToCart('Book 3')">Add</button></div>
+
+<div class="product">Book 4 ₹349<br><br>
+<button onclick="addToCart('Book 4')">Add</button></div>
+
+
+<br><br>
+
+<button onclick="confirmOrder()">Confirm Order</button>
+
+
+<h2 id="track">Track Order</h2>
+
+<input id="trackID" placeholder="Enter Order ID">
+<button onclick="trackOrder()">Track</button>
+
+<p id="statusResult"></p>
+
+</div>
+
+
+<footer>
+© 2026 MP Store
+</footer>
+
+</body>
+</html>
