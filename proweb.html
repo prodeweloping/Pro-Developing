@@ -58,7 +58,7 @@
       -webkit-backdrop-filter: blur(18px);
       border-bottom: 1px solid rgba(67, 97, 238, 0.15);
       transition: all 0.3s ease;
-      padding: 0.7rem 11px;   /* left & right padding 11px as requested */
+      padding: 0.7rem 11px;
       width: 100%;
     }
 
@@ -68,19 +68,17 @@
       padding: 0.5rem 11px;
     }
 
-    /* Force single line - no wrapping */
     .nav-container {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: nowrap;      /* ← ensures logo and button always on same line */
+      flex-wrap: nowrap;
       gap: 1rem;
       max-width: 1280px;
       margin: 0 auto;
       width: 100%;
     }
 
-    /* Logo area - slightly shrinkable */
     .nav-logo {
       display: flex;
       align-items: center;
@@ -90,8 +88,8 @@
       font-size: 1.55rem;
       letter-spacing: -0.3px;
       transition: all 0.2s;
-      flex-shrink: 1;         /* allows slight shrinking if needed */
-      min-width: 0;           /* helps with flex overflow */
+      flex-shrink: 1;
+      min-width: 0;
     }
 
     .nav-logo-icon {
@@ -117,7 +115,7 @@
       -webkit-background-clip: text;
       color: transparent;
       font-weight: 800;
-      white-space: nowrap;    /* keep text in one line */
+      white-space: nowrap;
     }
 
     .nav-logo-text span {
@@ -141,8 +139,8 @@
       cursor: pointer;
       transition: all 0.25s ease;
       box-shadow: 0 8px 18px -8px rgba(67, 97, 238, 0.4);
-      white-space: nowrap;    /* button text stays in one line */
-      flex-shrink: 0;         /* prevent button from shrinking */
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .order-now-btn:hover {
@@ -151,49 +149,22 @@
       background: linear-gradient(105deg, #2e4bd0, #9d4edd);
     }
 
-    /* Responsive: On very small screens, reduce font/padding to keep single line */
     @media (max-width: 560px) {
-      .nav-logo-text {
-        font-size: 1.2rem;    /* shrink logo text */
-      }
-      .nav-logo-icon {
-        width: 36px;
-        height: 36px;
-      }
-      .nav-logo-icon i {
-        font-size: 1.3rem;
-      }
-      .order-now-btn {
-        padding: 0.5rem 1.2rem;
-        font-size: 0.8rem;
-        gap: 6px;
-      }
-      .nav-logo {
-        gap: 8px;
-      }
-      .nav-container {
-        gap: 0.75rem;
-      }
+      .nav-logo-text { font-size: 1.2rem; }
+      .nav-logo-icon { width: 36px; height: 36px; }
+      .nav-logo-icon i { font-size: 1.3rem; }
+      .order-now-btn { padding: 0.5rem 1.2rem; font-size: 0.8rem; gap: 6px; }
+      .nav-logo { gap: 8px; }
+      .nav-container { gap: 0.75rem; }
     }
 
     @media (max-width: 420px) {
-      .nav-logo-text {
-        font-size: 1rem;
-      }
-      .order-now-btn {
-        padding: 0.45rem 1rem;
-        font-size: 0.75rem;
-      }
-      .nav-logo-icon {
-        width: 32px;
-        height: 32px;
-      }
-      .nav-logo-icon i {
-        font-size: 1.1rem;
-      }
+      .nav-logo-text { font-size: 1rem; }
+      .order-now-btn { padding: 0.45rem 1rem; font-size: 0.75rem; }
+      .nav-logo-icon { width: 32px; height: 32px; }
+      .nav-logo-icon i { font-size: 1.1rem; }
     }
 
-    /* Hero spacing to prevent fixed navbar overlap */
     .hero-section {
       background: radial-gradient(circle at 10% 30%, rgba(67, 97, 238, 0.05), transparent 70%),
                   linear-gradient(135deg, #ffffff 0%, #f5f7ff 100%);
@@ -203,7 +174,6 @@
       margin-top: 80px;
     }
 
-    /* ========= TYPOGRAPHY & HERO RESPONSIVE ========= */
     .hero-content {
       position: relative;
       z-index: 2;
@@ -274,7 +244,6 @@
       font-size: 0.9rem;
     }
 
-    /* ========= TOGGLE BUTTONS ========= */
     .tools-section {
       margin-top: -1rem;
       position: relative;
@@ -326,7 +295,6 @@
       box-shadow: 0 8px 18px rgba(67, 97, 238, 0.3);
     }
 
-    /* ========= RESPONSIVE GRID SYSTEM ========= */
     .tools-grid {
       display: grid;
       gap: 2rem;
@@ -334,18 +302,12 @@
     }
 
     @media (min-width: 768px) {
-      .tools-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .tools-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
     @media (min-width: 1024px) {
-      .tools-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      .tools-grid { grid-template-columns: repeat(3, 1fr); }
     }
 
-    /* Tool Cards */
     .tool-card {
       background: #ffffff;
       border-radius: 1.5rem;
@@ -356,7 +318,6 @@
       display: flex;
       flex-direction: column;
       height: 100%;
-      position: relative;
     }
 
     .tool-card:hover {
@@ -433,12 +394,6 @@
       opacity: 0.65;
     }
 
-    .tool-btn.disabled:hover {
-      transform: none;
-      background: #f1f5f9;
-      box-shadow: none;
-    }
-
     /* ========= MODAL FULLY RESPONSIVE ========= */
     .order-modal {
       display: none;
@@ -473,11 +428,7 @@
     }
 
     @media (max-width: 480px) {
-      .modal-content {
-        padding: 1.4rem;
-        width: 95%;
-        max-height: 85vh;
-      }
+      .modal-content { padding: 1.4rem; width: 95%; max-height: 85vh; }
     }
 
     .modal-header {
@@ -523,26 +474,81 @@
       font-size: 0.95rem;
     }
 
+    /* Email verify row */
+    .email-verify-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .email-verify-row input {
+      flex: 1;
+    }
+    .verify-email-btn {
+      background: linear-gradient(105deg, #fc8014, #7209b7);
+      border: none;
+      padding: 0 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: white;
+      cursor: pointer;
+      white-space: nowrap;
+      height: 48px;
+      transition: all 0.2s;
+    }
+    .verify-email-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .otp-section {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .otp-section input {
+      flex: 2;
+      min-width: 140px;
+    }
+    .verify-otp-btn {
+      background: #1e293b;
+      border: none;
+      padding: 0 1rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      height: 48px;
+    }
+    .email-verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #e3f9ed;
+      color: #0b5e42;
+      padding: 6px 12px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      margin-top: 8px;
+    }
     .radio-group, .checkbox-group {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
       margin-top: 6px;
     }
-
     .budget-options {
       background: #f9fbfe;
       border-radius: 24px;
       padding: 0.8rem;
     }
-
     .preset-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       margin-bottom: 14px;
     }
-
     .preset-btn {
       background: white;
       border: 1.5px solid #dce5ec;
@@ -551,20 +557,17 @@
       font-weight: 600;
       cursor: pointer;
     }
-
     .preset-btn.active {
       background: #1c3e55;
       border-color: #1c3e55;
       color: white;
     }
-
     .manual-budget {
       display: flex;
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
     }
-
     .budget-display {
       background: #eef3fc;
       padding: 6px 14px;
@@ -572,28 +575,23 @@
       font-size: 0.85rem;
       margin-top: 12px;
     }
-
     .error-message, .success-message {
       display: none;
       padding: 12px;
       border-radius: 16px;
       margin-bottom: 20px;
     }
-
     .error-message.show, .success-message.show {
       display: block;
     }
-
     .error-message {
       background: #ffe9e9;
       color: #b00020;
     }
-
     .success-message {
       background: #e3f9ed;
       color: #0b5e42;
     }
-
     .submit-order-btn {
       background: linear-gradient(105deg, #fc8014, #7209b7);
       width: 100%;
@@ -609,15 +607,18 @@
       justify-content: center;
       gap: 8px;
     }
-
-    /* ========= FOOTER ========= */
+    .reply-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #6c757d;
+      margin-top: 1rem;
+    }
     footer {
       background: #0b1120;
       color: #eef2ff;
       padding: 2rem 0;
       margin-top: 2.5rem;
     }
-
     .footer-content {
       display: flex;
       justify-content: space-between;
@@ -626,248 +627,61 @@
       gap: 1rem;
       text-align: center;
     }
-
     @media (max-width: 768px) {
-      .footer-content {
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-      }
+      .footer-content { flex-direction: column; justify-content: center; text-align: center; }
+      .hero-section { margin-top: 90px; padding: 2rem 0 3rem; }
+      .toggle-buttons { flex-direction: column; align-items: center; width: 100%; gap: 12px; }
+      .toggle-btn { width: 85%; justify-content: center; }
     }
-
-    /* ========= RESPONSIVE BREAKPOINTS ========= */
-    @media (max-width: 1024px) {
-      .container {
-        padding: 0 22px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero-section {
-        margin-top: 90px;
-        padding: 2rem 0 3rem;
-      }
-      .hero-stats {
-        gap: 0.9rem;
-      }
-      .hero-stat-card {
-        padding: 0.4rem 1rem;
-        font-size: 0.8rem;
-      }
-      .toggle-buttons {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        gap: 12px;
-      }
-      .toggle-btn {
-        width: 85%;
-        justify-content: center;
-      }
-      .tool-card {
-        padding: 1.3rem;
-      }
-      .tool-title {
-        font-size: 1.35rem;
-      }
-    }
-
-    /* No stacking for navbar on any screen — already handled by nowrap + responsive shrinking */
-    @media (max-width: 640px) {
-      .hero-section {
-        margin-top: 100px;
-      }
-    }
-
-    /* Animation keyframes */
     @keyframes slideUp {
       from { transform: translateY(40px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-
     @keyframes fadeIn {
       from { background: rgba(0,0,0,0); }
       to { background: rgba(0,0,0,0.7); }
     }
-
-    /* custom cursor (desktop only) */
-    .cursor-dot, .cursor-outline {
-      display: none;
-    }
+    .cursor-dot, .cursor-outline { display: none; }
     @media (min-width: 1024px) {
-      .cursor-dot, .cursor-outline {
-        display: block;
-      }
+      .cursor-dot, .cursor-outline { display: block; }
     }
-
     .cursor-dot {
-      width: 8px;
-      height: 8px;
-      background-color: #fc8014;
-      position: fixed;
-      top: 0;
-      left: 0;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      z-index: 9999;
-      pointer-events: none;
+      width: 8px; height: 8px; background-color: #fc8014; position: fixed; top: 0; left: 0;
+      transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none;
     }
-    
     .cursor-outline {
-      width: 28px;
-      height: 28px;
-      border: 2px solid #fc8014;
-      position: fixed;
-      top: 0;
-      left: 0;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      z-index: 9998;
-      pointer-events: none;
-      transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-      background: rgba(67, 97, 238, 0.05);
+      width: 28px; height: 28px; border: 2px solid #fc8014; position: fixed; top: 0; left: 0;
+      transform: translate(-50%, -50%); border-radius: 50%; z-index: 9998; pointer-events: none;
+      transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1); background: rgba(67, 97, 238, 0.05);
     }
-    .cursor-active {
-      transform: translate(-50%, -50%) scale(0.5);
-      background-color: #7209b7 !important;
-      border-color: #7209b7 !important;
-    }
-    .cursor-hover {
-      width: 40px;
-      height: 40px;
-      background: #7109b758;
-      border-color: #7209b7;
-    }
-
     .loading-overlay {
-      position: fixed;
-      inset: 0;
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      transition: opacity 0.4s;
+      position: fixed; inset: 0; background: white; display: flex; align-items: center;
+      justify-content: center; z-index: 9999; transition: opacity 0.4s;
     }
-    .loading-overlay.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-    .loader {
-      width: 60px;
-      height: 60px;
-      border: 5px solid #e9ecef;
-      border-top-color: #fc8014;
-      border-radius: 50%;
-      animation: spin 1s infinite;
-    }
+    .loading-overlay.hidden { opacity: 0; visibility: hidden; }
+    .loader { width: 60px; height: 60px; border: 5px solid #e9ecef; border-top-color: #fc8014; border-radius: 50%; animation: spin 1s infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
-<nav class="navbar" id="navbar">
-  <div class="nav-container">
-    <div class="nav-logo">
-      <div class="nav-logo-icon"><i class="fas fa-code"></i></div>
-      <div class="nav-logo-text">Premium<span>Work</span></div>
-    </div>
-    <button id="orderNavBtn" class="order-now-btn"><i class="fas fa-pen"></i> Order Now</button>
-  </div>
-</nav>
-
-<section class="hero-section">
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-badge"><i class="fas fa-crown"></i> Premium Web Work</div>
-      <h1 class="hero-title">Build Your Digital Empire with <span class="hero-highlight">Static & Dynamic</span> Excellence</h1>
-      <p class="hero-description">Custom-crafted websites that blend stunning design with powerful functionality. From business portfolios to complex e-commerce engines.</p>
-      <div class="hero-stats">
-        <div class="hero-stat-card"><i class="fas fa-rocket"></i> 100+ Projects</div>
-        <div class="hero-stat-card"><i class="fas fa-globe"></i> 24/7 Support</div>
-        <div class="hero-stat-card"><i class="fas fa-star"></i> 5-Star Rated</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="container tools-section">
-  <div class="toggle-buttons">
-    <button id="staticToggleBtn" class="toggle-btn active"><i class="fas fa-layer-group"></i> Statics</button>
-    <button id="dynamicToggleBtn" class="toggle-btn"><i class="fas fa-bolt"></i> Dynamic</button>
-  </div>
-  <div id="toolsGridContainer" class="tools-grid"></div>
-</div>
-
-<footer>
-  <div class="container footer-content">
-    <p><i class="fas fa-code"></i> © 2026 ProDeveloping – Premium Web Work</p>
-  </div>
-</footer>
-
-<div class="order-modal" id="orderModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3>Custom Order</h3>
-      <button class="close-modal" id="closeModalBtn">&times;</button>
-    </div>
- <div id="errorMsg" class="error-message"><i class="fas fa-exclamation-circle"></i> <span id="errorText"></span></div>
-    <div id="successMsg" class="success-message"><i class="fas fa-check-circle"></i> Request sent! We'll contact you soon.</div>
-    <form id="orderForm">
-      <div class="form-group"><label>Your Name *</label><input type="text" id="name" placeholder="Full name" required></div>
-      <div class="form-group"><label>Mobile Number *</label><input type="tel" id="mobile" placeholder="+91 6356952788" required></div>
-      <div class="form-group"><label>Email Address *</label><input type="email" id="email" placeholder="you@example.com" required></div>
-      <div class="form-group"><label>Website Name *</label><input type="text" id="websiteName" placeholder="e.g., MyBusinessHub" required></div>
-      <div class="form-group"><div class="radio-group" id="typeRadioGroup"><label><input type="radio" name="websiteType" value="Statics" checked> Statics</label><label><input type="radio" name="websiteType" value="Dynamic"> Dynamic</label></div></div>
-      <div class="form-group"><label>Select Package *</label><select id="packageSelect" required><option value="">-- Select a package --</option></select></div>
-      <div class="form-group"><label>Budget range (INR) *</label><div class="budget-options"><div class="preset-buttons"><button type="button" class="preset-btn" data-value="2000">₹ 2,000</button><button type="button" class="preset-btn" data-value="5000">₹ 5,000</button><button type="button" class="preset-btn" data-value="10000">₹ 10,000</button></div><div class="manual-budget"><label>Custom:</label><input type="number" id="customBudget" placeholder="Enter amount" step="1000"></div><div class="budget-display"><i class="fas fa-chart-line"></i> Selected: <span id="selectedBudgetSpan">—</span></div></div></div>
-      <div class="form-group"><label>Pages Needed *</label><div class="checkbox-group" id="pageNeedsGroup"><label><input type="checkbox" value="Home"> Home</label><label><input type="checkbox" value="About"> About</label><label><input type="checkbox" value="Services"> Services</label><label><input type="checkbox" value="Products"> Products</label><label><input type="checkbox" value="Contact"> Contact</label><label><input type="checkbox" value="Gallery"> Gallery</label><label><input type="checkbox" value="Blog"> Blog</label><label><input type="checkbox" value="Other"> Other</label></div><input type="text" id="otherPages" placeholder="If 'Other', specify pages" style="margin-top:10px;"></div>
-      <div class="form-group"><label>Features Required *</label><div class="checkbox-group" id="featuresGroup"><label><input type="checkbox" value="Contact form"> Contact form</label><label><input type="checkbox" value="WhatsApp button"> WhatsApp button</label><label><input type="checkbox" value="Payment gateway"> Payment gateway</label><label><input type="checkbox" value="Admin panel"> Admin panel</label><label><input type="checkbox" value="Notification system"> Notification system</label><label><input type="checkbox" value="Login system"> Login system</label><label><input type="checkbox" value="Order system"> Order system</label></div></div>
-      <div class="form-group"><label>Additional Details</label><textarea id="description" rows="3" placeholder="Specific design, colors, functionality..."></textarea></div>
-      <button type="submit" class="submit-order-btn" id="submitBtn"><i class="fas fa-paper-plane"></i> Send Request</button>
-      <div class="reply-note"><i class="fas fa-clock"></i> We'll respond within 24 hours</div>
-    </form>
-  </div>
-</div>
-
+<nav class="navbar" id="navbar"><div class="nav-container"><div class="nav-logo"><div class="nav-logo-icon"><i class="fas fa-code"></i></div><div class="nav-logo-text">Premium<span>Work</span></div></div><button id="orderNavBtn" class="order-now-btn"><i class="fas fa-pen"></i> Order Now</button></div></nav>
+<section class="hero-section"><div class="container"><div class="hero-content"><div class="hero-badge"><i class="fas fa-crown"></i> Premium Web Work</div><h1 class="hero-title">Build Your Digital Empire with <span class="hero-highlight">Static & Dynamic</span> Excellence</h1><p class="hero-description">Custom-crafted websites that blend stunning design with powerful functionality. From business portfolios to complex e-commerce engines.</p><div class="hero-stats"><div class="hero-stat-card"><i class="fas fa-rocket"></i> 100+ Projects</div><div class="hero-stat-card"><i class="fas fa-globe"></i> 24/7 Support</div><div class="hero-stat-card"><i class="fas fa-star"></i> 5-Star Rated</div></div></div></div></section>
+<div class="container tools-section"><div class="toggle-buttons"><button id="staticToggleBtn" class="toggle-btn active"><i class="fas fa-layer-group"></i> Statics</button><button id="dynamicToggleBtn" class="toggle-btn"><i class="fas fa-bolt"></i> Dynamic</button></div><div id="toolsGridContainer" class="tools-grid"></div></div>
+<footer><div class="container footer-content"><p><i class="fas fa-code"></i> © 2026 ProDeveloping – Premium Web Work</p></div></footer>
+<div class="order-modal" id="orderModal"><div class="modal-content"><div class="modal-header"><h3>Custom Order</h3><button class="close-modal" id="closeModalBtn">&times;</button></div><div id="errorMsg" class="error-message"><i class="fas fa-exclamation-circle"></i> <span id="errorText"></span></div><div id="successMsg" class="success-message"><i class="fas fa-check-circle"></i> Request sent! We'll contact you soon.</div><form id="orderForm"><div class="form-group"><label>Your Name *</label><input type="text" id="name" placeholder="Full name" required></div><div class="form-group"><label>Mobile Number *</label><input type="tel" id="mobile" placeholder="+91 6356952788" required></div><div class="form-group"><label>Email Address *</label><div class="email-verify-row"><input type="email" id="email" placeholder="you@example.com" required><button type="button" id="sendOtpBtn" class="verify-email-btn"><i class="fas fa-envelope"></i> Verify Email</button></div><div id="otpContainer" style="display:none;" class="otp-section"><input type="text" id="otpCode" placeholder="Enter 6-digit OTP" maxlength="6"><button type="button" id="verifyOtpBtn" class="verify-otp-btn"><i class="fas fa-check"></i> Confirm OTP</button></div><div id="emailVerifiedBadge" style="display:none;" class="email-verified-badge"><i class="fas fa-check-circle"></i> Email verified ✓</div></div><div class="form-group"><label>Website Name *</label><input type="text" id="websiteName" placeholder="e.g., MyBusinessHub" required></div><div class="form-group"><div class="radio-group" id="typeRadioGroup"><label><input type="radio" name="websiteType" value="Statics" checked> Statics</label><label><input type="radio" name="websiteType" value="Dynamic"> Dynamic</label></div></div><div class="form-group"><label>Select Package *</label><select id="packageSelect" required><option value="">-- Select a package --</option></select></div><div class="form-group"><label>Budget range (INR) *</label><div class="budget-options"><div class="preset-buttons"><button type="button" class="preset-btn" data-value="2000">₹ 2,000</button><button type="button" class="preset-btn" data-value="5000">₹ 5,000</button><button type="button" class="preset-btn" data-value="10000">₹ 10,000</button></div><div class="manual-budget"><label>Custom:</label><input type="number" id="customBudget" placeholder="Enter amount" step="1000"></div><div class="budget-display"><i class="fas fa-chart-line"></i> Selected: <span id="selectedBudgetSpan">—</span></div></div></div><div class="form-group"><label>Pages Needed *</label><div class="checkbox-group" id="pageNeedsGroup"><label><input type="checkbox" value="Home"> Home</label><label><input type="checkbox" value="About"> About</label><label><input type="checkbox" value="Services"> Services</label><label><input type="checkbox" value="Products"> Products</label><label><input type="checkbox" value="Contact"> Contact</label><label><input type="checkbox" value="Gallery"> Gallery</label><label><input type="checkbox" value="Blog"> Blog</label><label><input type="checkbox" value="Other"> Other</label></div><input type="text" id="otherPages" placeholder="If 'Other', specify pages" style="margin-top:10px;"></div><div class="form-group"><label>Features Required *</label><div class="checkbox-group" id="featuresGroup"><label><input type="checkbox" value="Contact form"> Contact form</label><label><input type="checkbox" value="WhatsApp button"> WhatsApp button</label><label><input type="checkbox" value="Payment gateway"> Payment gateway</label><label><input type="checkbox" value="Admin panel"> Admin panel</label><label><input type="checkbox" value="Notification system"> Notification system</label><label><input type="checkbox" value="Login system"> Login system</label><label><input type="checkbox" value="Order system"> Order system</label></div></div><div class="form-group"><label>Additional Details</label><textarea id="description" rows="3" placeholder="Specific design, colors, functionality..."></textarea></div><button type="submit" class="submit-order-btn" id="submitBtn"><i class="fas fa-paper-plane"></i> Send Request</button><div class="reply-note"><i class="fas fa-clock"></i> We'll respond within 24 hours</div></form></div></div>
 <script>
   (function(){ emailjs.init("FfnVW2oPii98q0uHl"); })();
-  
-  const staticServices = [
-    { title: "Portfolio Website", desc: "Showcase personal skills, projects, and achievements for freelancers, students, and professionals.", icon: "fa-user", url: "https://p.prodeveloping.online/", hasPreview: true },
-    { title: "Business Website", desc: "Create strong online presence for companies with services, contact details, and brand information.", icon: "fa-briefcase", url: "", hasPreview: false },
-    { title: "Landing Page Design", desc: "High-conversion single-page website for marketing campaigns and product promotions.", icon: "fa-window-maximize", url: "", hasPreview: false },
-    { title: "Education Website", desc: "Perfect for schools, coaching classes, and institutes to display courses and updates.", icon: "fa-graduation-cap", url: "", hasPreview: false }
-  ];
-  
-  const dynamicServices = [
-    { title: "Ecommerce Website", desc: "Sell products online with cart system, payment gateway, and order management.", icon: "fa-cart-shopping", url: "https://prodeveloping.github.io/Demo1/", hasPreview: true },
-    { title: "Booking System", desc: "Allow customers to book appointments, rooms, or services online easily.", icon: "fa-calendar-check", url: "", hasPreview: false },
-    { title: "Admin Panel", desc: "Manage website data, users, products, and content from dashboard.", icon: "fa-gauge-high", url: "", hasPreview: false },
-    { title: "Hospital Management", desc: "Manage patients, doctors, appointments, and reports digitally.", icon: "fa-hospital", url: "", hasPreview: false }
-  ];
-  
+  const staticServices = [ { title: "Portfolio Website", desc: "Showcase personal skills, projects, and achievements for freelancers, students, and professionals.", icon: "fa-user", url: "https://p.prodeveloping.online/", hasPreview: true }, { title: "Business Website", desc: "Create strong online presence for companies with services, contact details, and brand information.", icon: "fa-briefcase", url: "", hasPreview: false }, { title: "Landing Page Design", desc: "High-conversion single-page website for marketing campaigns and product promotions.", icon: "fa-window-maximize", url: "", hasPreview: false }, { title: "Education Website", desc: "Perfect for schools, coaching classes, and institutes to display courses and updates.", icon: "fa-graduation-cap", url: "", hasPreview: false } ];
+  const dynamicServices = [ { title: "Ecommerce Website", desc: "Sell products online with cart system, payment gateway, and order management.", icon: "fa-cart-shopping", url: "https://prodeveloping.github.io/Demo1/", hasPreview: true }, { title: "Booking System", desc: "Allow customers to book appointments, rooms, or services online easily.", icon: "fa-calendar-check", url: "", hasPreview: false }, { title: "Admin Panel", desc: "Manage website data, users, products, and content from dashboard.", icon: "fa-gauge-high", url: "", hasPreview: false }, { title: "Hospital Management", desc: "Manage patients, doctors, appointments, and reports digitally.", icon: "fa-hospital", url: "", hasPreview: false } ];
   let currentCategory = 'static';
   const gridContainer = document.getElementById('toolsGridContainer');
   const staticBtn = document.getElementById('staticToggleBtn');
   const dynamicBtn = document.getElementById('dynamicToggleBtn');
-  
-  function renderTools() {
-    const services = currentCategory === 'static' ? staticServices : dynamicServices;
-    let html = '';
-    services.forEach(s => {
-      const buttonHtml = s.hasPreview 
-        ? `<a href="${s.url}" target="_blank" class="tool-btn"><i class="fas fa-eye"></i> Live Preview</a>`
-        : `<button class="tool-btn disabled" disabled><i class="fas fa-lock"></i> Preview Unavailable</button>`;
-      html += `<div class="tool-card"><div class="tool-icon"><i class="fas ${s.icon}"></i></div><div class="tool-title">${s.title}</div><div class="tool-description">${s.desc}</div>${buttonHtml}</div>`;
-    });
-    gridContainer.innerHTML = html;
-  }
-  
+  function renderTools() { const services = currentCategory === 'static' ? staticServices : dynamicServices; let html = ''; services.forEach(s => { const buttonHtml = s.hasPreview ? `<a href="${s.url}" target="_blank" class="tool-btn"><i class="fas fa-eye"></i> Live Preview</a>` : `<button class="tool-btn disabled" disabled><i class="fas fa-lock"></i> Preview Unavailable</button>`; html += `<div class="tool-card"><div class="tool-icon"><i class="fas ${s.icon}"></i></div><div class="tool-title">${s.title}</div><div class="tool-description">${s.desc}</div>${buttonHtml}</div>`; }); gridContainer.innerHTML = html; }
   staticBtn.addEventListener('click', () => { if(currentCategory !== 'static') { currentCategory = 'static'; staticBtn.classList.add('active'); dynamicBtn.classList.remove('active'); renderTools(); } });
   dynamicBtn.addEventListener('click', () => { if(currentCategory !== 'dynamic') { currentCategory = 'dynamic'; dynamicBtn.classList.add('active'); staticBtn.classList.remove('active'); renderTools(); } });
   renderTools();
-  
-  // Modal Logic
+  // Modal Logic + OTP & Mobile Validation
   const modal = document.getElementById('orderModal');
   const orderNavBtn = document.getElementById('orderNavBtn');
   const closeModalBtn = document.getElementById('closeModalBtn');
@@ -876,42 +690,84 @@
   const errorMsgDiv = document.getElementById('errorMsg');
   const errorTextSpan = document.getElementById('errorText');
   const successMsgDiv = document.getElementById('successMsg');
-  
   function hideMessages() { errorMsgDiv.classList.remove('show'); successMsgDiv.classList.remove('show'); }
   function showError(msg) { hideMessages(); errorTextSpan.innerText = msg; errorMsgDiv.classList.add('show'); setTimeout(() => errorMsgDiv.classList.remove('show'), 5000); }
   function showSuccess() { hideMessages(); successMsgDiv.classList.add('show'); setTimeout(() => successMsgDiv.classList.remove('show'), 4000); }
   function lockScroll() { document.body.classList.add('modal-open'); }
   function unlockScroll() { document.body.classList.remove('modal-open'); }
-  
   let currentBudget = null;
   function updateBudgetDisplay(val) { document.getElementById('selectedBudgetSpan').innerHTML = val ? `₹ ${parseInt(val).toLocaleString('en-IN')}` : '—'; currentBudget = val ? parseInt(val) : null; }
   document.querySelectorAll('.preset-btn').forEach(btn => btn.addEventListener('click', (e) => { let val = parseInt(btn.getAttribute('data-value')); document.getElementById('customBudget').value = val; updateBudgetDisplay(val); document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }));
   document.getElementById('customBudget').addEventListener('input', function() { let val = this.value.trim(); updateBudgetDisplay(val || null); if(val) document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active')); });
-  
   const packageSelect = document.getElementById('packageSelect');
-  function updatePackageOptions() { 
-    const type = document.querySelector('input[name="websiteType"]:checked').value; 
-    const items = type === 'Statics' ? staticServices : dynamicServices; 
-    packageSelect.innerHTML = '<option value="">-- Select a package --</option>'; 
-    items.forEach(s => { let opt = document.createElement('option'); opt.value = s.url || s.title; opt.textContent = s.title; packageSelect.appendChild(opt); }); 
-    if(packageSelect.options.length > 1) packageSelect.selectedIndex = 1; 
-  }
+  function updatePackageOptions() { const type = document.querySelector('input[name="websiteType"]:checked').value; const items = type === 'Statics' ? staticServices : dynamicServices; packageSelect.innerHTML = '<option value="">-- Select a package --</option>'; items.forEach(s => { let opt = document.createElement('option'); opt.value = s.url || s.title; opt.textContent = s.title; packageSelect.appendChild(opt); }); if(packageSelect.options.length > 1) packageSelect.selectedIndex = 1; }
   document.querySelectorAll('input[name="websiteType"]').forEach(r => r.addEventListener('change', updatePackageOptions));
   updatePackageOptions();
-  
-  function resetFormFields() { orderForm.reset(); document.querySelectorAll('#pageNeedsGroup input').forEach(cb => cb.checked = false); document.querySelectorAll('#featuresGroup input').forEach(cb => cb.checked = false); document.querySelector('input[value="Statics"]').checked = true; updatePackageOptions(); document.getElementById('customBudget').value = ''; updateBudgetDisplay(null); document.getElementById('otherPages').value = ''; document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active')); }
-  function openModal() { hideMessages(); modal.classList.add('active'); lockScroll(); }
-  function closeModal() { modal.classList.remove('active'); unlockScroll(); resetFormFields(); }
+  function resetFormFields() { orderForm.reset(); document.querySelectorAll('#pageNeedsGroup input').forEach(cb => cb.checked = false); document.querySelectorAll('#featuresGroup input').forEach(cb => cb.checked = false); document.querySelector('input[value="Statics"]').checked = true; updatePackageOptions(); document.getElementById('customBudget').value = ''; updateBudgetDisplay(null); document.getElementById('otherPages').value = ''; document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active')); document.getElementById('otpContainer').style.display = 'none'; document.getElementById('emailVerifiedBadge').style.display = 'none'; window.storedOtp = null; window.emailVerified = false; document.getElementById('sendOtpBtn').disabled = false; document.getElementById('sendOtpBtn').innerHTML = '<i class="fas fa-envelope"></i> Verify Email'; }
+  function openModal() { hideMessages(); modal.classList.add('active'); lockScroll(); resetOtpState(); }
+  function closeModal() { modal.classList.remove('active'); unlockScroll(); resetFormFields(); resetOtpState(); }
+  function resetOtpState() { window.storedOtp = null; window.emailVerified = false; document.getElementById('otpContainer').style.display = 'none'; document.getElementById('emailVerifiedBadge').style.display = 'none'; document.getElementById('sendOtpBtn').disabled = false; document.getElementById('sendOtpBtn').innerHTML = '<i class="fas fa-envelope"></i> Verify Email'; document.getElementById('otpCode').value = ''; }
   orderNavBtn.addEventListener('click', openModal);
   closeModalBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
   document.querySelector('.modal-content').addEventListener('click', (e) => e.stopPropagation());
-  
+  // OTP Logic
+  const sendOtpBtn = document.getElementById('sendOtpBtn');
+  const otpContainer = document.getElementById('otpContainer');
+  const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+  const otpCodeInput = document.getElementById('otpCode');
+  const emailInput = document.getElementById('email');
+  const emailVerifiedBadge = document.getElementById('emailVerifiedBadge');
+  let generatedOtp = null;
+  let emailVerified = false;
+  sendOtpBtn.addEventListener('click', async () => {
+    const email = emailInput.value.trim();
+    if(!email) { showError("Please enter email address first."); return; }
+    if(!/^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/.test(email)) { showError("Please enter a valid email address."); return; }
+    generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+    window.storedOtp = generatedOtp;
+    try {
+      await emailjs.send("service_snv7hbg", "template_5z6r2qs", { to_email: email, passcode: generatedOtp });
+      showSuccessMessageTemporary("OTP sent to your email!");
+      otpContainer.style.display = 'flex';
+      sendOtpBtn.disabled = true;
+      sendOtpBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Sent';
+      setTimeout(() => { if(sendOtpBtn) { sendOtpBtn.disabled = false; sendOtpBtn.innerHTML = '<i class="fas fa-envelope"></i> Resend'; } }, 30000);
+    } catch(err) { showError("Failed to send OTP. Please try again."); console.error(err); }
+  });
+  function showSuccessMessageTemporary(msg) { const original = successMsgDiv.innerHTML; successMsgDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`; successMsgDiv.classList.add('show'); setTimeout(() => { if(successMsgDiv) successMsgDiv.classList.remove('show'); successMsgDiv.innerHTML = original; }, 3000); }
+  verifyOtpBtn.addEventListener('click', () => {
+    const enteredOtp = otpCodeInput.value.trim();
+    if(!enteredOtp) { showError("Please enter the OTP."); return; }
+    if(window.storedOtp && enteredOtp === window.storedOtp) {
+      emailVerified = true;
+      window.emailVerified = true;
+      emailVerifiedBadge.style.display = 'inline-flex';
+      otpContainer.style.display = 'none';
+      sendOtpBtn.disabled = true;
+      sendOtpBtn.innerHTML = '<i class="fas fa-check"></i> Verified';
+      showSuccessMessageTemporary("Email verified successfully!");
+    } else { showError("Invalid OTP. Please try again."); }
+  });
+  // Mobile validation: digits only, exactly 10 digits, block others
+  const mobileInput = document.getElementById('mobile');
+  mobileInput.addEventListener('input', function(e) {
+    let val = this.value.replace(/\D/g, '');
+    if(val.length > 10) val = val.slice(0,10);
+    this.value = val;
+  });
+  mobileInput.addEventListener('blur', function() {
+    let val = this.value;
+    if(val && !/^[0-9]{10}$/.test(val)) { showError("Enter valid 10-digit mobile number"); this.value = ''; }
+  });
+  // Final submit with OTP & Mobile check
   orderForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const name = document.getElementById('name').value.trim();
     const mobile = document.getElementById('mobile').value.trim();
-    const email = document.getElementById('email').value.trim();
+    if(!/^[0-9]{10}$/.test(mobile)) { showError("Enter valid 10-digit mobile number"); return; }
+    if(!window.emailVerified) { showError("Please verify your email first"); return; }
+    const name = document.getElementById('name').value.trim();
+    const email = emailInput.value.trim();
     const websiteName = document.getElementById('websiteName').value.trim();
     const websiteType = document.querySelector('input[name="websiteType"]:checked').value;
     const selectedPackageText = packageSelect.options[packageSelect.selectedIndex]?.text || '';
@@ -926,13 +782,10 @@
     const features = Array.from(document.querySelectorAll('#featuresGroup input:checked')).map(cb => cb.value).join(', ') || 'None';
     const templateParams = { from_name: name, user_email: email, user_mobile: mobile, website_name: websiteName, website_type: websiteType, selected_package: selectedPackageText, budget_range: `₹ ${currentBudget.toLocaleString('en-IN')}`, pages_needed: pagesNeeded, features_required: features, description: document.getElementById('description').value || 'No additional details' };
     submitBtn.disabled = true; submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Sending...';
-    try { await emailjs.send("service_snv7hbg", "template_x7cfn8f", templateParams); showSuccess(); resetFormFields(); setTimeout(() => closeModal(), 2000); } catch(err) { showError('Failed to send. Please try again.'); } finally { submitBtn.disabled = false; submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Request'; }
+    try { await emailjs.send("service_snv7hbg", "template_x7cfn8f", templateParams); showSuccess(); resetFormFields(); resetOtpState(); setTimeout(() => closeModal(), 2000); } catch(err) { showError('Failed to send. Please try again.'); } finally { submitBtn.disabled = false; submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Request'; }
   });
-  
   window.addEventListener('scroll', () => { const nav = document.getElementById('navbar'); if(window.scrollY > 20) nav.classList.add('scrolled'); else nav.classList.remove('scrolled'); });
   window.addEventListener('load', () => { const loader = document.getElementById('loadingOverlay'); if(loader) { loader.classList.add('hidden'); setTimeout(() => loader.remove(), 400); } });
-  
-  // Custom cursor effect (desktop)
   if(window.innerWidth >= 1024) {
     const cursorDot = document.createElement('div'); cursorDot.classList.add('cursor-dot'); document.body.appendChild(cursorDot);
     const cursorOutline = document.createElement('div'); cursorOutline.classList.add('cursor-outline'); document.body.appendChild(cursorOutline);
