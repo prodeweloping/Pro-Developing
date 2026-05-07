@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <link rel="icon" type="image/png" href="Pro.png">
-    <title>Contact Us | Pro Developing | Get in Touch</title>
+    <title>Contact Us | Pro Developing</title>
     <meta name="description" content="Contact Pro Developing for professional web development, custom tools, and digital solutions. Reach us via phone, email, or send a message directly.">
     <link rel="canonical" href="https://www.prodeveloping.online/contact.html">
     
@@ -140,30 +140,13 @@
         .menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(3px); z-index: 1999; opacity: 0; visibility: hidden; transition: 0.3s; }
         .menu-overlay.active { opacity: 1; visibility: visible; }
         
-        /* ===== FOOTER EXACT SAME AS INDEX ===== */
-        footer { background: #0b1120; color: white; border-radius: 60px 60px 0 0; padding: 70px 0 30px; margin-top: 40px; }
-        .footer-content { display: grid; grid-template-columns: 1.5fr 1fr 1.5fr; gap: 50px; margin-bottom: 50px; text-align: left; }
-        .footer-logo { font-size: 2rem; font-weight: 800; color: white; text-decoration: none; display: inline-block; margin-bottom: 16px; }
-        .footer-logo span { color: var(--primary); }
-        .ceo-highlight { font-weight: 700; margin: 12px 0 8px; background: linear-gradient(145deg, #fc8014, #7209b7); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; font-size: 1.1rem; border-bottom: 2px solid #fc8014; padding-bottom: 4px; }
-        .social-icons { display: flex; gap: 16px; margin-top: 20px; justify-content: flex-start; }
-        .social-icon { width: 44px; height: 44px; background: rgba(255,255,255,0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); }
-        .social-icon:hover { background: var(--primary); transform: translateY(-5px); }
-        .footer-links ul { list-style: none; margin-top: 16px; padding: 0; }
-        .footer-links li { margin-bottom: 14px; }
-        .footer-links a { color: #cbd5e1; text-decoration: none; transition: 0.2s; font-size: 1rem; display: inline-flex; align-items: center; gap: 8px; }
-        .footer-links a i { font-size: 0.8rem; color: var(--primary); }
-        .footer-links a:hover { color: white; transform: translateX(6px); }
-        .footer-newsletter h3, .footer-links h3 { margin-bottom: 20px; font-size: 1.4rem; }
-        .newsletter-form { display: flex; align-items: center; background: white; border-radius: 60px; padding: 4px; width: 100%; max-width: 400px; }
-        .newsletter-input { flex: 1; border: none; padding: 12px 18px; font-size: 1rem; border-radius: 60px; outline: none; background: transparent; min-width: 0; }
-        .newsletter-btn { background: linear-gradient(105deg, #fc8014, #7209b7); color: white; border: none; padding: 10px 22px; border-radius: 60px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: 0.2s; white-space: nowrap; }
-        .newsletter-btn:hover { background: linear-gradient(105deg, #2e4bd0, #9d4edd); transform: scale(1.02); }
-        .newsletter-btn.loading { pointer-events: none; opacity: 0.8; }
-        .newsletter-btn .spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.6s linear infinite; margin-right: 6px; vertical-align: middle; }
-        .newsletter-btn.loading .btn-text { display: none; }
-        .newsletter-btn.loading .spinner { display: inline-block; }
-        .copyright { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; padding-top: 30px; border-top: 1px solid #1e293b; color: #9aa9bb; text-align: left; }
+        /* ===== SIMPLE FOOTER - CHANGED ONLY ===== */
+        footer { background: #0b1120; color: #e2e8f0; padding: 48px 0 32px; margin-top: 40px; border-radius: 48px 48px 0 0; }
+        .footer-simple { text-align: center; }
+        .footer-logo-simple { font-size: 2rem; font-weight: 800; color: white; text-decoration: none; letter-spacing: -0.02em; }
+        .footer-logo-simple span { color: var(--primary); }
+        .footer-copyright { margin-top: 28px; font-size: 0.9rem; color: #9aa9bb; border-top: 1px solid #1e293b; padding-top: 24px; display: inline-block; width: 100%; }
+        
         .floating-action-btn { position: fixed; right: 25px; bottom: 25px; width: 58px; height: 58px; border-radius: 50%; background: #25D366; color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); cursor: pointer; z-index: 999; transition: 0.3s ease; text-decoration: none; }
         .floating-action-btn:hover { transform: translateY(-6px); background: #128C7E; }
         
@@ -177,9 +160,6 @@
             .container { padding: 0 18px; }
             section { padding: 60px 0; }
             .contact-container { grid-template-columns: 1fr; padding: 30px; gap: 30px; border-radius: 48px; }
-            .footer-content { grid-template-columns: 1fr; gap: 40px; text-align: left; }
-            .social-icons { justify-content: flex-start; }
-            .newsletter-form { max-width: 100%; }
             footer { border-radius: 40px 40px 0 0; }
         }
         @media (max-width: 480px) {
@@ -191,13 +171,12 @@
             .contact-form { padding: 24px; border-radius: 32px; }
             .form-control, .service-select { padding: 14px 16px; }
             .btn { width: 100%; justify-content: center; padding: 12px 20px; white-space: normal; }
-            .footer-logo { font-size: 1.5rem; }
             .floating-action-btn { width: 48px; height: 48px; font-size: 24px; right: 16px; bottom: 16px; }
             nav { padding: 8px 18px; }
             .logo { font-size: 1.5rem; }
             .mobile-menu-btn { width: 44px; height: 44px; font-size: 1.5rem; }
-            .copyright { flex-direction: column; gap: 12px; align-items: flex-start; }
             h2::after { width: 70px; }
+            .footer-logo-simple { font-size: 1.5rem; }
         }
         @media (max-width: 360px) {
             .container { padding: 0 12px; }
@@ -228,10 +207,10 @@
         </div>
         <ul class="side-nav-links">
             <li><a href="index.html#home"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="services.html"><i class="fas fa-cogs"></i> Services</a></li>
-            <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
-            <li><a href="office.html"><i class="fas fa-building"></i> Office</a></li>
-            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="#services"><i class="fas fa-cogs"></i> Services</a></li>
+            <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="#office"><i class="fas fa-building"></i> Office</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
     </div>
     <div class="menu-overlay" id="menuOverlay"></div>
@@ -295,41 +274,12 @@
         </div>
     </section>
 
-    <!-- FOOTER - EXACT SAME AS INDEX (including newsletter, links, social) -->
+    <!-- SIMPLE FOOTER - CHANGED ONLY -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div>
-                    <a href="index.html" class="footer-logo">Pro <span>Developing</span></a>
-                    <p>Web solutions for modern business.</p>
-                    <a href="https://www.instagram.com/m_gajjar_09/" target="_blank" rel="noopener" class="ceo-link"><p class="ceo-highlight"><i class="fas fa-crown"></i> CEO & Founder :- MP Suthar</p></a>
-                    <div class="social-icons">
-                        <a href="https://www.instagram.com/prodeweloping.online" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="https://wa.me/916356952788" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html#home"><i class="fas fa-chevron-right"></i> Home</a></li>
-                        <li><a href="services.html"><i class="fas fa-chevron-right"></i> Services</a></li>
-                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
-                        <li><a href="office.html"><i class="fas fa-chevron-right"></i> Office</a></li>
-                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-newsletter">
-                    <h3>Newsletter</h3>
-                    <p>Subscribe for updates & offers.</p>
-                    <form class="newsletter-form" id="newsletterForm">
-                        <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Your email" required>
-                        <button type="submit" class="newsletter-btn" id="newsletterBtn"><span class="btn-text">Subscribe</span><span class="spinner"></span></button>
-                    </form>
-                    <p id="newsletterMsg" style="margin-top:12px; color:#a5f3fc;"></p>
-                </div>
-            </div>
-            <div class="copyright">
-                <span>&copy; 2026 Pro Developing. All rights reserved.</span>
+            <div class="footer-simple">
+                <a href="index.html" class="footer-logo-simple">Pro <span>Developing</span></a>
+                <div class="footer-copyright">© 2026 ProDeveloping</div>
             </div>
         </div>
     </footer>
@@ -457,43 +407,6 @@
             .then(res => res.json()).then(data => { if(data.status === "success") { alert("✅ Message sent!"); contactForm.reset(); updateSubCategory(); } else { alert("❌ Error: " + data.message); } })
             .catch(() => alert("❌ Network error")).finally(() => contactBtn.classList.remove('loading'));
         });
-        
-        // ========== NEWSLETTER SUBSCRIPTION (SAME AS INDEX: EMAILJS + GOOGLE SHEETS) ==========
-        const newsletterForm = document.getElementById("newsletterForm");
-        const newsletterBtn = document.getElementById("newsletterBtn");
-        const newsletterMsg = document.getElementById("newsletterMsg");
-        const EMAILJS_SERVICE_ID = "service_sw42q96";
-        const EMAILJS_TEMPLATE_ID = "template_5547llk";
-        
-        if(newsletterForm) {
-            newsletterForm.addEventListener("submit", function(e) {
-                e.preventDefault();
-                if (newsletterBtn.classList.contains("loading")) return;
-                const email = document.getElementById("newsletterEmail").value.trim();
-                if (!email.includes('@')) { newsletterMsg.innerHTML = "❌ Valid email required"; return; }
-                newsletterBtn.classList.add("loading");
-                newsletterMsg.innerHTML = "";
-                const sheetData = { name: "Newsletter", email: email, phone: "", service: "newsletter", message: "Newsletter subscription" };
-                fetch(GS_URL, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(sheetData) })
-                .then(res => res.json())
-                .then(data => { 
-                    if (data.status === "success") { 
-                        return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, { email: email }); 
-                    } else { 
-                        throw new Error(data.message || "Google Sheets save failed"); 
-                    } 
-                })
-                .then(() => { 
-                    newsletterMsg.innerHTML = "✅ Subscribed & email sent!"; 
-                    newsletterForm.reset(); 
-                })
-                .catch(error => { 
-                    console.error(error); 
-                    newsletterMsg.innerHTML = "❌ Subscription failed. Please try again."; 
-                })
-                .finally(() => newsletterBtn.classList.remove("loading"));
-            });
-        }
         
         // ========== FLOATING BUTTON: SCROLL TO TOP WHEN SCROLLED >400px, ELSE WHATSAPP ==========
         const floatingBtn = document.getElementById("floatingActionBtn");
