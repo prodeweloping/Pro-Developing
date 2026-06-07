@@ -2,27 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Pro Developing | Premium IT Services</title>
     <meta name="description" content="Pro Developing provides premium Website Development, App Development, Digital Marketing & IT Support in Gujarat.">
-    <meta name="keywords" content="Pro Developing, IT Services, Website Development, App Development, Digital Marketing, WhatsApp Automation, Gujarat IT Services">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.prodeveloping.online/">
-    
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Pro Developing | Premium IT Services">
-    <meta property="og:description" content="Premium Website Development, App Development & Digital Marketing Services in Gujarat.">
-    <meta property="og:image" content="https://i.ibb.co/d033FzF4/Pro.png">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://i.ibb.co/d033FzF4/Pro.png">
-    
-    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
         * {
             margin: 0;
@@ -57,6 +41,7 @@
             color: var(--text-primary);
             overflow-x: hidden;
             line-height: 1.5;
+            width: 100%;
         }
 
         .container {
@@ -72,8 +57,8 @@
         }
 
         @media (max-width: 768px) {
-            .container { padding: 0 1.25rem; }
-            section { padding: 3rem 0; }
+            .container { padding: 0 1rem; }
+            section { padding: 2.5rem 0; }
         }
 
         /* Section Headers */
@@ -92,7 +77,7 @@
         }
 
         .section-title {
-            font-size: clamp(1.6rem, 5vw, 2.5rem);
+            font-size: clamp(1.4rem, 5vw, 2.5rem);
             font-weight: 800;
             color: var(--text-primary);
             margin-bottom: 0.5rem;
@@ -135,7 +120,7 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 800;
             background: var(--blue-gradient);
             -webkit-background-clip: text;
@@ -146,7 +131,7 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             list-style: none;
         }
 
@@ -155,7 +140,7 @@
             color: var(--text-secondary);
             font-weight: 500;
             transition: var(--transition);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             position: relative;
             padding: 0.5rem 0;
         }
@@ -184,44 +169,41 @@
         .nav-cta {
             background: var(--blue-gradient);
             color: white;
-            padding: 0.6rem 1.5rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
-            font-size: 0.85rem;
+            gap: 0.5rem;
+            font-size: 0.8rem;
         }
 
         .nav-cta:hover {
             transform: translateY(-2px);
-            gap: 0.8rem;
+            gap: 0.7rem;
         }
 
         .mobile-menu-btn {
             background: var(--blue);
             border: none;
             color: white;
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             border-radius: 8px;
             cursor: pointer;
             display: none;
             align-items: center;
             justify-content: center;
-        }
-
-        .mobile-menu-btn:hover {
-            background: var(--blue-dark);
-            transform: rotate(90deg);
+            font-size: 1.2rem;
         }
 
         @media (max-width: 768px) {
+            header { padding: 0.7rem 1rem; }
             .nav-links, .nav-cta { display: none; }
             .mobile-menu-btn { display: flex; }
-            header { padding: 0.8rem 1.2rem; }
+            .logo { font-size: 1.2rem; }
         }
 
         /* Side Menu */
@@ -234,7 +216,7 @@
             background: var(--white);
             z-index: 2000;
             transition: left 0.3s ease;
-            padding: 2rem 1.5rem;
+            padding: 2rem 1.2rem;
             box-shadow: var(--shadow-xl);
         }
 
@@ -244,13 +226,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid var(--border);
         }
 
         .side-menu-logo {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 800;
             background: var(--blue-gradient);
             -webkit-background-clip: text;
@@ -262,24 +244,23 @@
         .close-menu {
             background: var(--white-muted);
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 8px;
             cursor: pointer;
-            transition: var(--transition);
+            font-size: 1rem;
         }
 
         .close-menu:hover {
             background: var(--blue);
             color: white;
-            transform: rotate(90deg);
         }
 
         .side-nav-links {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.8rem;
         }
 
         .side-nav-links li a {
@@ -288,16 +269,17 @@
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 0.8rem 1rem;
+            gap: 0.8rem;
+            padding: 0.7rem 0.8rem;
             border-radius: 8px;
             transition: var(--transition);
+            font-size: 0.9rem;
         }
 
         .side-nav-links li a:hover {
             background: var(--blue-soft);
             color: var(--blue);
-            transform: translateX(8px);
+            transform: translateX(5px);
         }
 
         .menu-overlay {
@@ -346,14 +328,14 @@
             padding: 0.4rem 1rem;
             background: var(--blue-soft);
             border-radius: 40px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--blue);
             font-weight: 600;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
         }
 
         .hero h1 {
-            font-size: clamp(2rem, 6vw, 4rem);
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
             font-weight: 900;
             line-height: 1.2;
             margin-bottom: 1rem;
@@ -361,36 +343,36 @@
         }
 
         .hero-subtitle {
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-size: clamp(0.85rem, 2vw, 1rem);
             color: var(--text-secondary);
             max-width: 600px;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 1.2rem;
         }
 
         .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin: 1.5rem 0 2rem;
+            gap: 1rem;
+            margin: 1.2rem 0 1.5rem;
             flex-wrap: wrap;
         }
 
         .hero-stat {
             text-align: center;
-            padding: 0.4rem 1rem;
+            padding: 0.4rem 0.8rem;
             background: rgba(255,255,255,0.7);
             backdrop-filter: blur(4px);
             border-radius: 10px;
         }
 
         .hero-stat .number {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 800;
             color: var(--blue);
         }
 
         .hero-stat .label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: var(--text-muted);
         }
 
@@ -398,18 +380,18 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 0.8rem;
+            gap: 0.7rem;
         }
 
         .btn-hero {
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
-            padding: 0.7rem 1.5rem;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
             font-weight: 600;
             border-radius: 8px;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: var(--transition);
         }
 
@@ -419,8 +401,8 @@
         }
 
         .btn-hero-primary:hover {
-            transform: translateY(-3px);
-            gap: 0.8rem;
+            transform: translateY(-2px);
+            gap: 0.7rem;
         }
 
         .btn-hero-outline {
@@ -437,13 +419,13 @@
 
         .scroll-hint {
             position: absolute;
-            bottom: 1.5rem;
+            bottom: 1.2rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.3rem;
             cursor: pointer;
             animation: bounce 2s infinite;
         }
@@ -454,21 +436,21 @@
         }
 
         .mouse {
-            width: 22px;
-            height: 36px;
+            width: 20px;
+            height: 32px;
             border: 2px solid var(--text-muted);
-            border-radius: 16px;
+            border-radius: 14px;
             position: relative;
         }
 
         .mouse::before {
             content: '';
             position: absolute;
-            top: 6px;
+            top: 5px;
             left: 50%;
             transform: translateX(-50%);
             width: 3px;
-            height: 6px;
+            height: 5px;
             background: var(--blue);
             border-radius: 2px;
             animation: scrollWheel 1.5s infinite;
@@ -476,15 +458,15 @@
 
         @keyframes scrollWheel {
             0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            80% { opacity: 0.3; transform: translateX(-50%) translateY(10px); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
+            80% { opacity: 0.3; transform: translateX(-50%) translateY(8px); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
         }
 
         /* Services Section */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
         }
 
         .service-card:nth-child(1) { --service-color: #2563eb; --service-gradient: linear-gradient(135deg, #2563eb, #3b82f6); }
@@ -497,7 +479,7 @@
         .service-card {
             background: var(--white);
             border-radius: 20px;
-            padding: 1.5rem;
+            padding: 1.2rem;
             transition: var(--transition-slow);
             border: 1px solid var(--border);
             text-decoration: none;
@@ -525,16 +507,16 @@
 
         .service-card:hover::before { transform: scaleX(1); }
         .service-card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-xl);
             border-color: transparent;
         }
 
         .card-number {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.8rem;
+            top: 0.8rem;
+            right: 0.8rem;
+            font-size: 1.5rem;
             font-weight: 800;
             color: var(--service-color);
             opacity: 0.3;
@@ -542,63 +524,70 @@
         }
 
         .service-icon {
-            width: 55px;
-            height: 55px;
-            border-radius: 14px;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
             background: var(--service-gradient);
             color: white;
         }
 
         .service-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.4rem;
             font-weight: 700;
         }
 
         .service-card p {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
         }
 
         .benefits-list {
             list-style: none;
-            margin-top: 0.5rem;
-            padding-top: 0.5rem;
+            margin-top: 0.4rem;
+            padding-top: 0.4rem;
             border-top: 1px solid var(--border);
         }
 
         .benefits-list li {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.25rem;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.3rem;
         }
 
         .benefits-list li i {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             color: var(--service-color);
         }
 
-        /* Trust Section - WITH ARROWS */
+        /* Trust Section */
         .trust-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 1rem;
             margin-bottom: 2rem;
         }
 
+        @media (max-width: 640px) {
+            .trust-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+        }
+
         .trust-stats-card {
             background: var(--white);
-            border-radius: 20px;
-            padding: 1.2rem;
+            border-radius: 16px;
+            padding: 1rem;
             text-align: center;
             transition: var(--transition-slow);
             border: 1px solid var(--border);
@@ -612,12 +601,12 @@
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             position: absolute;
-            bottom: 1rem;
-            right: 1rem;
-            font-size: 0.8rem;
+            bottom: 0.8rem;
+            right: 0.8rem;
+            font-size: 0.7rem;
             color: var(--blue);
             opacity: 0;
-            transform: translateX(-10px);
+            transform: translateX(-8px);
             transition: all 0.3s ease;
         }
 
@@ -627,25 +616,25 @@
         }
 
         .trust-stats-card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
             border-color: var(--blue);
         }
 
         .trust-stats-card i {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.4rem;
             color: var(--blue);
         }
 
         .trust-stats-card .stat-number {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 800;
             color: var(--blue);
         }
 
         .trust-stats-card .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-secondary);
         }
 
@@ -658,15 +647,14 @@
 
         .trust-feature {
             background: var(--white);
-            border-radius: 16px;
-            padding: 1rem;
+            border-radius: 14px;
+            padding: 0.9rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border: 1px solid var(--border);
             transition: var(--transition);
             cursor: pointer;
-            position: relative;
         }
 
         .trust-feature:hover {
@@ -678,46 +666,40 @@
         .feature-content {
             display: flex;
             align-items: flex-start;
-            gap: 0.8rem;
+            gap: 0.7rem;
             flex: 1;
         }
 
         .feature-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 0.9rem;
             background: var(--blue);
             color: white;
             flex-shrink: 0;
-            transition: var(--transition);
-        }
-
-        .trust-feature:hover .feature-icon {
-            transform: scale(1.05) rotate(5deg);
         }
 
         .feature-text h4 {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.15rem;
         }
 
         .feature-text p {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
         }
 
         .feature-arrow {
             opacity: 0;
-            transform: translateX(-10px);
+            transform: translateX(-8px);
             transition: all 0.3s ease;
             color: var(--blue);
-            font-size: 0.8rem;
-            margin-left: 0.5rem;
+            font-size: 0.7rem;
         }
 
         .trust-feature:hover .feature-arrow {
@@ -725,10 +707,11 @@
             transform: translateX(0);
         }
 
-        /* Testimonial Cards */
+        /* Testimonial Slider */
         .testimonial-slider {
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
             overflow: hidden;
             border-radius: 24px;
         }
@@ -736,6 +719,7 @@
         .slider-container {
             display: flex;
             transition: transform 0.5s ease-in-out;
+            will-change: transform;
         }
 
         .feedback-card {
@@ -744,15 +728,8 @@
             border-radius: 24px;
             padding: 2rem;
             border: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
             text-align: center;
-        }
-
-        .feedback-card:hover {
-            transform: scale(1.01);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--blue-soft);
+            box-sizing: border-box;
         }
 
         .stars {
@@ -868,6 +845,14 @@
             box-shadow: var(--shadow-md);
         }
 
+        @media (max-width: 768px) {
+            .feedback-card { padding: 1.2rem; }
+            .feedback-text { font-size: 0.8rem; padding: 0 0.5rem; }
+            .feedback-text::before, .feedback-text::after { font-size: 2rem; }
+            .avatar { width: 45px; height: 45px; font-size: 1rem; }
+            .author-info strong { font-size: 0.9rem; }
+        }
+
         /* FAQ */
         .faq-grid {
             max-width: 700px;
@@ -876,25 +861,24 @@
 
         .faq-item {
             background: var(--white);
-            border-radius: 14px;
-            margin-bottom: 0.8rem;
+            border-radius: 12px;
+            margin-bottom: 0.7rem;
             border: 1px solid var(--border);
             overflow: hidden;
         }
 
         .faq-question {
-            padding: 0.9rem 1.2rem;
+            padding: 0.8rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .faq-question:hover {
             background: var(--blue-soft);
-            color: var(--blue);
         }
 
         .faq-question i {
@@ -907,102 +891,96 @@
         }
 
         .faq-answer {
-            padding: 0 1.2rem;
+            padding: 0 1rem;
             max-height: 0;
             overflow: hidden;
             transition: all 0.3s;
             color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         .faq-item.active .faq-answer {
-            padding: 0 1.2rem 0.8rem;
+            padding: 0 1rem 0.7rem;
             max-height: 150px;
         }
 
         /* About */
         .about-card {
             background: var(--white);
-            border-radius: 20px;
-            padding: 1.8rem;
+            border-radius: 18px;
+            padding: 1.5rem;
             border: 1px solid var(--border);
         }
 
         .mission-items {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin: 1.5rem 0;
+            gap: 0.8rem;
+            margin: 1.2rem 0;
         }
 
         .mission-item {
             flex: 1;
             background: var(--white-muted);
-            padding: 1rem;
-            border-radius: 14px;
+            padding: 0.8rem;
+            border-radius: 12px;
             text-align: center;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .mission-item:hover {
-            transform: translateY(-3px);
-            background: var(--blue-soft);
         }
 
         .mission-item i {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            margin-bottom: 0.4rem;
             display: block;
             color: var(--blue);
+        }
+
+        .mission-item h3 {
+            font-size: 0.9rem;
         }
 
         /* Contact Section */
         .contact-wrapper {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 1.2rem;
         }
 
         .contact-info-card {
             flex: 1;
-            min-width: 260px;
+            min-width: 250px;
             background: var(--blue-gradient);
-            border-radius: 24px;
-            padding: 1.5rem;
+            border-radius: 20px;
+            padding: 1.2rem;
             color: white;
-            position: relative;
-            overflow: hidden;
         }
 
         .info-header {
             text-align: center;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
         }
 
         .info-header i {
-            font-size: 2rem;
+            font-size: 1.8rem;
             background: rgba(255,255,255,0.2);
-            padding: 0.8rem;
-            border-radius: 16px;
-            margin-bottom: 0.8rem;
+            padding: 0.6rem;
+            border-radius: 14px;
+            margin-bottom: 0.6rem;
             display: inline-block;
         }
 
         .info-header h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.2rem;
+            font-size: 1.2rem;
         }
 
         .info-header p {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             opacity: 0.9;
         }
 
         .info-details {
             display: flex;
             flex-direction: column;
-            gap: 0.8rem;
+            gap: 0.7rem;
         }
 
         .info-item {
@@ -1010,8 +988,8 @@
             align-items: center;
             justify-content: space-between;
             background: rgba(255,255,255,0.1);
-            padding: 0.8rem;
-            border-radius: 12px;
+            padding: 0.7rem;
+            border-radius: 10px;
             text-decoration: none;
             color: white;
             transition: var(--transition);
@@ -1020,35 +998,35 @@
         .info-item-left {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.7rem;
         }
 
         .info-icon {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: rgba(255,255,255,0.15);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .info-content span {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             opacity: 0.8;
             display: block;
         }
 
         .info-content strong {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
 
         .arrow-icon {
             opacity: 0;
             transform: translateX(-8px);
             transition: all 0.3s ease;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
 
         .info-item:hover .arrow-icon {
@@ -1059,16 +1037,16 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 0.8rem;
-            margin-top: 1.2rem;
+            gap: 0.6rem;
+            margin-top: 1rem;
             flex-wrap: wrap;
         }
 
         .social-link {
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             background: rgba(255,255,255,0.1);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1077,18 +1055,12 @@
             text-decoration: none;
         }
 
-        .social-link:hover {
-            background: white;
-            color: var(--blue);
-            transform: translateY(-3px);
-        }
-
         .contact-form-card {
             flex: 1.5;
-            min-width: 260px;
+            min-width: 250px;
             background: var(--white);
-            border-radius: 24px;
-            padding: 1.5rem;
+            border-radius: 20px;
+            padding: 1.2rem;
             border: 1px solid var(--border);
         }
 
@@ -1098,26 +1070,25 @@
         }
 
         .form-header i {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--blue);
             margin-bottom: 0.3rem;
             display: inline-block;
         }
 
         .form-header h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.2rem;
+            font-size: 1.1rem;
         }
 
         .form-header p {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
         }
 
         .modern-form {
             display: flex;
             flex-direction: column;
-            gap: 0.8rem;
+            gap: 0.7rem;
         }
 
         .input-group {
@@ -1128,68 +1099,56 @@
 
         .input-icon {
             position: absolute;
-            left: 0.8rem;
+            left: 0.7rem;
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         .input-group input,
         .input-group select,
         .input-group textarea {
             width: 100%;
-            padding: 0.7rem 0.7rem 0.7rem 2.5rem;
+            padding: 0.6rem 0.6rem 0.6rem 2.2rem;
             background: var(--white-muted);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 8px;
             font-family: inherit;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             transition: var(--transition);
         }
 
         .input-group textarea {
             resize: vertical;
-            min-height: 80px;
+            min-height: 70px;
         }
 
         .submit-btn {
             background: var(--blue-gradient);
             color: white;
-            padding: 0.8rem;
+            padding: 0.7rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
+            gap: 0.4rem;
+            font-size: 0.8rem;
             transition: var(--transition);
         }
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            gap: 0.7rem;
+            gap: 0.6rem;
         }
 
         .form-message {
-            margin-bottom: 1rem;
-            padding: 0.7rem;
-            border-radius: 10px;
-            font-size: 0.75rem;
+            margin-bottom: 0.8rem;
+            padding: 0.6rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
             text-align: center;
-            animation: slideDown 0.3s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .form-message.success {
@@ -1205,28 +1164,26 @@
         }
 
         @media (max-width: 768px) {
-            .contact-wrapper { flex-direction: column; }
-            .contact-info-card, .contact-form-card { min-width: 100%; padding: 1.2rem; }
-            .feedback-card { padding: 1.5rem; }
-            .feedback-text { font-size: 0.85rem; }
-            .feedback-text::before, .feedback-text::after { font-size: 2rem; }
+            .contact-wrapper { flex-direction: column; gap: 1rem; }
+            .contact-info-card, .contact-form-card { min-width: 100%; padding: 1rem; }
         }
 
-        /* Footer */
+        /* Footer - LEFT ALIGNED */
         footer {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: #e2e8f0;
-            padding: 2.5rem 0 1.5rem;
+            padding: 3rem 0 1.5rem;
             margin-top: 2.5rem;
         }
 
         .footer-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            gap: 2rem;
+            text-align: left;
         }
 
         .footer-logo {
@@ -1237,24 +1194,27 @@
             background-clip: text;
             color: transparent;
             text-decoration: none;
+            display: inline-block;
+            margin-bottom: 0.8rem;
         }
 
         .footer-about p {
             color: #94a3b8;
-            font-size: 0.7rem;
-            line-height: 1.5;
+            font-size: 0.8rem;
+            line-height: 1.6;
             margin-top: 0.5rem;
+            max-width: 250px;
         }
 
         .social-icons {
             display: flex;
-            gap: 0.6rem;
-            margin-top: 0.8rem;
+            gap: 0.8rem;
+            margin-top: 1rem;
         }
 
         .social-icon {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             background: rgba(255,255,255,0.08);
             border-radius: 8px;
             display: flex;
@@ -1263,6 +1223,7 @@
             color: #94a3b8;
             transition: var(--transition);
             text-decoration: none;
+            font-size: 0.9rem;
         }
 
         .social-icon:hover {
@@ -1272,9 +1233,9 @@
         }
 
         .footer-links h3, .footer-contact h3 {
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 700;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             color: #e2e8f0;
         }
 
@@ -1283,65 +1244,93 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.6rem;
         }
 
         .footer-links a {
             color: #94a3b8;
             text-decoration: none;
+            font-size: 0.8rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .footer-links a i {
             font-size: 0.7rem;
+            opacity: 0;
             transition: var(--transition);
         }
 
         .footer-links a:hover {
             color: var(--blue);
-            transform: translateX(3px);
+            transform: translateX(5px);
+        }
+
+        .footer-links a:hover i {
+            opacity: 1;
         }
 
         .footer-contact p {
-            margin-bottom: 0.5rem;
-            font-size: 0.7rem;
+            margin-bottom: 0.7rem;
+            font-size: 0.8rem;
             color: #94a3b8;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
 
         .footer-contact i {
-            width: 18px;
+            width: 20px;
             color: var(--blue);
         }
 
         .copyright {
             max-width: 1400px;
-            margin: 1.5rem auto 0;
-            padding: 1rem 1.5rem 0;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            font-size: 0.65rem;
-            text-align: center;
+            margin: 2rem auto 0;
+            padding: 1.2rem 2rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.7rem;
+            text-align: left;
             color: #64748b;
         }
 
         @media (max-width: 768px) {
             .footer-content {
                 grid-template-columns: 1fr;
-                gap: 1.2rem;
+                gap: 1.5rem;
+                padding: 0 1.5rem;
+                text-align: left;
+            }
+            .footer-about p {
+                max-width: 100%;
+            }
+            .social-icons {
+                justify-content: flex-start;
+            }
+            .footer-contact p {
+                justify-content: flex-start;
+            }
+            .copyright {
+                text-align: center;
+                padding: 1rem 1.5rem 0;
             }
         }
 
         /* Floating Button */
         .floating-btn {
             position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            width: 48px;
-            height: 48px;
+            bottom: 1.2rem;
+            right: 1.2rem;
+            width: 44px;
+            height: 44px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             z-index: 999;
             cursor: pointer;
             animation: floatBtn 3s ease-in-out infinite;
@@ -1360,10 +1349,6 @@
             0%,100% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
         }
-
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
     </style>
 </head>
 <body>
@@ -1372,13 +1357,7 @@
     <nav>
         <a href="#" class="logo">Pro Developing</a>
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#trust">Why Trust Us</a></li>
-            <li><a href="#feedback">Feedback</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#trust">Why Trust Us</a></li><li><a href="#feedback">Feedback</a></li><li><a href="#faq">FAQ</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li>
         </ul>
         <a href="#contact" class="nav-cta">Get in Touch <i class="fas fa-arrow-right"></i></a>
         <button class="mobile-menu-btn" id="menuToggle"><i class="fas fa-bars"></i></button>
@@ -1430,17 +1409,17 @@
             <div class="section-divider"></div>
         </div>
         <div class="services-grid">
-            <a href="#" class="service-card"><div class="card-number">01</div><div class="service-icon"><i class="fas fa-code"></i></div><h3>Website Development</h3><p>Custom responsive websites that drive results.</p><ul class="benefits-list"><li><i class="fas fa-check-circle"></i> Responsive Design</li><li><i class="fas fa-check-circle"></i> SEO Optimized</li><li><i class="fas fa-check-circle"></i> Fast Loading</li></ul></a>
-            <a href="#" class="service-card"><div class="card-number">02</div><div class="service-icon"><i class="fas fa-mobile-alt"></i></div><h3>App Development</h3><p>Native & cross-platform mobile apps for iOS and Android.</p><ul class="benefits-list"><li><i class="fas fa-check-circle"></i> iOS & Android</li><li><i class="fas fa-check-circle"></i> UI/UX Design</li><li><i class="fas fa-check-circle"></i> App Store Support</li></ul></a>
-            <a href="#" class="service-card"><div class="card-number">03</div><div class="service-icon"><i class="fas fa-chart-line"></i></div><h3>Digital Marketing</h3><p>Data-driven strategies to grow your brand online.</p><ul class="benefits-list"><li><i class="fas fa-check-circle"></i> SEO/SEM</li><li><i class="fas fa-check-circle"></i> Social Media</li><li><i class="fas fa-check-circle"></i> Email Marketing</li></ul></a>
-            <a href="#" class="service-card"><div class="card-number">04</div><div class="service-icon"><i class="fab fa-whatsapp"></i></div><h3>WhatsApp Automation</h3><p>Automated WhatsApp Business API solutions for better engagement.</p><ul class="benefits-list"><li><i class="fas fa-check-circle"></i> Auto Replies</li><li><i class="fas fa-check-circle"></i> Broadcast</li><li><i class="fas fa-check-circle"></i> Chatbots</li></ul></a>
-            <a href="#" class="service-card"><div class="card-number">05</div><div class="service-icon"><i class="fas fa-tools"></i></div><h3>Custom Tools</h3><p>Tailored CRM, ERP and business automation tools.</p><ul class="benefits-list"><li><i class="fas fa-check-circle"></i> CRM/ERP</li><li><i class="fas fa-check-circle"></i> Automation</li><li><i class="fas fa-check-circle"></i> Integration</li></ul></a>
-            <a href="#" class="service-card"><div class="card-number">06</div><div class="service-icon"><i class="fas fa-headset"></i></div><h3>IT Support</h3><p>24/7 technical support and IT infrastructure management.</p><ul class="benefits-list"><li><i class="fas fa-check-circle"></i> 24/7 Support</li><li><i class="fas fa-check-circle"></i> Cloud Services</li><li><i class="fas fa-check-circle"></i> Security</li></ul></a>
+            <a href="#" class="service-card"><div class="card-number">01</div><div class="service-icon"><i class="fas fa-code"></i></div><h3>Website Development</h3><p>Custom responsive websites.</p><ul class="benefits-list"><li><i class="fas fa-check-circle"></i> Responsive Design</li><li><i class="fas fa-check-circle"></i> SEO Optimized</li><li><i class="fas fa-check-circle"></i> Fast Loading</li></ul></a>
+            <a href="#" class="service-card"><div class="card-number">02</div><div class="service-icon"><i class="fas fa-mobile-alt"></i></div><h3>App Development</h3><p>Native & cross-platform apps.</p><ul class="benefits-list"><li><i class="fas fa-check-circle"></i> iOS & Android</li><li><i class="fas fa-check-circle"></i> UI/UX Design</li><li><i class="fas fa-check-circle"></i> App Store Support</li></ul></a>
+            <a href="#" class="service-card"><div class="card-number">03</div><div class="service-icon"><i class="fas fa-chart-line"></i></div><h3>Digital Marketing</h3><p>Data-driven growth strategies.</p><ul class="benefits-list"><li><i class="fas fa-check-circle"></i> SEO/SEM</li><li><i class="fas fa-check-circle"></i> Social Media</li><li><i class="fas fa-check-circle"></i> Email Marketing</li></ul></a>
+            <a href="#" class="service-card"><div class="card-number">04</div><div class="service-icon"><i class="fab fa-whatsapp"></i></div><h3>WhatsApp Automation</h3><p>Automated business solutions.</p><ul class="benefits-list"><li><i class="fas fa-check-circle"></i> Auto Replies</li><li><i class="fas fa-check-circle"></i> Broadcast</li><li><i class="fas fa-check-circle"></i> Chatbots</li></ul></a>
+            <a href="#" class="service-card"><div class="card-number">05</div><div class="service-icon"><i class="fas fa-tools"></i></div><h3>Custom Tools</h3><p>Tailored CRM & ERP solutions.</p><ul class="benefits-list"><li><i class="fas fa-check-circle"></i> CRM/ERP</li><li><i class="fas fa-check-circle"></i> Automation</li><li><i class="fas fa-check-circle"></i> Integration</li></ul></a>
+            <a href="#" class="service-card"><div class="card-number">06</div><div class="service-icon"><i class="fas fa-headset"></i></div><h3>IT Support</h3><p>24/7 technical support.</p><ul class="benefits-list"><li><i class="fas fa-check-circle"></i> 24/7 Support</li><li><i class="fas fa-check-circle"></i> Cloud Services</li><li><i class="fas fa-check-circle"></i> Security</li></ul></a>
         </div>
     </div>
 </section>
 
-<!-- Why Clients Trust Us - WITH ARROWS ON ALL CARDS -->
+<!-- Why Clients Trust Us -->
 <section id="trust">
     <div class="container">
         <div class="section-header">
@@ -1466,7 +1445,7 @@
     </div>
 </section>
 
-<!-- Feedback with Modern Cards -->
+<!-- Feedback Section -->
 <section id="feedback">
     <div class="container">
         <div class="section-header">
@@ -1479,16 +1458,16 @@
         </div>
         <div class="testimonial-slider">
             <div class="slider-container" id="sliderContainer">
-                <div class="feedback-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="feedback-text">"Excellent service! Pro IT Services built our website and it's amazing. Very professional team with great attention to detail. They delivered the project on time and exceeded our expectations."</div><div class="feedback-author"><div class="avatar"><i class="fas fa-user"></i></div><div class="author-info"><strong>Rahul Patel</strong><br><small>Business Owner</small></div></div></div>
-                <div class="feedback-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="feedback-text">"Best IT service provider in Gujarat! Their digital marketing strategies boosted our online sales by 200% in just 3 months. The team is responsive, creative, and truly cares about client success."</div><div class="feedback-author"><div class="avatar"><i class="fas fa-user"></i></div><div class="author-info"><strong>Priyanka Sharma</strong><br><small>Marketing Head</small></div></div></div>
-                <div class="feedback-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="feedback-text">"Very responsive team! Got my WhatsApp automation setup within days. They understand client needs perfectly and provide excellent post-launch support. Highly recommended for any IT needs!"</div><div class="feedback-author"><div class="avatar"><i class="fas fa-user"></i></div><div class="author-info"><strong>Amit Thakor</strong><br><small>Entrepreneur</small></div></div></div>
+                <div class="feedback-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="feedback-text">"Excellent service! Pro IT Services built our website and it's amazing. Very professional team with great attention to detail."</div><div class="feedback-author"><div class="avatar"><i class="fas fa-user"></i></div><div class="author-info"><strong>Rahul Patel</strong><br><small>Business Owner</small></div></div></div>
+                <div class="feedback-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="feedback-text">"Best IT service provider! Their digital marketing boosted our sales by 200% in just 3 months. Highly recommended!"</div><div class="feedback-author"><div class="avatar"><i class="fas fa-user"></i></div><div class="author-info"><strong>Priyanka Sharma</strong><br><small>Marketing Head</small></div></div></div>
+                <div class="feedback-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="feedback-text">"Very responsive team! Got my WhatsApp automation setup within days. They understand client needs perfectly."</div><div class="feedback-author"><div class="avatar"><i class="fas fa-user"></i></div><div class="author-info"><strong>Amit Thakor</strong><br><small>Entrepreneur</small></div></div></div>
             </div>
             <div class="dot-container" id="dotContainer"></div>
         </div>
     </div>
 </section>
 
-<!-- FAQ -->
+<!-- FAQ Section -->
 <section id="faq">
     <div class="container">
         <div class="section-header">
@@ -1505,7 +1484,7 @@
     </div>
 </section>
 
-<!-- About -->
+<!-- About Section -->
 <section id="about">
     <div class="container">
         <div class="section-header">
@@ -1567,29 +1546,67 @@
     </div>
 </section>
 
-<!-- Footer -->
+<!-- Footer - LEFT ALIGNED -->
 <footer>
     <div class="footer-content">
-        <div class="footer-about"><a href="#" class="footer-logo">Pro Developing</a><p>India's Best IT Services Provider since 2026.</p><div class="social-icons"><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a><a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></div></div>
-        <div class="footer-links"><h3>Quick Links</h3><ul><li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#trust">Why Trust Us</a></li><li><a href="#feedback">Feedback</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact</a></li></ul></div>
-        <div class="footer-contact"><h3>Contact</h3><p><i class="fas fa-phone"></i> +91 63569 52788</p><p><i class="fas fa-envelope"></i> prodeveloping97@gmail.com</p><p><i class="fas fa-map-marker-alt"></i> Vav-Tharad, Gujarat</p><p><i class="fas fa-clock"></i> Mon-Sat: 10AM-7PM</p></div>
-        <div class="footer-links"><h3>Services</h3><ul><li>Web Development</li><li>App Development</li><li>Digital Marketing</li><li>WhatsApp Automation</li><li>IT Support</li></ul></div>
+        <div class="footer-about">
+            <a href="#" class="footer-logo">Pro Developing</a>
+            <p>India's Best IT Services Provider. Complete IT Solutions since 2026. We deliver excellence with cutting-edge technology and 24/7 dedicated support.</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                <li><a href="#services"><i class="fas fa-chevron-right"></i> IT Services</a></li>
+                <li><a href="#trust"><i class="fas fa-chevron-right"></i> Why Trust Us</a></li>
+                <li><a href="#feedback"><i class="fas fa-chevron-right"></i> Client Feedback</a></li>
+                <li><a href="#faq"><i class="fas fa-chevron-right"></i> FAQs</a></li>
+                <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-contact">
+            <h3>Contact Info</h3>
+            <p><i class="fas fa-phone"></i> +91 63569 52788</p>
+            <p><i class="fas fa-envelope"></i> prodeveloping97@gmail.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> Vav-Tharad District, Gujarat, India</p>
+            <p><i class="fas fa-clock"></i> Mon-Sat: 10AM - 7PM</p>
+        </div>
+        <div class="footer-links">
+            <h3>Our Services</h3>
+            <ul>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Web Development</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> App Development</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Digital Marketing</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> WhatsApp Automation</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Custom Tools</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> IT Support</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="copyright"><p>&copy; 2026 Pro Developing. All rights reserved. | India's Trusted IT Partner</p></div>
+    <div class="copyright">
+        <p>&copy; 2026 Pro Developing. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ec4899;"></i> in India | India's Trusted IT Partner</p>
+    </div>
 </footer>
 
 <div class="floating-btn whatsapp" id="floatingBtn"><i class="fab fa-whatsapp"></i></div>
 
 <script>
-    // Google Sheets Web App URL
-    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwPiZJVPFvSJe7k3BAdz2QZ_ifxz4Rdsv3TU8IVnodGvhdeU91_saGTUQfpn6pInVfK/exec';
-    
-    // Auto Slider
+    // Testimonial Slider
     const sliderContainer = document.getElementById('sliderContainer');
     const dotContainer = document.getElementById('dotContainer');
     const slides = document.querySelectorAll('.feedback-card');
-    let currentIndex = 0, totalSlides = slides.length, autoInterval;
-    
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    let autoInterval;
+    let isTransitioning = false;
+
     function createDots() {
         if (!dotContainer) return;
         dotContainer.innerHTML = '';
@@ -1597,39 +1614,46 @@
             const dot = document.createElement('div');
             dot.classList.add('dot');
             if (i === currentIndex) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(i));
+            dot.addEventListener('click', () => {
+                if (!isTransitioning) goToSlide(i);
+            });
             dotContainer.appendChild(dot);
         }
     }
-    
+
     function updateDots() {
-        document.querySelectorAll('.dot').forEach((dot, i) => {
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, i) => {
             if (i === currentIndex) dot.classList.add('active');
             else dot.classList.remove('active');
         });
     }
-    
+
     function goToSlide(index) {
+        if (isTransitioning || index === currentIndex) return;
+        isTransitioning = true;
         currentIndex = index;
-        if (sliderContainer) sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+        sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
         updateDots();
+        setTimeout(() => { isTransitioning = false; }, 500);
         resetAutoSlide();
     }
-    
+
     function nextSlide() {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        goToSlide(currentIndex);
+        if (isTransitioning) return;
+        let next = (currentIndex + 1) % totalSlides;
+        goToSlide(next);
     }
-    
+
     function startAutoSlide() {
         autoInterval = setInterval(nextSlide, 5000);
     }
-    
+
     function resetAutoSlide() {
         clearInterval(autoInterval);
         startAutoSlide();
     }
-    
+
     if (sliderContainer && slides.length > 0) {
         createDots();
         startAutoSlide();
@@ -1639,35 +1663,32 @@
             slider.addEventListener('mouseleave', startAutoSlide);
         }
     }
-    
+
     // Share Review Button
     document.getElementById('shareReviewBtn')?.addEventListener('click', () => {
         alert('Thank you for sharing your review!');
     });
-    
+
     // Contact Form Submission
     const contactForm = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
     const submitBtn = document.getElementById('submitBtn');
-    
+
     contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Honeypot check
         const honeypot = document.getElementById('honeypot').value;
         if (honeypot) {
             showMessage('error', '❌ Invalid submission');
             return;
         }
         
-        // Get form data
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
         const phone = document.getElementById('phone').value.trim();
         const service = document.getElementById('service').value;
         const message = document.getElementById('message').value.trim();
         
-        // Validation
         if (!name || name.length < 2) {
             showMessage('error', '❌ Name is required');
             return;
@@ -1689,11 +1710,9 @@
             return;
         }
         
-        // Show loading state
         submitBtn.classList.add('loading');
         submitBtn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
         
-        // Prepare data
         const formData = new URLSearchParams();
         formData.append('name', name);
         formData.append('email', email);
@@ -1701,74 +1720,52 @@
         formData.append('service', service);
         formData.append('message', message);
         formData.append('timestamp', new Date().toLocaleString());
-        formData.append('ip', '');
         
         try {
-            // Send to Google Sheets
-            await fetch(GOOGLE_SHEETS_URL, {
+            await fetch('https://script.google.com/macros/s/AKfycbwPiZJVPFvSJe7k3BAdz2QZ_ifxz4Rdsv3TU8IVnodGvhdeU91_saGTUQfpn6pInVfK/exec', {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: formData.toString()
             });
             
-            // Show success message
             showMessage('success', '✅ Thank you! Your message has been sent successfully. We will contact you soon.');
             contactForm.reset();
-            
         } catch (error) {
-            console.error('Error:', error);
-            showMessage('error', '❌ Something went wrong. Please try again or call us directly.');
+            showMessage('error', '❌ Something went wrong. Please try again.');
         } finally {
             submitBtn.classList.remove('loading');
             submitBtn.innerHTML = '<span>Send Message</span> <i class="fas fa-paper-plane"></i>';
         }
     });
-    
+
     function showMessage(type, text) {
         formMessage.style.display = 'block';
         formMessage.className = `form-message ${type}`;
         formMessage.innerHTML = text;
-        
-        // Auto hide after 5 seconds
-        setTimeout(() => {
-            formMessage.style.display = 'none';
-        }, 5000);
+        setTimeout(() => { formMessage.style.display = 'none'; }, 5000);
     }
-    
+
     // Menu Functions
     const menuToggle = document.getElementById('menuToggle');
     const sideMenu = document.getElementById('sideMenu');
     const overlay = document.getElementById('menuOverlay');
     const closeMenu = document.getElementById('closeMenu');
     
-    function openMenu() {
-        sideMenu.classList.add('active');
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closeMenuFn() {
-        sideMenu.classList.remove('active');
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
+    function openMenu() { sideMenu.classList.add('active'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeMenuFn() { sideMenu.classList.remove('active'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
     
     if (menuToggle) menuToggle.addEventListener('click', openMenu);
     if (closeMenu) closeMenu.addEventListener('click', closeMenuFn);
     if (overlay) overlay.addEventListener('click', closeMenuFn);
     
-    // Smooth Scroll
     document.querySelectorAll('.side-nav-links a, .nav-links a, .nav-cta, .btn-hero').forEach(link => {
         link.addEventListener('click', (e) => {
             const hash = link.getAttribute('href');
             if (hash && hash !== '#' && hash.startsWith('#')) {
                 e.preventDefault();
                 closeMenuFn();
-                const target = document.querySelector(hash);
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
@@ -1795,14 +1792,12 @@
     window.addEventListener('scroll', changeActiveLink);
     changeActiveLink();
     
-    // Header Scroll
     const header = document.querySelector('header');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) header.classList.add('scrolled');
         else header.classList.remove('scrolled');
     });
     
-    // FAQ Accordion
     document.querySelectorAll('.faq-item').forEach(item => {
         const q = item.querySelector('.faq-question');
         if (q) q.addEventListener('click', () => item.classList.toggle('active'));
@@ -1818,10 +1813,7 @@
                 floatingBtn.classList.remove('whatsapp');
                 floatingBtn.classList.add('scroll-top');
                 floatingBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-                floatingBtn.onclick = (e) => {
-                    e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                };
+                floatingBtn.onclick = (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
                 isWhatsApp = false;
             }
         } else {
@@ -1829,9 +1821,7 @@
                 floatingBtn.classList.remove('scroll-top');
                 floatingBtn.classList.add('whatsapp');
                 floatingBtn.innerHTML = '<i class="fab fa-whatsapp"></i>';
-                floatingBtn.onclick = () => {
-                    window.open('https://wa.me/916356952788', '_blank');
-                };
+                floatingBtn.onclick = () => { window.open('https://wa.me/916356952788', '_blank'); };
                 isWhatsApp = true;
             }
         }
@@ -1840,7 +1830,6 @@
     window.addEventListener('scroll', updateFloatingButton);
     updateFloatingButton();
     
-    // Scroll Hint
     const scrollHint = document.getElementById('scrollHint');
     if (scrollHint) {
         scrollHint.addEventListener('click', () => {
