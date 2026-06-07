@@ -614,7 +614,7 @@
 
 
 
-        /* Hero Section - 2 COLOR GRADIENT DESIGN */
+        /* Hero Section */
 
         .hero {
 
@@ -696,7 +696,7 @@
 
             text-align: center;
 
-            max-width: 950px;
+            max-width: 850px;
 
             width: 100%;
 
@@ -742,11 +742,11 @@
 
         .hero h1 {
 
-            font-size: clamp(2rem, 6vw, 4rem);
+            font-size: clamp(1.8rem, 5vw, 3rem);
 
             font-weight: 900;
 
-            line-height: 1.2;
+            line-height: 1.3;
 
             margin-bottom: 1rem;
 
@@ -764,11 +764,11 @@
 
         .hero-subtitle {
 
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-size: clamp(0.9rem, 2vw, 1rem);
 
             color: var(--text-secondary);
 
-            max-width: 700px;
+            max-width: 600px;
 
             margin: 0 auto 2rem;
 
@@ -800,11 +800,11 @@
 
             gap: 0.5rem;
 
-            padding: 0.9rem 2rem;
+            padding: 0.8rem 1.8rem;
 
             font-weight: 600;
 
-            border-radius: 50px;
+            border-radius: 10px;
 
             text-decoration: none;
 
@@ -847,6 +847,8 @@
             border: 2px solid var(--border);
 
             color: var(--text-primary);
+
+            border-radius: 10px;
 
         }
 
@@ -1558,7 +1560,7 @@
 
             border: none;
 
-            border-radius: 50px;
+            border-radius: 10px;
 
             font-weight: 600;
 
@@ -1704,7 +1706,7 @@
 
 
 
-        /* Contact Section - NEW DESIGN AS PER IMAGE */
+        /* Contact Section */
 
         .contact-wrapper {
 
@@ -1916,6 +1918,92 @@
 
 
 
+        .location-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 1rem;
+
+            background: rgba(255,255,255,0.08);
+
+            padding: 0.8rem 1rem;
+
+            border-radius: 16px;
+
+            transition: var(--transition);
+
+            backdrop-filter: blur(4px);
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+        }
+
+
+
+        .location-item:hover {
+
+            background: rgba(255,255,255,0.15);
+
+            transform: translateX(5px);
+
+        }
+
+
+
+        .location-icon {
+
+            width: 44px;
+
+            height: 44px;
+
+            background: rgba(255,255,255,0.15);
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 1.2rem;
+
+        }
+
+
+
+        .location-content {
+
+            flex: 1;
+
+        }
+
+
+
+        .location-content .label {
+
+            font-size: 0.65rem;
+
+            opacity: 0.7;
+
+            display: block;
+
+        }
+
+
+
+        .location-content .value {
+
+            font-size: 0.85rem;
+
+            font-weight: 600;
+
+        }
+
+
+
         .social-links {
 
             display: flex;
@@ -1923,6 +2011,8 @@
             gap: 1rem;
 
             flex-wrap: wrap;
+
+            margin-top: 1rem;
 
         }
 
@@ -2620,7 +2710,7 @@
 
 
 
-<!-- Hero Section - 2 COLOR GRADIENT DESIGN -->
+<!-- Hero Section - NEW HEADING -->
 
 <section class="hero" id="home">
 
@@ -2628,9 +2718,9 @@
 
         <div class="hero-badge"><i class="fas fa-bolt"></i> India's Trusted IT Partner</div>
 
-        <h1>Transform Your Ideas Into Powerful Digital Solutions</h1>
+        <h1>Take Your Business To The Next Level Online</h1>
 
-        <p class="hero-subtitle">From concept to execution, we build cutting-edge websites, apps, and marketing strategies that drive real business growth.</p>
+        <p class="hero-subtitle">We build websites, apps & marketing strategies that drive real growth.</p>
 
         <div class="btn-group">
 
@@ -2752,11 +2842,11 @@
 
             <div class="slider-container" id="sliderContainer">
 
-                <div class="feedback-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="feedback-text">"Excellent service! Pro Developing built our website and it's amazing. Very professional team with great attention to detail."</div><div class="feedback-author"><div class="avatar"><i class="fas fa-user"></i></div><div class="author-info"><strong>Rahul Patel</strong><br><small>Business Owner</small></div></div></div>
+                <div class="feedback-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="feedback-text">"Excellent service! Pro Developing built our company website and mobile app from scratch. The team was very professional, communicated clearly throughout the project, and delivered ahead of schedule. The website is fast, responsive, and looks amazing on all devices. Our sales have increased by 40% since launch. Highly recommended for anyone looking for quality IT services!"</div><div class="feedback-author"><div class="avatar"><i class="fas fa-user"></i></div><div class="author-info"><strong>Rahul Patel</strong><br><small>Business Owner, Ahmedabad</small></div></div></div>
 
-                <div class="feedback-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="feedback-text">"Best IT service provider! Their digital marketing boosted our sales significantly. Highly recommended!"</div><div class="feedback-author"><div class="avatar"><i class="fas fa-user"></i></div><div class="author-info"><strong>Priyanka Sharma</strong><br><small>Marketing Head</small></div></div></div>
+                <div class="feedback-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="feedback-text">"Best IT service provider in Gujarat! Their digital marketing team transformed our online presence completely. We started getting quality leads within the first month. SEO rankings improved dramatically and our social media engagement went up by 200%. The team is responsive, knowledgeable, and truly cares about client success. Will definitely work with them again for future projects!"</div><div class="feedback-author"><div class="avatar"><i class="fas fa-user"></i></div><div class="author-info"><strong>Priyanka Sharma</strong><br><small>Marketing Head, Surat</small></div></div></div>
 
-                <div class="feedback-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="feedback-text">"Very responsive team! Got my WhatsApp automation setup within days. They understand client needs perfectly."</div><div class="feedback-author"><div class="avatar"><i class="fas fa-user"></i></div><div class="author-info"><strong>Amit Thakor</strong><br><small>Entrepreneur</small></div></div></div>
+                <div class="feedback-card"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><div class="feedback-text">"Very impressed with Pro Developing! Got my WhatsApp Business API automation setup within just 3 days. The system handles thousands of customer queries automatically and has saved us so much time and money. Their support team is available 24/7 and always solves issues within minutes. If you need reliable IT solutions, this is the team to trust. Thank you for your excellent work!"</div><div class="feedback-author"><div class="avatar"><i class="fas fa-user"></i></div><div class="author-info"><strong>Amit Thakor</strong><br><small>Entrepreneur, Mehsana</small></div></div></div>
 
             </div>
 
@@ -2804,7 +2894,7 @@
 
 
 
-<!-- Contact Section - NEW DESIGN AS PER YOUR IMAGE -->
+<!-- Contact Section -->
 
 <section id="contact">
 
@@ -2869,6 +2959,20 @@
                         </div>
 
                     </a>
+
+                    <div class="location-item">
+
+                        <div class="location-icon"><i class="fas fa-map-marker-alt"></i></div>
+
+                        <div class="location-content">
+
+                            <span class="label">Our Location</span>
+
+                            <span class="value">Vav-Tharad District, Gujarat - 385565</span>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -2980,7 +3084,7 @@
 
             <p><i class="fas fa-envelope"></i> prodeveloping97@gmail.com</p>
 
-            <p><i class="fas fa-map-marker-alt"></i> Vav-Tharad, Gujarat, India</p>
+            <p><i class="fas fa-map-marker-alt"></i> Vav-Tharad District, Gujarat - 385565</p>
 
             <p><i class="fas fa-clock"></i> Mon-Sat: 10AM - 7PM</p>
 
@@ -3012,7 +3116,7 @@
 
     <div class="copyright">
 
-        <p>&copy; 2026 Pro Developing. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ec4899;"></i> in India</p>
+        <p>&copy; 2026 Pro Developing. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ec4899;"></i> in India | Vav-Tharad, Gujarat - 385565</p>
 
     </div>
 
